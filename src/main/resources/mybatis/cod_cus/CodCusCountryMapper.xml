@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusCountryMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusCountry">
+    <result column="COUNTRY_CO" jdbcType="VARCHAR" property="countryCo" />
+    <result column="COUNTRY_EN" jdbcType="VARCHAR" property="countryEn" />
+    <result column="COUNTRY_NA" jdbcType="VARCHAR" property="countryNa" />
+    <result column="EXAM_MARK" jdbcType="VARCHAR" property="examMark" />
+    <result column="HIGH_LOW" jdbcType="VARCHAR" property="highLow" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusCountry">
+    SELECT
+      COUNTRY_CO AS id,
+      COUNTRY_NA AS text
+    FROM cod_cus_country
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusCountry">
+    insert into cod_cus_country (COUNTRY_CO, COUNTRY_EN, COUNTRY_NA, 
+      EXAM_MARK, HIGH_LOW)
+    values (#{countryCo,jdbcType=VARCHAR}, #{countryEn,jdbcType=VARCHAR}, #{countryNa,jdbcType=VARCHAR}, 
+      #{examMark,jdbcType=VARCHAR}, #{highLow,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusCountry">
+    insert into cod_cus_country
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="countryCo != null">
+        COUNTRY_CO,
+      </if>
+      <if test="countryEn != null">
+        COUNTRY_EN,
+      </if>
+      <if test="countryNa != null">
+        COUNTRY_NA,
+      </if>
+      <if test="examMark != null">
+        EXAM_MARK,
+      </if>
+      <if test="highLow != null">
+        HIGH_LOW,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="countryCo != null">
+        #{countryCo,jdbcType=VARCHAR},
+      </if>
+      <if test="countryEn != null">
+        #{countryEn,jdbcType=VARCHAR},
+      </if>
+      <if test="countryNa != null">
+        #{countryNa,jdbcType=VARCHAR},
+      </if>
+      <if test="examMark != null">
+        #{examMark,jdbcType=VARCHAR},
+      </if>
+      <if test="highLow != null">
+        #{highLow,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

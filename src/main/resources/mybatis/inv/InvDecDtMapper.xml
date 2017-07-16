@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.inv.dao.InvDecDtMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.inv.entity.InvDecDt">
+		<id column="UID" property="uid" />
+		<result column="BOND_INVT_NO" property="bondInvtNo" />
+		<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+		<result column="GDS_SEQNO" property="gdsSeqno" />
+		<result column="PUTREC_SEQNO" property="putrecSeqno" />
+		<result column="GDS_MTNO" property="gdsMtno" />
+		<result column="GDECD" property="gdecd" />
+		<result column="GDS_NM" property="gdsNm" />
+		<result column="ENDPRD_GDS_SPCF_MODEL_DESC" property="endprdGdsSpcfModelDesc" />
+		<result column="USD_STAT_TOTAL_AMT" property="usdStatTotalAmt" />
+		<result column="DCL_UNITCD" property="dclUnitcd" />
+		<result column="DCL_TOTAL_CHT" property="dclTotalCht" />
+		<result column="LAWF_UNITCD" property="lawfUnitcd" />
+		<result column="SECD_LAWF_UNITCD" property="secdLawfUnitcd" />
+		<result column="DCL_UPRC_AMT" property="dclUprcAmt" />
+		<result column="DCL_CURRCD" property="dclCurrcd" />
+		<result column="DCL_QTY" property="dclQty" />
+		<result column="LVYRLF_MODECD" property="lvyrlfModecd" />
+		<result column="NATCD" property="natcd" />
+		<result column="LAWF_QTY" property="lawfQty" />
+		<result column="SECD_LAWF_QTY" property="secdLawfQty" />
+		<result column="WT_SF_VAL" property="wtSfVal" />
+		<result column="ENTRY_GDS_SEQNO" property="entryGdsSeqno" />
+		<result column="APPLY_TB_SEQNO" property="applyTbSeqno" />
+		<result column="CLY_MARKCD" property="clyMarkcd" />
+		<result column="ETPS_INNER_INVT_NO" property="etpsInnerInvtNo" />
+		<result column="FST_SF_VAL" property="fstSfVal" />
+		<result column="SECD_SF_VAL" property="secdSfVal" />
+		<result column="MTPCK_ENDPRD_MARKCD" property="mtpckEndprdMarkcd" />
+		<result column="GROSS_WT" property="grossWt" />
+		<result column="NET_WT" property="netWt" />
+		<result column="UCNS_VERNO" property="ucnsVerno" />
+		<result column="PUTREC_NO" property="putrecNo" />
+		<result column="COP_ENT_NO" property="copEntNo" />
+		<result column="RMK" property="rmk" />
+		<result column="DCL_TOTAL_AMT" property="dclTotalAmt" />
+		<result column="I_E_FLAG" property="iEFlag" />
+		<result column="I_E_FLAG1" property="iEFlag1" />
+		<result column="ORG_NO" property="orgNo" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_NAME" property="createName" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_NAME" property="updateName" />
+		<result column="PARAM1" property="param1" />
+		<result column="PARAM2" property="param2" />
+		<result column="PARAM3" property="param3" />
+		<result column="PARAM4" property="param4" />
+		<result column="USE_CD" property="useCd" />
+		<result column="ACTL_PASS_QTY" property="actlPassQty" />
+		<result column="PASSPORT_USED_QTY" property="passportUsedQty" />
+	</resultMap>
+	<sql id="Base_Column_List">
+	A.UID AS UID,
+	A.BOND_INVT_NO AS BONDINVTNO,
+	A.CHG_TMS_CNT AS CHGTMSCNT,
+	A.GDS_SEQNO AS GDSSEQNO,
+	A.PUTREC_SEQNO AS PUTRECSEQNO,
+	A.GDS_MTNO AS GDSMTNO,
+	A.GDECD AS GDECD,
+	A.GDS_NM AS GDSNM,
+	A.ENDPRD_GDS_SPCF_MODEL_DESC AS ENDPRDGDSSPCFMODELDESC,
+	A.USD_STAT_TOTAL_AMT AS USDSTATTOTALAMT,
+	A.DCL_UNITCD AS DCLUNITCD,
+	A.DCL_TOTAL_CHT AS DCLTOTALCHT,
+	A.LAWF_UNITCD AS LAWFUNITCD,
+	A.SECD_LAWF_UNITCD AS SECDLAWFUNITCD,
+	A.DCL_UPRC_AMT AS DCLUPRCAMT,
+	A.DCL_CURRCD AS DCLCURRCD,
+	A.DCL_QTY AS DCLQTY,
+	A.LVYRLF_MODECD AS LVYRLFMODECD,
+	A.NATCD AS NATCD,
+	A.LAWF_QTY AS LAWFQTY,
+	A.SECD_LAWF_QTY AS SECDLAWFQTY,
+	A.WT_SF_VAL AS WTSFVAL,
+	A.ENTRY_GDS_SEQNO AS ENTRYGDSSEQNO,
+	A.APPLY_TB_SEQNO AS APPLYTBSEQNO,
+	A.CLY_MARKCD AS CLYMARKCD,
+	A.ETPS_INNER_INVT_NO AS ETPSINNERINVTNO,
+	A.FST_SF_VAL AS FSTSFVAL,
+	A.SECD_SF_VAL AS SECDSFVAL,
+	A.MTPCK_ENDPRD_MARKCD AS MTPCKENDPRDMARKCD,
+	A.GROSS_WT AS GROSSWT,
+	A.NET_WT AS NETWT,
+	A.UCNS_VERNO AS UCNSVERNO,
+	A.PUTREC_NO AS PUTRECNO,
+	A.COP_ENT_NO AS COPENTNO,
+	A.RMK AS RMK,
+	A.DCL_TOTAL_AMT AS DCLTOTALAMT,
+	A.I_E_FLAG AS IEFLAG,
+	A.I_E_FLAG1 AS IEFLAG1,
+	A.ORG_NO AS ORGNO,
+	A.SEQ_NO AS SEQNO,
+	A.CREATE_BY AS CREATEBY,
+	A.CREATE_NAME AS CREATENAME,
+	A.CREATE_TIME AS CREATETIME,
+	A.UPDATE_BY AS UPDATEBY,
+	A.UPDATE_NAME AS UPDATENAME,
+	A.UPDATE_TIME AS UPDATETIME,
+	A.PARAM1 AS PARAM1,
+	A.PARAM2 AS PARAM2,
+	A.PARAM3 AS PARAM3,
+	A.PARAM4 AS PARAM4,
+	A.USE_CD AS USECD,
+	A.ACTL_PASS_QTY AS ACTLPASSQTY,
+	A.PASSPORT_USED_QTY AS PASSPORTUSEDQTY,
+	B.UNIT_NAME AS DCLUNITNM,
+	D.UNIT_NAME AS LAWFUNITNM,
+	H.UNIT_NAME AS SECDLAWFUNITNM,
+	E.CURR_NAME AS DCLCURRNM,
+	F.COUNTRY_NA AS NATNM,
+	G.DUTY_SPEC AS LVYRLFMODENM
+</sql>
+
+	<select id="selectByInvDeclare" resultType="com.powerbridge.bssp.inv.entity.InvDecDt">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM INV_DEC_DT A
+		LEFT JOIN BSSP_COD.COD_CUS_UNIT B ON A.DCL_UNITCD=B.UNIT_CODE <!-- 申报计量单位-->
+		LEFT JOIN BSSP_COD.COD_CUS_UNIT D ON A.LAWF_UNITCD=D.UNIT_CODE <!-- 法定计量单位-->
+		LEFT JOIN BSSP_COD.COD_CUS_UNIT H ON A.SECD_LAWF_UNITCD=H.UNIT_CODE <!-- 第二法定计量单位-->
+		LEFT JOIN BSSP_COD.COD_CUS_CURR E ON A.DCL_CURRCD=E.CURR_CODE <!-- 申报币制-->
+		LEFT JOIN BSSP_COD.COD_CUS_COUNTRY F ON A.NATCD=F.COUNTRY_CO <!-- 国别代码-->
+		LEFT JOIN BSSP_COD.COD_CUS_LEVYMODE G ON A.LVYRLF_MODECD=G.DUTY_MODE <!-- 增减免方式-->
+		<where>
+			1=1
+			<if test="seqNo != null">
+				AND SEQ_NO = #{seqNo}
+			</if>
+			ORDER BY A.GDS_SEQNO ASC
+		</where>
+	</select>
+</mapper>

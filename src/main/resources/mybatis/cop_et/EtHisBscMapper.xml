@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cop_et.dao.EtHisBscMapper">
+
+    <!-- 通用查询映射结果 -->
+    <sql id="Base_Column_List">
+        A.UID As uid,
+        A.ET_ARCRP_NO As etArcrpNo,
+        A.CHG_TMS_CNT As chgTmsCnt,
+        A.ETPS_PREENT_NO As etpsPreentNo,
+        A.BIZOP_ETPS_SCCD As bizopEtpsSccd,
+        A.BIZOP_ETPSNO As bizopEtpsno,
+        A.BIZOP_ETPS_NM As bizopEtpsNm,
+        A.PRCS_ETPS_SCCD As prcsEtpsSccd,
+        A.PRCS_ETPSNO As prcsEtpsno,
+        A.PRCS_ETPS_NM As prcsEtpsNm,
+        A.DCL_ETPS_SCCD As dclEtpsSccd,
+        A.DCL_ETPSNO As dclEtpsno,
+        A.DCL_ETPS_NM As dclEtpsNm,
+        A.DECLARE_ER_TYPE As declareErType,
+        A.DECLARE_ER_TYPENM As declareErTypenm,
+        A.CONC_ADDR As concAddr,
+        A.TELNUM As telnum,
+        A.FINISH_VALID_DATE As finishValidDate,
+        A.APCRET_NO As apcretNo,
+        A.PRCS_PRDC_ABLT_AMT As prcsPrdcAbltAmt,
+        A.RISK_ASSURE_MARKCD As riskAssureMarkcd,
+        A.RISK_ASSURE_MARKNM As riskAssureMarknm,
+        A.DCL_SOURCE_MARKCD As dclSourceMarkcd,
+        A.DCL_SOURCE_MARKNM As dclSourceMarknm,
+        A.DCL_TIME As dclTime,
+        A.DCL_TYPECD As dclTypecd,
+        <!--A.DCL_TYPENAME As dclTypename,-->
+        A.EXE_MARKCD As exeMarkcd,
+        A.EXE_MARKNM As exeMarknm,
+        A.RLT_FORM_NO As rltFormNo,
+        A.PUTREC_APPR_TIME As putrecApprTime,
+        A.CHG_APPR_TIME As chgApprTime,
+        A.EMAPV_STUCD As emapvStucd,
+        A.EMAPV_STUNM As emapvStunm,
+        A.RMK As rmk,
+        A.MASTER_CUSCD As masterCuscd,
+        <!--A.MASTER_CUS_NAME As masterCusName,-->
+        A.AREA_CODE As areaCode,
+        A.AREA_NAME As areaName,
+        A.BIZ_TYPE As bizType,
+        A.CHK_STATUS As chkStatus,
+        A.DOC_TYPE As docType,
+        A.RET_CHANNEL As retChannel,
+        A.BIZ_TYPE_NAME As bizTypeName,
+        <!--A.CHK_STATUS_NAME As chkStatusName,-->
+        A.DOC_TYPE_NAME As docTypeName,
+        A.RET_CHANNEL_NAME As retChannelName,
+        A.DEC_TIME As decTime,
+        A.SEQ_NO As seqNo,
+        A.CHK_TIME As chkTime,
+        A.INPUTER_CODE As inputerCode,
+        A.INPUTER_NAME As inputerName,
+        A.INPUT_COP_NO As inputCopNo,
+        A.INPUT_COP_NAME As inputCopName,
+        A.DECLARE_MARK As declareMark,
+        A.CREATE_BY As createBy,
+        A.CREATE_NAME As createName,
+        A.CREATE_TIME As createTime,
+        A.UPDATE_BY As updateBy,
+        A.UPDATE_NAME As updateName,
+        A.UPDATE_TIME As updateTime
+    </sql>
+    <!--查询列表-->
+    <select id="selectEtHisBscList" parameterType="com.powerbridge.bssp.cop_et.entity.EtHisBsc" resultType="com.powerbridge.bssp.cop_et.entity.EtHisBsc">
+        SELECT
+        D.ATTR_NAME As dclTypename,
+        B.CUSTOMS_NAME As masterCusName,
+        C.ATTR_NAME As chkStatusName,
+        <include refid="Base_Column_List"/>
+        FROM ET_HIS_BSC A
+
+        LEFT JOIN BSSP_COD.COD_CUS_CUSTOMSFEC B ON B.CUSTOMS_CODE = A.MASTER_CUSCD <!-- 主管海关-->
+        LEFT JOIN BSSP_COD.COD_STD_CODES C ON C.ATTR_VALUE = A.CHK_STATUS AND C.DICTIONARY_VALUE='CHK_STATUS' <!-- 审批状态 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES D ON D.ATTR_VALUE = A.DCL_TYPECD AND D.DICTIONARY_VALUE='DCL_TYPE' <!-- 申报类型 -->
+        <where>
+            1=1
+            <if test="inputCopNo != null and inputCopNo !=''">
+                AND A.INPUT_COP_NO = #{inputCopNo}
+            </if>
+            <if test="etArcrpNo != null and etArcrpNo !=''">
+                AND A.ET_ARCRP_NO = #{etArcrpNo}
+            </if>
+            <if test="seqNo != null and seqNo !=''">
+                AND A.SEQ_NO = #{seqNo}
+            </if>
+            <if test="dclTypecd != null and dclTypecd !=''">
+                AND A.DCL_TYPECD = #{dclTypecd}
+            </if>
+            <if test="emapvStucd != null and emapvStucd !=''">
+                AND A.EMAPV_STUCD = #{emapvStucd}
+            </if>
+            <if test="finishValidDateStart != null and finishValidDateStart !=''">
+                AND A.FINISH_VALID_DATE <![CDATA[>=]]> #{finishValidDateStart} <!-- 结束有效日期起始 -->
+            </if>
+            <if test="finishValidDateEnd != null and finishValidDateEnd !=''">
+                AND A.FINISH_VALID_DATE <![CDATA[<=]]> '${finishValidDateEnd} 23:59:59' <!-- 结束有效日期终结 -->
+            </if>
+            <if test="decTimeStart != null and decTimeStart !=''">
+                AND A.DEC_TIME <![CDATA[>=]]> #{decTimeStart} <!-- 录入日期起始 -->
+            </if>
+            <if test="decTimeEnd != null and decTimeEnd !=''">
+                AND A.DEC_TIME <![CDATA[<=]]> '{decTimeEnd} 23:59:59' <!-- 录入日期终结 -->
+            </if>
+            <if test="masterCuscd != null and masterCuscd !=''">
+                AND A.MASTER_CUSCD = #{masterCuscd} <!-- 主管海关 -->
+            </if>
+        </where>
+    </select>
+</mapper>

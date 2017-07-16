@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusTradeMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusTrade">
+    <result column="TRADE_MODE" jdbcType="VARCHAR" property="tradeMode" />
+    <result column="ABBR_TRADE" jdbcType="VARCHAR" property="abbrTrade" />
+    <result column="FULL_TRADE" jdbcType="VARCHAR" property="fullTrade" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusTrade">
+    SELECT
+      TRADE_MODE AS id,
+      ABBR_TRADE AS text
+    FROM COD_CUS_TRADE
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusTrade">
+    insert into cod_cus_trade (TRADE_MODE, ABBR_TRADE, FULL_TRADE
+      )
+    values (#{tradeMode,jdbcType=VARCHAR}, #{abbrTrade,jdbcType=VARCHAR}, #{fullTrade,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusTrade">
+    insert into cod_cus_trade
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tradeMode != null">
+        TRADE_MODE,
+      </if>
+      <if test="abbrTrade != null">
+        ABBR_TRADE,
+      </if>
+      <if test="fullTrade != null">
+        FULL_TRADE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tradeMode != null">
+        #{tradeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="abbrTrade != null">
+        #{abbrTrade,jdbcType=VARCHAR},
+      </if>
+      <if test="fullTrade != null">
+        #{fullTrade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

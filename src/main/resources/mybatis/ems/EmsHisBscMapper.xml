@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.ems.dao.EmsHisBscMapper">
+    <!--基本字段-->
+    <sql id="Base_Column_List">
+		A.UID,A.EMS_NO AS EMSNO,A.CHG_TMS_CNT AS CHGTMSCNT,A.ETPS_PREENT_NO AS ETPSPREENTNO,A.MASTER_CUSCD AS MASTERCUSCD,A.BIZOP_ETPS_SCCD AS BIZOPETPSSCCD,A.RET_CHANNEL AS RETCHANNEL
+		,A.BIZOP_ETPSNO AS BIZOPETPSNO,A.BIZOP_ETPS_NM AS BIZOPETPSNM,A.RVSNGD_ETPS_SCCD AS RVSNGDETPSSCCD,A.RCVGD_ETPSNO AS RCVGDETPSNO,A.RCVGD_ETPS_NM AS RCVGDETPSNM
+		,A.DCL_ETPS_SCCD AS DCLETPSSCCD,A.DCL_ETPSNO AS DCLETPSNO,A.DCL_ETPS_NM AS DCLETPSNM,A.DCL_ETPS_TYPECD AS DCLETPSTYPECD,A.EMS_TYPECD AS EMSTYPECD,A.UPDATE_TIME AS updateTime
+		,A.DCL_TYPECD AS DCLTYPECD,A.FINISH_VALID_DATE AS FINISHVALIDDATE,A.APCRET_NO AS APCRETNO,A.NETWK_ETPS_ARCRP_NO AS NETWKETPSARCRPNO,A.MAX_TOVR_AMT AS MAXTOVRAMT
+		,A.DCL_TIME AS DCLTIME,A.UCNS_DCL_SEGCD AS UCNSDCLSEGCD,A.DCL_MARKCD AS DCLMARKCD,A.EMAPV_STUCD AS EMAPVSTUCD,A.PAUSE_IMPEXP_MARKCD AS PAUSEIMPEXPMARKCD
+		,A.PAUSE_CHG_MARKCD AS PAUSECHGMARKCD,A.PUTREC_APPR_TIME AS PUTRECAPPRTIME,A.CHG_APPR_TIME AS CHGAPPRTIME,A.RCNT_VCLR_TIME AS RCNTVCLRTIME,A.SEQ_NO AS SEQNO
+		,A.VCLR_APPLY_TIME AS VCLRAPPLYTIME,A.VCLR_PRID_VAL AS VCLRPRIDVAL,A.ADJACC_MARKCD AS ADJACCMARKCD,A.ADJACC_TMS_CNT,A.DEC_TIME as DECTIME,A.AREA_CODE AS areaCode
+		,A.CHK_STATUS AS CHKSTATUS,B.CUSTOMS_NAME AS MASTERCUSNAME,C.AREA_NAME AS AREANAME,D.ATTR_NAME AS CHKSTATUSNAME,E.ATTR_NAME AS DCLTYPENAME
+	</sql>
+    <!--查询列表-->
+    <select id="selectEmsHisBscList" resultType="com.powerbridge.bssp.ems.entity.EmsHisBsc">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM EMS_HIS_BSC A
+        LEFT JOIN BSSP_COD.COD_CUS_CUSTOMSFEC B ON B.CUSTOMS_CODE = A.MASTER_CUSCD <!-- 主管海关-->
+        LEFT JOIN BSSP_COD.COD_STD_AREA_CODE C ON C.AREA_CODE=A.AREA_CODE <!-- 场地名称-->
+        LEFT JOIN BSSP_COD.COD_STD_CODES D ON D.ATTR_VALUE = A.CHK_STATUS AND D.DICTIONARY_VALUE='CHK_STATUS' <!-- 审批状态-->
+        LEFT JOIN BSSP_COD.COD_STD_CODES E ON E.ATTR_VALUE=A.DCL_TYPECD AND E.DICTIONARY_VALUE='DCL_TYPE' <!-- 申报类型-->
+        LEFT JOIN BSSP_COD.COD_STD_CODES F ON F.ATTR_VALUE=A.EMS_TYPECD AND F.DICTIONARY_VALUE='EMS_TYPE' <!-- 账册类型-->
+        <where>
+            1=1
+            <if test="emsTypecd != null and emsTypecd !=''">
+                AND A.EMS_TYPECD = #{emsTypecd} <!-- 账册类型 -->
+            </if>
+            <if test="inputCopNo != null and inputCopNo !=''">
+                AND A.INPUT_COP_NO = #{inputCopNo} <!-- 录入单位编码 -->
+            </if>
+            <if test="emsNo != null and emsNo !=''">
+                AND A.EMS_NO LIKE '%${emsNo}%'<!-- 账册编号 -->
+            </if>
+            <if test="etpsPreentNo != null and etpsPreentNo !=''">
+                AND A.ETPS_PREENT_NO LIKE '%${etpsPreentNo}%' <!-- 企业内部编号 -->
+            </if>
+            <if test="dclTypecd != null and dclTypecd !=''">
+                AND A.DCL_TYPECD = #{dclTypecd} <!-- 申报类型 -->
+            </if>
+            <if test="chkStatus != null and chkStatus !=''">
+                AND A.CHK_STATUS = #{chkStatus} <!-- 审批状态 -->
+            </if>
+            <if test="finishValidDateStart != null and finishValidDateStart !=''">
+                AND A.FINISH_VALID_DATE <![CDATA[>=]]> #{finishValidDateStart} <!-- 结束有效日期起始 -->
+            </if>
+            <if test="finishValidDateEnd != null and finishValidDateEnd !=''">
+                AND A.FINISH_VALID_DATE <![CDATA[<=]]> '${finishValidDateEnd} 23:59:59' <!-- 结束有效日期终结 -->
+            </if>
+            <if test="decTimeStart != null and decTimeStart !=''">
+                AND A.DEC_TIME <![CDATA[>=]]> #{decTimeStart} <!-- 录入日期起始 -->
+            </if>
+            <if test="decTimeEnd != null and decTimeEnd !=''">
+                AND A.DEC_TIME <![CDATA[<=]]> '{decTimeEnd}  23:59:59' <!-- 录入日期终结 -->
+            </if>
+        </where>
+    </select>
+</mapper>

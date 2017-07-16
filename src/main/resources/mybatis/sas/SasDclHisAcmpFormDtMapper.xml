@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.sas.dao.SasDclHisAcmpFormDtMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.sas.entity.SasDclHisAcmpFormDt">
+		<id column="UID" property="uid" />
+		<result column="SAS_DCL_NO" property="sasDclNo" />
+		<result column="ACMP_FORM_SEQNO" property="acmpFormSeqno" />
+		<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+		<result column="FORM_TYPECD" property="formTypecd" />
+		<result column="FORM_NO" property="formNo" />
+		<result column="FIXD_NO" property="fixdNo" />
+		<result column="ACMP_FORM_FILE_NM" property="acmpFormFileNm" />
+		<result column="RMK" property="rmk" />
+		<result column="VERSION" property="version" />
+		<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+		<result column="ACMP_FORM_FILE_SIZE" property="acmpFormFileSize" />
+		<result column="SEQ_NO" property="seqNo" />
+	</resultMap>
+
+	<select id="selectByList" resultType="com.powerbridge.bssp.sas.entity.SasDclHisAcmpFormDt">
+		SELECT
+		A.UID AS UID,SAS_DCL_NO AS SASDCLNO,ACMP_FORM_SEQNO AS ACMPFORMSEQNO,
+		CHG_TMS_CNT AS CHGTMSCNT,B.ATTR_NAME AS FORMTYPECD,FORM_NO AS FORMNO,
+		FIXD_NO AS FIXDNO,ACMP_FORM_FILE_NM AS ACMPFORMFILENM,RMK AS RMK,
+		VERSION AS VERSION,ETPS_PREENT_NO AS ETPSPREENTNO,ACMP_FORM_FILE_SIZE AS acmpFormFileSize,
+		SEQ_NO AS SEQNO
+		FROM SAS_DCL_HIS_ACMP_FORM_DT A
+		LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE = A.FORM_TYPECD AND B.DICTIONARY_VALUE='ACMP_FORM_TYPECD' <!--随附单证类型-->
+		<where>
+            1=1
+            <if test="seqNo != null and seqNo != ''">
+                AND A.SEQ_NO = #{seqNo}
+            </if>
+            <if test="chgTmsCnt != null and chgTmsCnt != '' or chgTmsCnt == 0">
+                AND A.CHG_TMS_CNT = #{chgTmsCnt}
+            </if>
+        </where>
+	</select>
+
+</mapper>

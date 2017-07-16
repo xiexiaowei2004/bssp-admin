@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.ems.dao.EmsPutrecBscMapper">
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.ems.entity.EmsPutrecBsc">
+		<id column="UID" property="uid" />
+		<result column="EMS_NO" property="emsNo" />
+		<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+		<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+		<result column="MASTER_CUSCD" property="masterCuscd" />
+		<result column="BIZOP_ETPS_SCCD" property="bizopEtpsSccd" />
+		<result column="BIZOP_ETPSNO" property="bizopEtpsno" />
+		<result column="BIZOP_ETPS_NM" property="bizopEtpsNm" />
+		<result column="RVSNGD_ETPS_SCCD" property="rvsngdEtpsSccd" />
+		<result column="RCVGD_ETPSNO" property="rcvgdEtpsno" />
+		<result column="RCVGD_ETPS_NM" property="rcvgdEtpsNm" />
+		<result column="DCL_ETPS_SCCD" property="dclEtpsSccd" />
+		<result column="DCL_ETPSNO" property="dclEtpsno" />
+		<result column="DCL_ETPS_NM" property="dclEtpsNm" />
+		<result column="DCL_ETPS_TYPECD" property="dclEtpsTypecd" />
+		<result column="EMS_TYPECD" property="emsTypecd" />
+		<result column="DCL_TYPECD" property="dclTypecd" />
+		<result column="FINISH_VALID_DATE" property="finishValidDate" />
+		<result column="APCRET_NO" property="apcretNo" />
+		<result column="NETWK_ETPS_ARCRP_NO" property="netwkEtpsArcrpNo" />
+		<result column="MAX_TOVR_AMT" property="maxTovrAmt" />
+		<result column="DCL_TIME" property="dclTime" />
+		<result column="UCNS_DCL_SEGCD" property="ucnsDclSegcd" />
+		<result column="DCL_MARKCD" property="dclMarkcd" />
+		<result column="EMAPV_STUCD" property="emapvStucd" />
+		<result column="PAUSE_IMPEXP_MARKCD" property="pauseImpexpMarkcd" />
+		<result column="PAUSE_CHG_MARKCD" property="pauseChgMarkcd" />
+		<result column="PUTREC_APPR_TIME" property="putrecApprTime" />
+		<result column="CHG_APPR_TIME" property="chgApprTime" />
+		<result column="RCNT_VCLR_TIME" property="rcntVclrTime" />
+		<result column="VCLR_APPLY_TIME" property="vclrApplyTime" />
+		<result column="VCLR_PRID_VAL" property="vclrPridVal" />
+		<result column="ADJACC_MARKCD" property="adjaccMarkcd" />
+		<result column="ADJACC_TMS_CNT" property="adjaccTmsCnt" />
+		<result column="UCNS_VERNO_CNTR_FLAG" property="ucnsVernoCntrFlag" />
+		<result column="RCASE_MARKCD" property="rcaseMarkcd" />
+		<result column="RCASE_MARKNAME" property="rcaseMarkname" />
+		<result column="ETPS_POSES_SADJA_QUA_FLAG" property="etpsPosesSadjaQuaFlag" />
+		<result column="RMK" property="rmk" />
+		<result column="COP_ENT_NO" property="copEntNo" />
+		<result column="AREA_CODE" property="areaCode" />
+		<result column="BIZ_TYPE" property="bizType" />
+		<result column="CHK_STATUS" property="chkStatus" />
+		<result column="DOC_TYPE" property="docType" />
+		<result column="RET_CHANNEL" property="retChannel" />
+		<result column="DEC_TIME" property="decTime" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="CHK_TIME" property="chkTime" />
+		<result column="INPUTER_CODE" property="inputerCode" />
+		<result column="INPUTER_NAME" property="inputerName" />
+		<result column="INPUT_COP_NO" property="inputCopNo" />
+		<result column="INPUT_COP_NAME" property="inputCopName" />
+		<result column="DECLARE_MARK" property="declareMark" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_NAME" property="createName" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_NAME" property="updateName" />
+		<result column="UPDATE_TIME" property="updateTime" />
+		<collection property="emsPutrecExgs" javaType="java.util.List" ofType="com.powerbridge.bssp.ems.entity.EmsPutrecExg">
+			<id column="UID" property="uid" />
+			<result column="EMS_NO" property="emsNo" />
+			<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+			<result column="GDS_SEQNO" property="gdsSeqno" />
+			<result column="MTPCK_ENDPRD_TYPECD" property="mtpckEndprdTypecd" />
+			<result column="GDS_MTNO" property="gdsMtno" />
+			<result column="GDECD" property="gdecd" />
+			<result column="GDS_NM" property="gdsNm" />
+			<result column="ENDPRD_GDS_SPCF_MODEL_DESC" property="endprdGdsSpcfModelDesc" />
+			<result column="DCL_UNITCD" property="dclUnitcd" />
+			<result column="LAWF_UNITCD" property="lawfUnitcd" />
+			<result column="SECD_LAWF_UNITCD" property="secdLawfUnitcd" />
+			<result column="DCL_UPRC_AMT" property="dclUprcAmt" />
+			<result column="DCL_CURRCD" property="dclCurrcd" />
+			<result column="DCL_QTY" property="dclQty" />
+			<result column="LVYRLF_MODECD" property="lvyrlfModecd" />
+			<result column="QTY_CNTR_MARKCD" property="qtyCntrMarkcd" />
+			<result column="ADJMTR_MARKCD" property="adjmtrMarkcd" />
+			<result column="MODF_MARKCD" property="modfMarkcd" />
+			<result column="ETPS_EXE_MARKCD" property="etpsExeMarkcd" />
+			<result column="CUSM_EXE_MARKCD" property="cusmExeMarkcd" />
+			<result column="APPR_MAX_SURP_QTY" property="apprMaxSurpQty" />
+			<result column="VCLR_PRID_INIT_QTY" property="vclrPridInitQty" />
+			<result column="UCNS_TQSN_FLAG" property="ucnsTqsnFlag" />
+			<result column="CSTTN_FLAG" property="csttnFlag" />
+			<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+			<result column="RMK" property="rmk" />
+			<result column="SEQ_NO" property="seqNo" />
+			<result column="CREATE_BY" property="createBy" />
+			<result column="CREATE_NAME" property="createName" />
+			<result column="CREATE_TIME" property="createTime" />
+			<result column="UPDATE_BY" property="updateBy" />
+			<result column="UPDATE_NAME" property="updateName" />
+			<result column="UPDATE_TIME" property="updateTime" />
+		</collection>
+		<collection property="emsPutrecImgs" javaType="java.util.List" ofType="com.powerbridge.bssp.ems.entity.EmsPutrecImg">
+			<id column="UID" property="uid" />
+			<result column="EMS_NO" property="emsNo" />
+			<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+			<result column="GDS_SEQNO" property="gdsSeqno" />
+			<result column="MTPCK_ENDPRD_TYPECD" property="mtpckEndprdTypecd" />
+			<result column="GDS_MTNO" property="gdsMtno" />
+			<result column="GDECD" property="gdecd" />
+			<result column="GDS_NM" property="gdsNm" />
+			<result column="ENDPRD_GDS_SPCF_MODEL_DESC" property="endprdGdsSpcfModelDesc" />
+			<result column="DCL_UNITCD" property="dclUnitcd" />
+			<result column="LAWF_UNITCD" property="lawfUnitcd" />
+			<result column="SECD_LAWF_UNITCD" property="secdLawfUnitcd" />
+			<result column="DCL_UPRC_AMT" property="dclUprcAmt" />
+			<result column="DCL_CURRCD" property="dclCurrcd" />
+			<result column="DCL_QTY" property="dclQty" />
+			<result column="LVYRLF_MODECD" property="lvyrlfModecd" />
+			<result column="QTY_CNTR_MARKCD" property="qtyCntrMarkcd" />
+			<result column="ADJMTR_MARKCD" property="adjmtrMarkcd" />
+			<result column="MODF_MARKCD" property="modfMarkcd" />
+			<result column="ETPS_EXE_MARKCD" property="etpsExeMarkcd" />
+			<result column="CUSM_EXE_MARKCD" property="cusmExeMarkcd" />
+			<result column="APPR_MAX_SURP_QTY" property="apprMaxSurpQty" />
+			<result column="VCLR_PRID_INIT_QTY" property="vclrPridInitQty" />
+			<result column="UCNS_TQSN_FLAG" property="ucnsTqsnFlag" />
+			<result column="CSTTN_FLAG" property="csttnFlag" />
+			<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+			<result column="RMK" property="rmk" />
+			<result column="SEQ_NO" property="seqNo" />
+			<result column="CREATE_BY" property="createBy" />
+			<result column="CREATE_NAME" property="createName" />
+			<result column="CREATE_TIME" property="createTime" />
+			<result column="UPDATE_BY" property="updateBy" />
+			<result column="UPDATE_NAME" property="updateName" />
+			<result column="UPDATE_TIME" property="updateTime" />
+		</collection>
+		<collection property="emsPutrecUcnsDts" javaType="java.util.List" ofType="com.powerbridge.bssp.ems.entity.EmsPutrecUcnsDt">
+			<id column="UID" property="uid" />
+			<result column="EMS_NO" property="emsNo" />
+			<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+			<result column="ENDPRD_SEQNO" property="endprdSeqno" />
+			<result column="MTPCK_SEQNO" property="mtpckSeqno" />
+			<result column="UCNS_VERNO" property="ucnsVerno" />
+			<result column="UCNS_QTY" property="ucnsQty" />
+			<result column="NET_USEUP_QTY" property="netUseupQty" />
+			<result column="TGBL_LOSS_RATE" property="tgblLossRate" />
+			<result column="INTGB_LOSS_RATE" property="intgbLossRate" />
+			<result column="UCNS_DCL_STUCD" property="ucnsDclStucd" />
+			<result column="MODF_MARKCD" property="modfMarkcd" />
+			<result column="BOND_MTPCK_PRPR" property="bondMtpckPrpr" />
+			<result column="ETPS_EXE_MARKCD" property="etpsExeMarkcd" />
+			<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+			<result column="DCL_TIME" property="dclTime" />
+			<result column="RMK" property="rmk" />
+			<result column="SEQ_NO" property="seqNo" />
+			<result column="CREATE_BY" property="createBy" />
+			<result column="CREATE_NAME" property="createName" />
+			<result column="CREATE_TIME" property="createTime" />
+			<result column="UPDATE_BY" property="updateBy" />
+			<result column="UPDATE_NAME" property="updateName" />
+			<result column="UPDATE_TIME" property="updateTime" />
+		</collection>
+		<collection property="emsPutrecAcmpFormDts" javaType="java.util.List" ofType="com.powerbridge.bssp.ems.entity.EmsPutrecAcmpFormDt">
+			<id column="UID" property="uid" />
+			<result column="EMS_NO" property="emsNo" />
+			<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+			<result column="ENDPRD_SEQNO" property="endprdSeqno" />
+			<result column="MTPCK_SEQNO" property="mtpckSeqno" />
+			<result column="UCNS_VERNO" property="ucnsVerno" />
+			<result column="UCNS_QTY" property="ucnsQty" />
+			<result column="NET_USEUP_QTY" property="netUseupQty" />
+			<result column="TGBL_LOSS_RATE" property="tgblLossRate" />
+			<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+			<result column="RMK" property="rmk" />
+			<result column="SEQ_NO" property="seqNo" />
+			<result column="CREATE_BY" property="createBy" />
+			<result column="CREATE_NAME" property="createName" />
+			<result column="CREATE_TIME" property="createTime" />
+			<result column="UPDATE_BY" property="updateBy" />
+			<result column="UPDATE_NAME" property="updateName" />
+			<result column="UPDATE_TIME" property="updateTime" />
+		</collection>
+	</resultMap>
+	
+	<select id="getBusinessData" parameterType="java.lang.String" resultMap="BaseResultMap">
+         ${str}
+    </select>
+	<sql id="Base_Column_List">
+		A.UID,A.EMS_NO AS EMSNO,A.CHG_TMS_CNT AS CHGTMSCNT,A.ETPS_PREENT_NO AS ETPSPREENTNO,A.MASTER_CUSCD AS MASTERCUSCD,A.BIZOP_ETPS_SCCD AS BIZOPETPSSCCD,A.RET_CHANNEL AS RETCHANNEL
+		,A.BIZOP_ETPSNO AS BIZOPETPSNO,A.BIZOP_ETPS_NM AS BIZOPETPSNM,A.RVSNGD_ETPS_SCCD AS RVSNGDETPSSCCD,A.RCVGD_ETPSNO AS RCVGDETPSNO,A.RCVGD_ETPS_NM AS RCVGDETPSNM
+		,A.DCL_ETPS_SCCD AS DCLETPSSCCD,A.DCL_ETPSNO AS DCLETPSNO,A.DCL_ETPS_NM AS DCLETPSNM,A.DCL_ETPS_TYPECD AS DCLETPSTYPECD,A.EMS_TYPECD AS EMSTYPECD,A.UPDATE_TIME AS updateTime
+		,A.DCL_TYPECD AS DCLTYPECD,A.FINISH_VALID_DATE AS FINISHVALIDDATE,A.APCRET_NO AS APCRETNO,A.NETWK_ETPS_ARCRP_NO AS NETWKETPSARCRPNO,A.MAX_TOVR_AMT AS MAXTOVRAMT
+		,A.DCL_TIME AS DCLTIME,A.UCNS_DCL_SEGCD AS UCNSDCLSEGCD,A.DCL_MARKCD AS DCLMARKCD,A.EMAPV_STUCD AS EMAPVSTUCD,A.PAUSE_IMPEXP_MARKCD AS PAUSEIMPEXPMARKCD
+		,A.PAUSE_CHG_MARKCD AS PAUSECHGMARKCD,A.PUTREC_APPR_TIME AS PUTRECAPPRTIME,A.CHG_APPR_TIME AS CHGAPPRTIME,A.RCNT_VCLR_TIME AS RCNTVCLRTIME,A.SEQ_NO AS SEQNO
+		,A.VCLR_APPLY_TIME AS VCLRAPPLYTIME,A.VCLR_PRID_VAL AS VCLRPRIDVAL,A.ADJACC_MARKCD AS ADJACCMARKCD,A.ADJACC_TMS_CNT,A.DEC_TIME as DECTIME,A.AREA_CODE AS areaCode
+		,A.CHK_STATUS AS CHKSTATUS,B.CUSTOMS_NAME AS MASTERCUSNAME,C.AREA_NAME AS AREANAME,D.ATTR_NAME AS CHKSTATUSNAME,E.ATTR_NAME AS DCLTYPENAME
+	</sql>
+
+	<select id="selectEmsPutrecBscList" resultType="com.powerbridge.bssp.ems.entity.EmsPutrecBsc">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM EMS_PUTREC_BSC A
+		LEFT JOIN BSSP_COD.COD_CUS_CUSTOMSFEC B ON B.CUSTOMS_CODE = A.MASTER_CUSCD  <!-- 主管海关 -->
+		LEFT JOIN BSSP_COD.COD_STD_AREA_CODE C ON C.AREA_CODE=A.AREA_CODE  <!-- 场地名称 -->
+		LEFT JOIN BSSP_COD.COD_STD_CODES D ON D.ATTR_VALUE = A.CHK_STATUS AND D.DICTIONARY_VALUE='CHK_STATUS'  <!-- 审批状态 -->
+		LEFT JOIN bssp_cod.COD_STD_CODES E ON E.ATTR_VALUE=A.DCL_TYPECD AND E.DICTIONARY_VALUE='DCL_TYPE'  <!-- 申报类型 -->
+		<where>
+			1=1
+			<if test="emsTypecd != null and emsTypecd !=''">
+				AND A.EMS_TYPECD = #{emsTypecd} <!-- 账册类型 -->
+			</if>
+			<if test="inputCopNo != null and inputCopNo !=''">
+				AND A.INPUT_COP_NO = #{inputCopNo} <!-- 录入单位编码 -->
+			</if>
+			<if test="emsNo != null and emsNo !=''">
+				AND A.EMS_NO LIKE '%${emsNo}%'<!-- 账册编号 -->
+			</if>
+			<if test="etpsPreentNo != null and etpsPreentNo !=''">
+				AND A.ETPS_PREENT_NO LIKE '%${etpsPreentNo}%' <!-- 企业内部编号 -->
+			</if>
+			<if test="dclTypecd != null and dclTypecd !=''">
+				AND A.DCL_TYPECD = #{dclTypecd} <!-- 申报类型 -->
+			</if>
+			<if test="chkStatus != null and chkStatus !=''">
+				AND A.CHK_STATUS = #{chkStatus} <!-- 审批状态 -->
+			</if>
+			<if test="finishValidDateStart != null and finishValidDateStart !=''">
+				AND A.FINISH_VALID_DATE <![CDATA[>=]]> #{finishValidDateStart} <!-- 结束有效日期起始 -->
+			</if>
+			<if test="finishValidDateEnd != null and finishValidDateEnd !=''">
+				AND A.FINISH_VALID_DATE <![CDATA[<=]]> '${finishValidDateEnd} 23:59:59' <!-- 结束有效日期终结 -->
+			</if>
+			<if test="decTimeStart != null and decTimeStart !=''">
+				AND A.DEC_TIME <![CDATA[>=]]> #{decTimeStart} <!-- 录入日期起始 -->
+			</if>
+			<if test="decTimeEnd != null and decTimeEnd !=''">
+				AND A.DEC_TIME <![CDATA[<=]]> '${decTimeEnd}  23:59:59' <!-- 录入日期终结 -->
+			</if>
+		</where>
+	</select>
+</mapper>

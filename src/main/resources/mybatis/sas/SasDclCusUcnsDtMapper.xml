@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.sas.dao.SasDclCusUcnsDtMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.sas.entity.SasDclCusUcnsDt">
+		<id column="UID" property="uid" />
+		<result column="SAS_DCL_NO" property="sasDclNo" />
+		<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+		<result column="ENDPRD_SEQNO" property="endprdSeqno" />
+		<result column="MTPCK_SEQNO" property="mtpckSeqno" />
+		<result column="NET_USEUP_QTY" property="netUseupQty" />
+		<result column="LOSS_RATE" property="lossRate" />
+		<result column="MODF_MARKCD" property="modfMarkcd" />
+		<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="COL4" property="col4" />
+		<result column="COL3" property="col3" />
+		<result column="COL1" property="col1" />
+		<result column="COL2" property="col2" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		A.UID AS UID,A.SAS_DCL_NO AS SASDCLNO,A.CHG_TMS_CNT AS CHGTMSCNT,A.ENDPRD_SEQNO AS ENDPRDSEQNO,A.MTPCK_SEQNO AS MTPCKSEQNO
+		,A.NET_USEUP_QTY AS NETUSEUPQTY,A.LOSS_RATE AS LOSSRATE,A.MODF_MARKCD AS MODFMARKCD,A.ETPS_PREENT_NO AS ETPSPREENTNO,A.SEQ_NO AS SEQNO
+		,A.COL1 AS COL1,A.COL2 AS COL2,A.COL3 AS COL3,A.COL4 AS COL4,B.ATTR_NAME AS MODFMARKNM
+	</sql>
+	<select id="selectByList" resultType="com.powerbridge.bssp.sas.entity.SasDclCusUcnsDt">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM SAS_DCL_CUS_UCNS_DT A
+		LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE=A.MODF_MARKCD AND B.DICTIONARY_VALUE='MODF_MARK'  <!--修改标记-->
+		<where>
+		1=1
+		<if test="sasDclNo != null and sasDclNo != ''">
+			AND  A.SAS_DCL_NO = #{sasDclNo}
+		</if>
+		<if test="modfMarkcd != null and modfMarkcd != ''">
+			AND A.MODF_MARKCD != #{modfMarkcd}          <!-- 修改标记代码 -->
+		</if>
+		</where>
+	</select>
+</mapper>

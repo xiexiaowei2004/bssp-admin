@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.erp.dao.ErpPreBondInvtDtMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.erp.entity.ErpPreBondInvtDt">
+		<id column="UID" property="uid" />
+		<result column="ETPS_INNER_INVT_NO" property="etpsInnerInvtNo" />
+		<result column="LIST_G_NO" property="listGNo" />
+		<result column="EMS_G_NO" property="emsGNo" />
+		<result column="COP_G_NO" property="copGNo" />
+		<result column="CODE_TS" property="codeTs" />
+		<result column="G_NAME" property="gName" />
+		<result column="G_MODEL" property="gModel" />
+		<result column="UNIT" property="unit" />
+		<result column="UNIT_1" property="unit1" />
+		<result column="UNIT_2" property="unit2" />
+		<result column="COUNTRY_CODE" property="countryCode" />
+		<result column="DEC_PRICE" property="decPrice" />
+		<result column="DEC_TOTAL" property="decTotal" />
+		<result column="CURR" property="curr" />
+		<result column="QTY_1" property="qty1" />
+		<result column="QTY_2" property="qty2" />
+		<result column="QTY" property="qty" />
+		<result column="FACTOR_1" property="factor1" />
+		<result column="FACTOR_2" property="factor2" />
+		<result column="FACTOR_WT" property="factorWt" />
+		<result column="GROSS_WT" property="grossWt" />
+		<result column="NET_WT" property="netWt" />
+		<result column="USE_TYPE" property="useType" />
+		<result column="DUTY_MODE" property="dutyMode" />
+		<result column="ENT_VERSION" property="entVersion" />
+		<result column="ENTRY_GDS_SEQNO" property="entryGdsSeqno" />
+		<result column="APPLY_TB_SEQNO" property="applyTbSeqno" />
+		<result column="RMK" property="rmk" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		UID AS UID, ETPS_INNER_INVT_NO as etpsInnerInvtNo, LIST_G_NO as listGNo, EMS_G_NO as emsGNo, COP_G_NO as copGNo, CODE_TS as codeTs, G_NAME as gName, G_MODEL as gModel,
+		UNIT as unit, UNIT_1 as unit1, UNIT_2 as unit2, COUNTRY_CODE as countryCode, DEC_PRICE as decPrice, DEC_TOTAL as decTotal, CURR as curr, QTY_1 as qty1,
+		QTY_2 as qty2, QTY as qty, FACTOR_1 as factor1, FACTOR_2 as factor2, FACTOR_WT as factorWt, GROSS_WT as grossWt, NET_WT as netWt,	USE_TYPE as useType,
+		DUTY_MODE as dutyMode, ENT_VERSION as entVersion, ENTRY_GDS_SEQNO as entryGdsSeqno, APPLY_TB_SEQNO as applyTbSeqno, RMK as rmk
+	</sql>
+	<sql id="Join_Column_List">
+        A.UID AS UID, A.ETPS_INNER_INVT_NO as etpsInnerInvtNo, A.LIST_G_NO as listGNo, A.EMS_G_NO as emsGNo, A.COP_G_NO as copGNo, A.CODE_TS as codeTs, A.G_NAME as gName, A.G_MODEL as gModel,
+		A.UNIT as unit, A.UNIT_1 as unit1, A.UNIT_2 as unit2, A.COUNTRY_CODE as countryCode, A.DEC_PRICE as decPrice, A.DEC_TOTAL as decTotal, A.CURR as curr, A.QTY_1 as qty1,
+		A.QTY_2 as qty2, A.QTY as qty, A.FACTOR_1 as factor1, A.FACTOR_2 as factor2, A.FACTOR_WT as factorWt, A.GROSS_WT as grossWt, A.NET_WT as netWt, A.USE_TYPE as useType,
+		A.DUTY_MODE as dutyMode, A.ENT_VERSION as entVersion, A.ENTRY_GDS_SEQNO as entryGdsSeqno, A.APPLY_TB_SEQNO as applyTbSeqno, A.RMK as rmk,
+		unit.UNIT_NAME as unitName, unit1.UNIT_NAME as unitName1, unit2.UNIT_NAME as unitName2, country.COUNTRY_NA as countryName,
+		curr.CURR_NAME as currName, levy.DUTY_SPEC as dutySpec
+    </sql>
+	<!-- 列表页面取数据 -->
+	<select id="getListData" resultType="com.powerbridge.bssp.erp.entity.ErpPreBondInvtDt">
+		SELECT
+		<include refid="Join_Column_List"/>
+		FROM ERP_PRE_BOND_INVT_DT A
+		LEFT JOIN BSSP_COD.COD_CUS_UNIT unit on unit.UNIT_CODE = A.UNIT
+		LEFT JOIN BSSP_COD.COD_CUS_UNIT unit1 on unit1.UNIT_CODE = A.UNIT_1
+		LEFT JOIN BSSP_COD.COD_CUS_UNIT unit2 on unit2.UNIT_CODE = A.UNIT_2
+		LEFT JOIN BSSP_COD.COD_CUS_COUNTRY country on country.COUNTRY_CO = A.COUNTRY_CODE
+		LEFT JOIN BSSP_COD.COD_CUS_CURR curr on curr.CURR_CODE = A.CURR
+		LEFT JOIN BSSP_COD.COD_CUS_LEVYMODE levy on levy.DUTY_MODE = A.DUTY_MODE
+		<where>
+			<if test="etpsInnerInvtNo != null and etpsInnerInvtNo !=''">
+				 A.ETPS_INNER_INVT_NO = '${etpsInnerInvtNo}' <!--清单企业内部编号 -->
+			</if>
+		</where>
+	</select>
+	<select id="getMaxListGNo" resultType="BigDecimal">
+		SELECT max(LIST_G_NO) as listGNo
+		FROM ERP_PRE_BOND_INVT_DT
+		WHERE ETPS_INNER_INVT_NO = #{etpsInnerInvtNo}
+	</select>
+
+</mapper>

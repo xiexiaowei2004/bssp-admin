@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.erp.dao.ErpPreBondInvtBscMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.erp.entity.ErpPreBondInvtBsc">
+		<id column="UID" property="uid" />
+		<result column="BOND_INVT_NO" property="bondInvtNo" />
+		<result column="PUTREC_NO" property="putrecNo" />
+		<result column="INVT_PREENT_NO" property="invtPreentNo" />
+		<result column="ETPS_INNER_INVT_NO" property="etpsInnerInvtNo" />
+		<result column="BIZOP_ETPS_SCCD" property="bizopEtpsSccd" />
+		<result column="BIZOP_ETPSNO" property="bizopEtpsno" />
+		<result column="BIZOP_ETPS_NM" property="bizopEtpsNm" />
+		<result column="RVSNGD_ETPS_SCCD" property="rvsngdEtpsSccd" />
+		<result column="RCVGD_ETPSNO" property="rcvgdEtpsno" />
+		<result column="RCVGD_ETPS_NM" property="rcvgdEtpsNm" />
+		<result column="DCL_ETPS_SCCD" property="dclEtpsSccd" />
+		<result column="DCL_ETPSNO" property="dclEtpsno" />
+		<result column="DCL_ETPS_NM" property="dclEtpsNm" />
+		<result column="DEC_TIME" property="decTime" />
+		<result column="MTPCK_ENDPRD_MARKCD" property="mtpckEndprdMarkcd" />
+		<result column="SUPV_MODECD" property="supvModecd" />
+		<result column="TRSP_MODECD" property="trspModecd" />
+		<result column="IMPEXP_MARKCD" property="impexpMarkcd" />
+		<result column="IMPEXP_PORTCD" property="impexpPortcd" />
+		<result column="DCL_PLC_CUSCD" property="dclPlcCuscd" />
+		<result column="NATCD" property="natcd" />
+		<result column="APPLY_NO" property="applyNo" />
+		<result column="LIST_TYPE" property="listType" />
+		<result column="INPUT_ETPS_SCCD" property="inputEtpsSccd" />
+		<result column="INPUT_COP_NO" property="inputCopNo" />
+		<result column="INPUT_COP_NAME" property="inputCopName" />
+		<result column="DCLCUS_FLAG" property="dclcusFlag" />
+		<result column="DCLCUS_TYPECD" property="dclcusTypecd" />
+		<result column="BOND_INVT_TYPECD" property="bondInvtTypecd" />
+		<result column="DEC_TYPECD" property="decTypecd" />
+		<result column="RLT_INVT_NO" property="rltInvtNo" />
+		<result column="RLT_PUTREC_NO" property="rltPutrecNo" />
+		<result column="RLT_ENTRY_NO" property="rltEntryNo" />
+		<result column="RLT_ENTRY_BIZOP_ETPS_SCCD" property="rltEntryBizopEtpsSccd" />
+		<result column="RLT_ENTRY_BIZOP_ETPSNO" property="rltEntryBizopEtpsno" />
+		<result column="RLT_ENTRY_BIZOP_ETPS_NM" property="rltEntryBizopEtpsNm" />
+		<result column="RLT_ENTRY_RVSNGD_ETPS_SCCD" property="rltEntryRvsngdEtpsSccd" />
+		<result column="RLT_ENTRY_RCVGD_ETPSNO" property="rltEntryRcvgdEtpsno" />
+		<result column="RLT_ENTRY_RCVGD_ETPS_NM" property="rltEntryRcvgdEtpsNm" />
+		<result column="RLT_ENTRY_DCL_ETPS_SCCD" property="rltEntryDclEtpsSccd" />
+		<result column="RLT_ENTRY_DCL_ETPSNO" property="rltEntryDclEtpsno" />
+		<result column="RLT_ENTRY_DCL_ETPS_NM" property="rltEntryDclEtpsNm" />
+		<result column="SUCCESS_FLAG" property="successFlag" />
+		<result column="RMK" property="rmk" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_TIME" property="updateTime" />
+		<result column="CORR_ENTRY_DCL_ETPS_SCCD" property="corrEntryDclEtpsSccd" />
+		<result column="CORR_ENTRY_DCL_ETPSNO" property="corrEntryDclEtpsno" />
+		<result column="CORR_ENTRY_DCL_ETPS_NM" property="corrEntryDclEtpsNm" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		UID AS UID,BOND_INVT_NO as bondInvtNo, PUTREC_NO as putrecNo,INVT_PREENT_NO as invtPreentNo,ETPS_INNER_INVT_NO as etpsInnerInvtNo,
+		BIZOP_ETPS_SCCD as bizopEtpsSccd, BIZOP_ETPSNO as bizopEtpsno, BIZOP_ETPS_NM as bizopEtpsNm, RVSNGD_ETPS_SCCD as rvsngdEtpsSccd,
+		RCVGD_ETPSNO as rcvgdEtpsno, RCVGD_ETPS_NM as rcvgdEtpsNm, DCL_ETPS_SCCD as dclEtpsSccd, DCL_ETPSNO as dclEtpsno,
+		DCL_ETPS_NM as dclEtpsNm, DEC_TIME as decTime, MTPCK_ENDPRD_MARKCD as mtpckEndprdMarkcd, SUPV_MODECD as supvModecd,
+		TRSP_MODECD as trspModecd, IMPEXP_MARKCD as impexpMarkcd, IMPEXP_PORTCD as impexpPortcd, DCL_PLC_CUSCD as dclPlcCuscd,
+		NATCD as natcd, APPLY_NO as applyNo, LIST_TYPE as listType, INPUT_ETPS_SCCD as inputEtpsSccd, INPUT_COP_NO as inputCopNo,
+		INPUT_COP_NAME as inputCopName, DCLCUS_FLAG as dclcusFlag, DCLCUS_TYPECD as dclcusTypecd, BOND_INVT_TYPECD as bondInvtTypecd,
+		DEC_TYPECD as decTypecd, RLT_INVT_NO as rltInvtNo, RLT_PUTREC_NO as rltPutrecNo, RLT_ENTRY_NO as rltEntryNo,
+		RLT_ENTRY_BIZOP_ETPS_SCCD as rltEntryBizopEtpsSccd, RLT_ENTRY_BIZOP_ETPSNO as rltEntryBizopEtpsno,
+		RLT_ENTRY_BIZOP_ETPS_NM as rltEntryBizopEtpsNm, RLT_ENTRY_RVSNGD_ETPS_SCCD as rltEntryRvsngdEtpsSccd,
+		RLT_ENTRY_RCVGD_ETPSNO as rltEntryRcvgdEtpsno, RLT_ENTRY_RCVGD_ETPS_NM as rltEntryRcvgdEtpsNm,
+		RLT_ENTRY_DCL_ETPS_SCCD as rltEntryDclEtpsSccd, RLT_ENTRY_DCL_ETPSNO as rltEntryDclEtpsno, RLT_ENTRY_DCL_ETPS_NM as rltEntryDclEtpsNm,
+		SUCCESS_FLAG as successFlag, RMK as rmk, CREATE_BY AS createBy, CREATE_TIME AS createTime, UPDATE_BY AS updateBy, UPDATE_TIME AS updateTime,
+		CORR_ENTRY_DCL_ETPS_SCCD as corrEntryDclEtpsSccd, CORR_ENTRY_DCL_ETPSNO as corrEntryDclEtpsno, CORR_ENTRY_DCL_ETPS_NM as corrEntryDclEtpsNm
+	</sql>
+	<sql id="Join_Column_List">
+		A.UID AS UID,A.BOND_INVT_NO as bondInvtNo, A.PUTREC_NO as putrecNo,A.INVT_PREENT_NO as invtPreentNo,A.ETPS_INNER_INVT_NO as etpsInnerInvtNo,
+		A.BIZOP_ETPS_SCCD as bizopEtpsSccd, A.BIZOP_ETPSNO as bizopEtpsno, A.BIZOP_ETPS_NM as bizopEtpsNm, A.RVSNGD_ETPS_SCCD as rvsngdEtpsSccd,
+		A.RCVGD_ETPSNO as rcvgdEtpsno, A.RCVGD_ETPS_NM as rcvgdEtpsNm, A.DCL_ETPS_SCCD as dclEtpsSccd, A.DCL_ETPSNO as dclEtpsno,
+		A.DCL_ETPS_NM as dclEtpsNm, A.DEC_TIME as decTime, A.MTPCK_ENDPRD_MARKCD as mtpckEndprdMarkcd, A.SUPV_MODECD as supvModecd,
+		A.TRSP_MODECD as trspModecd, A.IMPEXP_MARKCD as impexpMarkcd, A.IMPEXP_PORTCD as impexpPortcd, A.DCL_PLC_CUSCD as dclPlcCuscd,
+		A.NATCD as natcd, A.APPLY_NO as applyNo, A.LIST_TYPE as listType, A.INPUT_ETPS_SCCD as inputEtpsSccd, A.INPUT_COP_NO as inputCopNo,
+		A.INPUT_COP_NAME as inputCopName, A.DCLCUS_FLAG as dclcusFlag, A.DCLCUS_TYPECD as dclcusTypecd, A.BOND_INVT_TYPECD as bondInvtTypecd,
+		A.DEC_TYPECD as decTypecd, A.RLT_INVT_NO as rltInvtNo, A.RLT_PUTREC_NO as rltPutrecNo, A.RLT_ENTRY_NO as rltEntryNo,
+		A.RLT_ENTRY_BIZOP_ETPS_SCCD as rltEntryBizopEtpsSccd, A.RLT_ENTRY_BIZOP_ETPSNO as rltEntryBizopEtpsno,
+		A.RLT_ENTRY_BIZOP_ETPS_NM as rltEntryBizopEtpsNm, A.RLT_ENTRY_RVSNGD_ETPS_SCCD as rltEntryRvsngdEtpsSccd,
+		A.RLT_ENTRY_RCVGD_ETPSNO as rltEntryRcvgdEtpsno, A.RLT_ENTRY_RCVGD_ETPS_NM as rltEntryRcvgdEtpsNm,
+		A.RLT_ENTRY_DCL_ETPS_SCCD as rltEntryDclEtpsSccd, A.RLT_ENTRY_DCL_ETPSNO as rltEntryDclEtpsno, A.RLT_ENTRY_DCL_ETPS_NM as rltEntryDclEtpsNm,
+		A.SUCCESS_FLAG as successFlag, A.RMK as rmk, A.CREATE_BY AS createBy, A.CREATE_TIME AS createTime, A.UPDATE_BY AS updateBy, A.UPDATE_TIME AS updateTime,
+		A.CORR_ENTRY_DCL_ETPS_SCCD as corrEntryDclEtpsSccd, A.CORR_ENTRY_DCL_ETPSNO as corrEntryDclEtpsno, A.CORR_ENTRY_DCL_ETPS_NM as corrEntryDclEtpsNm,
+		trade.ABBR_TRADE as supvModecdName, ieport.CUSTOMS_NAME as impexpPortcdName,custom.CUSTOMS_NAME as dclPlcCuscdName
+	</sql>
+	<!-- 列表页面取数据 -->
+	<select id="getListData" resultType="com.powerbridge.bssp.erp.entity.ErpPreBondInvtBsc">
+		SELECT
+		<include refid="Join_Column_List"/>
+		FROM ERP_PRE_BOND_INVT_BSC A
+		LEFT JOIN BSSP_COD.COD_CUS_TRADE trade ON trade.TRADE_MODE = A.SUPV_MODECD  /* 监管方式 */
+        LEFT JOIN BSSP_COD.COD_CUS_CUSTOMSREL ieport on ieport.CUSTOMS_CODE = A.IMPEXP_PORTCD /* 进出口岸 */
+		LEFT JOIN BSSP_COD.COD_CUS_CUSTOMSREL custom on custom.CUSTOMS_CODE = A.DCL_PLC_CUSCD /* 申报地海关 */
+
+		<where>
+			<if test="etpsInnerInvtNo != null and etpsInnerInvtNo !=''">
+				AND A.ETPS_INNER_INVT_NO LIKE '${etpsInnerInvtNo}%' <!--清单企业内部编号(左匹配) -->
+			</if>
+			<if test="putrecNo != null and putrecNo !=''">
+				AND A.PUTREC_NO LIKE '${putrecNo}%' <!--账册编号(左匹配) -->
+			</if>
+
+			<if test="createTimeStart != null and createTimeStart !=''">
+				AND A.CREATE_TIME <![CDATA[>=]]> #{createTimeStart} <!-- 录入日期起始 -->
+			</if>
+			<if test="createTimeEnd != null and createTimeEnd !=''">
+				AND A.CREATE_TIME <![CDATA[<=]]> #{createTimeEnd}  <!-- 录入日期终结 -->
+			</if>
+			<if test="filterCond == 2">
+				AND A.SUCCESS_FLAG ='1'  <!-- 已备案 -->
+			</if>
+			<if test="filterCond == 3">
+				AND A.SUCCESS_FLAG ='0' <!-- 未备案 -->
+			</if>
+			<if test="successFlag != null and successFlag !=''">
+				AND A.SUCCESS_FLAG = #{successFlag} <!-- 是否已备案 -->
+			</if>
+		</where>
+	</select>
+</mapper>

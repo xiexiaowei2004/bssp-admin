@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.edi.dao.EdiMessageHeadMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.edi.entity.EdiMessageHead">
+		<id column="UID" property="uid" />
+		<result column="SERIAL_NO" property="serialNo" />
+		<result column="CLASS_NAME" property="className" />
+		<result column="CLASS_VER" property="classVer" />
+		<result column="DOC_TYPE" property="docType" />
+		<result column="BIZ_TYPE" property="bizType" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="APP_STEP_ID" property="appStepId" />
+		<result column="FILE_DATETIME" property="fileDatetime" />
+		<result column="FILE_KEY_ID" property="fileKeyId" />
+		<result column="FILE_NAME" property="fileName" />
+		<result column="FILE_ORDER" property="fileOrder" />
+		<result column="FILE_SIZE" property="fileSize" />
+		<result column="FILE_SIGN" property="fileSign" />
+		<result column="PUBLIC_CODE" property="publicCode" />
+		<result column="PUBLIC_NAME" property="publicName" />
+		<result column="AREA_CODE" property="areaCode" />
+		<result column="TOKEN" property="token" />
+		<result column="STORAGE_TIME" property="storageTime" />
+		<result column="PROCESSING_TIME" property="processingTime" />
+		<result column="FILE_URL" property="fileUrl" />
+		<result column="STATUS" property="status" />
+	</resultMap>
+	
+	<select id="getEdiMessageHead" parameterType="java.lang.String" resultMap="BaseResultMap">	
+        SELECT
+          UID,SERIAL_NO,CLASS_NAME,CLASS_VER,DOC_TYPE,BIZ_TYPE,SEQ_NO,APP_STEP_ID,FILE_DATETIME,FILE_KEY_ID,FILE_NAME,FILE_ORDER,FILE_SIZE,FILE_SIGN
+          FROM EDI_MESSAGE_HEAD
+        <where> 
+	        <if test="seqNo != null and seqNo !=''">
+	        	AND SEQ_NO = #{seqNo,jdbcType=VARCHAR}
+	        </if>
+        </where>
+    </select>
+</mapper>

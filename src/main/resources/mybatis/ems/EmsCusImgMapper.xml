@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.ems.dao.EmsCusImgMapper">
+	<!--基本字段-->
+	<sql id="Base_Column_List">
+		A.UID,A.EMS_NO AS EMSNO,A.CHG_TMS_CNT AS CHGTMSCNT,A.GDS_SEQNO AS GDSSEQNO,A.MTPCK_ENDPRD_TYPECD AS MTPCKENDPRDTYPECD,H.ATTR_NAME AS MTPCKENDPRDTYPENM,A.GDS_MTNO AS GDSMTNO,A.GDECD AS GDECD
+		,A.GDS_NM AS GDSNM,A.ENDPRD_GDS_SPCF_MODEL_DESC AS ENDPRDGDSSPCFMODELDESC,A.DCL_UNITCD AS DCLUNITCD,A.LAWF_UNITCD AS LAWFUNITCD,A.SECD_LAWF_UNITCD AS SECDLAWFUNITCD,I.UNIT_NAME AS SECDLAWFUNITNM
+		,A.DCL_UPRC_AMT AS DCLUPRCAMT,A.DCL_CURRCD AS DCLCURRCD,A.DCL_QTY AS DCLQTY,A.LVYRLF_MODECD AS LVYRLFMODECD,A.QTY_CNTR_MARKCD AS QTYCNTRMARKCD
+		,A.ADJMTR_MARKCD AS ADJMTRMARKCD,A.MODF_MARKCD AS MODFMARKCD,A.ETPS_EXE_MARKCD AS ETPSEXEMARKCD,A.CUSM_EXE_MARKCD AS CUSMEXEMARKCD,A.CSTTN_FLAG AS CSTTNFLAG
+		,A.APPR_MAX_SURP_QTY AS APPRMAXSURPQTY,A.VCLR_PRID_INIT_QTY AS VCLRPRIDINITQTY,A.UCNS_TQSN_FLAG AS UCNSTQSNFLAG,A.ETPS_PREENT_NO AS ETPSPREENTNO,A.RMK AS RMK
+		,A.SEQ_NO AS SEQNO,A.CREATE_BY AS CREATEBY,A.CREATE_NAME AS CREATENAME,A.CREATE_TIME AS CREATETIME,A.UPDATE_BY AS UPDATEBY,A.UPDATE_NAME AS UPDATENAME,A.UPDATE_TIME AS UPDATETIME
+		,B.ATTR_NAME AS ADJMTRMARKNM,C.ATTR_NAME AS MODFMARKNM,D.ATTR_NAME AS ETPSEXEMARKNM,E.UNIT_NAME AS DCLUNITNM,F.UNIT_NAME AS LAWFUNITNM,G.CURR_NAME AS DCLCURRNM
+	</sql>
+	<!--根据单据编号或账册编号查询料件数据-->
+	<select id="selectEmsCusImgList" resultType="com.powerbridge.bssp.ems.entity.EmsCusImg">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM EMS_CUS_IMG A
+		LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE = A.ADJMTR_MARKCD AND B.DICTIONARY_VALUE='ADJMTR_MARKCD' <!--辅料标记-->
+		LEFT JOIN BSSP_COD.COD_STD_CODES C ON C.ATTR_VALUE=A.MODF_MARKCD AND C.DICTIONARY_VALUE='MODF_MARK' <!-- 修改标记-->
+		LEFT JOIN BSSP_COD.COD_STD_CODES D ON D.ATTR_VALUE=A.ETPS_EXE_MARKCD AND D.DICTIONARY_VALUE='ETPS_EXE_MARK' <!-- 企业执行标记-->
+		LEFT JOIN BSSP_COD.COD_CUS_UNIT E ON A.DCL_UNITCD=E.UNIT_CODE <!-- 申报计量单位-->
+		LEFT JOIN BSSP_COD.COD_CUS_UNIT F ON A.LAWF_UNITCD=F.UNIT_CODE <!-- 法定计量单位-->
+		LEFT JOIN BSSP_COD.COD_CUS_CURR G ON A.DCL_CURRCD=G.CURR_CODE <!-- 申报币制-->
+		LEFT JOIN BSSP_COD.COD_STD_CODES H ON H.ATTR_VALUE=A.MTPCK_ENDPRD_TYPECD AND H.DICTIONARY_VALUE='MTPCK_TYPECD' <!-- 料件成品标记 -->
+		LEFT JOIN BSSP_COD.COD_CUS_UNIT I ON A.SECD_LAWF_UNITCD=I.UNIT_CODE <!-- 第二法定计量单位-->
+		<where>
+			1=1
+			<if test="seqNo != null and seqNo !=''">
+				AND A.SEQ_NO = #{seqNo} <!-- 单据编号-->
+			</if>
+			<if test="emsNo != null and emsNo !=''">
+				AND A.EMS_NO = #{emsNo} <!-- 账册编号-->
+			</if>
+			<if test="gdsSeqno != null and gdsSeqno !=''">
+				AND A.GDS_SEQNO = #{gdsSeqno} <!-- 序号-->
+			</if>
+			<if test="gdsSeqnoStart != null and gdsSeqnoStart !=''">
+				AND A.GDS_SEQNO <![CDATA[>=]]> #{gdsSeqnoStart}
+			</if>
+			<if test="gdsSeqnoEnd != null and gdsSeqnoEnd !=''">
+				AND A.GDS_SEQNO <![CDATA[<=]]> #{gdsSeqnoEnd}
+			</if>
+			<if test="gdsMtno != null and gdsMtno !=''">
+				AND A.GDS_MTNO LIKE '%${gdsMtno}' <!-- 料号-->
+			</if>
+			<if test="gdecd != null and gdecd !=''">
+				AND A.GDECD LIKE'%${gdecd}%' <!-- 商品编码-->
+			</if>
+			<if test="gdsNm != null and gdsNm !=''">
+				AND A.GDS_NM LIKE '%${gdsNm}%' <!-- 商品名称-->
+			</if>
+			<if test="filterSelect != null and filterSelect !=''">
+				AND NOT EXISTS (SELECT 1 FROM EMS_PUTREC_IMG WHERE SEQ_NO=A.SEQ_NO  AND GDS_SEQNO=A.GDS_SEQNO  AND CHG_TMS_CNT = #{filterSelect})
+			</if>
+		</where>
+	</select>
+	<!-- 获取最大的商品序号-->
+	<select id="getMaxGdsSeqno" resultType="java.math.BigDecimal">
+		SELECT IFNULL(MAX(GDS_SEQNO),0) AS GDSSEQNO
+		FROM EMS_CUS_IMG
+		WHERE SEQ_NO = #{seqNo} <!-- 单据编号-->
+	</select>
+</mapper>

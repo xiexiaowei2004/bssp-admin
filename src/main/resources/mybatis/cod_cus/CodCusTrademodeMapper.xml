@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusTrademodeMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusTrademode">
+    <result column="TRADE_MODE" jdbcType="VARCHAR" property="tradeMode" />
+    <result column="DISTRICT_T" jdbcType="VARCHAR" property="districtT" />
+    <result column="BASIC_IM" jdbcType="VARCHAR" property="basicIm" />
+    <result column="BASIC_EX" jdbcType="VARCHAR" property="basicEx" />
+    <result column="IM_CONTROL" jdbcType="VARCHAR" property="imControl" />
+    <result column="EX_CONTROL" jdbcType="VARCHAR" property="exControl" />
+    <result column="PK_SEQ" jdbcType="VARCHAR" property="pkSeq" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusTrademode">
+    SELECT
+      TRADE_MODE AS id,
+      DISTRICT_T AS text
+    FROM COD_CUS_TRADEMODE
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusTrademode">
+    insert into cod_cus_trademode (TRADE_MODE, DISTRICT_T, BASIC_IM, 
+      BASIC_EX, IM_CONTROL, EX_CONTROL, 
+      PK_SEQ)
+    values (#{tradeMode,jdbcType=VARCHAR}, #{districtT,jdbcType=VARCHAR}, #{basicIm,jdbcType=VARCHAR}, 
+      #{basicEx,jdbcType=VARCHAR}, #{imControl,jdbcType=VARCHAR}, #{exControl,jdbcType=VARCHAR}, 
+      #{pkSeq,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusTrademode">
+    insert into cod_cus_trademode
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tradeMode != null">
+        TRADE_MODE,
+      </if>
+      <if test="districtT != null">
+        DISTRICT_T,
+      </if>
+      <if test="basicIm != null">
+        BASIC_IM,
+      </if>
+      <if test="basicEx != null">
+        BASIC_EX,
+      </if>
+      <if test="imControl != null">
+        IM_CONTROL,
+      </if>
+      <if test="exControl != null">
+        EX_CONTROL,
+      </if>
+      <if test="pkSeq != null">
+        PK_SEQ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tradeMode != null">
+        #{tradeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtT != null">
+        #{districtT,jdbcType=VARCHAR},
+      </if>
+      <if test="basicIm != null">
+        #{basicIm,jdbcType=VARCHAR},
+      </if>
+      <if test="basicEx != null">
+        #{basicEx,jdbcType=VARCHAR},
+      </if>
+      <if test="imControl != null">
+        #{imControl,jdbcType=VARCHAR},
+      </if>
+      <if test="exControl != null">
+        #{exControl,jdbcType=VARCHAR},
+      </if>
+      <if test="pkSeq != null">
+        #{pkSeq,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

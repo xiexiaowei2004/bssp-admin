@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusInterfaceMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusInterface">
+    <id column="INTERFACE_ID" jdbcType="VARCHAR" property="interfaceId" />
+    <result column="INTERFACE_NAME" jdbcType="VARCHAR" property="interfaceName" />
+    <result column="INTERFACE_URL" jdbcType="VARCHAR" property="interfaceUrl" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="STATE" jdbcType="INTEGER" property="state" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    INTERFACE_ID, INTERFACE_NAME, INTERFACE_URL, CREATE_TIME, CREATE_BY, UPDATE_TIME, 
+    UPDATE_BY, STATE, REMARKS
+  </sql>
+  
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusInterface">
+    SELECT
+      INTERFACE_ID AS id,
+      INTERFACE_NAME AS text
+    FROM COD_CUS_INTERFACE
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cod_cus_interface
+    where INTERFACE_ID = #{interfaceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cod_cus_interface
+    where INTERFACE_ID = #{interfaceId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusInterface">
+    insert into cod_cus_interface (INTERFACE_ID, INTERFACE_NAME, INTERFACE_URL, 
+      CREATE_TIME, CREATE_BY, UPDATE_TIME, 
+      UPDATE_BY, STATE, REMARKS
+      )
+    values (#{interfaceId,jdbcType=VARCHAR}, #{interfaceName,jdbcType=VARCHAR}, #{interfaceUrl,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusInterface">
+    insert into cod_cus_interface
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="interfaceId != null">
+        INTERFACE_ID,
+      </if>
+      <if test="interfaceName != null">
+        INTERFACE_NAME,
+      </if>
+      <if test="interfaceUrl != null">
+        INTERFACE_URL,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="remarks != null">
+        REMARKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="interfaceId != null">
+        #{interfaceId,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceName != null">
+        #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceUrl != null">
+        #{interfaceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusInterface">
+    update cod_cus_interface
+    <set>
+      <if test="interfaceName != null">
+        INTERFACE_NAME = #{interfaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceUrl != null">
+        INTERFACE_URL = #{interfaceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        STATE = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where INTERFACE_ID = #{interfaceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusInterface">
+    update cod_cus_interface
+    set INTERFACE_NAME = #{interfaceName,jdbcType=VARCHAR},
+      INTERFACE_URL = #{interfaceUrl,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=INTEGER},
+      REMARKS = #{remarks,jdbcType=VARCHAR}
+    where INTERFACE_ID = #{interfaceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

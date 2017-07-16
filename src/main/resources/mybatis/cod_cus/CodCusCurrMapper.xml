@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusCurrMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusCurr">
+    <result column="CURR_CODE" jdbcType="VARCHAR" property="currCode" />
+    <result column="CURR_SYMB" jdbcType="VARCHAR" property="currSymb" />
+    <result column="CURR_NAME" jdbcType="VARCHAR" property="currName" />
+    <result column="IS_MAINTAIN" jdbcType="VARCHAR" property="isMaintain" />
+  </resultMap>
+   <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusCurr">
+    SELECT
+      CURR_CODE AS id,
+      CURR_NAME AS text
+    FROM COD_CUS_CURR
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusCurr">
+    insert into cod_cus_curr (CURR_CODE, CURR_SYMB, CURR_NAME, 
+      IS_MAINTAIN)
+    values (#{currCode,jdbcType=VARCHAR}, #{currSymb,jdbcType=VARCHAR}, #{currName,jdbcType=VARCHAR}, 
+      #{isMaintain,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusCurr">
+    insert into cod_cus_curr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="currCode != null">
+        CURR_CODE,
+      </if>
+      <if test="currSymb != null">
+        CURR_SYMB,
+      </if>
+      <if test="currName != null">
+        CURR_NAME,
+      </if>
+      <if test="isMaintain != null">
+        IS_MAINTAIN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="currCode != null">
+        #{currCode,jdbcType=VARCHAR},
+      </if>
+      <if test="currSymb != null">
+        #{currSymb,jdbcType=VARCHAR},
+      </if>
+      <if test="currName != null">
+        #{currName,jdbcType=VARCHAR},
+      </if>
+      <if test="isMaintain != null">
+        #{isMaintain,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.entry.dao.EntryFreeTxtMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.entry.entity.EntryFreeTxt">
+		<result column="UID" property="uid" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+		<result column="BON_NO" property="bonNo" />
+		<result column="CUS_FIE" property="cusFie" />
+		<result column="DEC_BPNO" property="decBpno" />
+		<result column="DEC_NO" property="decNo" />
+		<result column="REL_ID" property="relId" />
+		<result column="REL_MAN_NO" property="relManNo" />
+		<result column="VOY_NO" property="voyNo" />
+	</resultMap>
+
+</mapper>

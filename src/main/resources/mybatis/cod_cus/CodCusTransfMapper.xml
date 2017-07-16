@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusTransfMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusTransf">
+    <result column="TRAF_CODE" jdbcType="VARCHAR" property="trafCode" />
+    <result column="TRAF_SPEC" jdbcType="VARCHAR" property="trafSpec" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusTransf">
+    SELECT
+      TRAF_CODE AS id,
+      TRAF_SPEC AS text
+    FROM COD_CUS_TRANSF
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusTransf">
+    insert into cod_cus_transf (TRAF_CODE, TRAF_SPEC)
+    values (#{trafCode,jdbcType=VARCHAR}, #{trafSpec,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusTransf">
+    insert into cod_cus_transf
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="trafCode != null">
+        TRAF_CODE,
+      </if>
+      <if test="trafSpec != null">
+        TRAF_SPEC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="trafCode != null">
+        #{trafCode,jdbcType=VARCHAR},
+      </if>
+      <if test="trafSpec != null">
+        #{trafSpec,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

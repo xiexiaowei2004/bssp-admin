@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusCotypeMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusCotype">
+    <result column="CO_OWNER" jdbcType="VARCHAR" property="coOwner" />
+    <result column="CO_OWNERSH" jdbcType="VARCHAR" property="coOwnersh" />
+  </resultMap>
+  <select id="selectCotypeByList" resultType="java.util.HashMap">
+    SELECT CO_OWNER AS ID,CO_OWNERSH AS TEXT FROM COD_CUS_COTYPE ORDER BY CO_OWNER
+  </select>
+  
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusCotype">
+    SELECT
+      CO_OWNER AS id,
+      CO_OWNERSH AS text
+    FROM COD_CUS_COTYPE
+  </select>
+</mapper>

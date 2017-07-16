@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.edi.dao.EdiMessageDataMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.edi.entity.EdiMessageData">
+		<id column="UID" property="uid" />
+		<result column="SERIAL_NO" property="serialNo" />
+		<result column="AREA_CODE" property="areaCode" />
+		<result column="DOC_TYPE" property="docType" />
+		<result column="BIZ_TYPE" property="bizType" />
+		<result column="FILE_NAME" property="fileName" />
+		<result column="TRANS_TYPE" property="transType" />
+		<result column="TRANS_MODE" property="transMode" />
+		<result column="STORAGE_TIME" property="storageTime" />
+		<result column="BIG_DATA" property="bigData" />
+		<result column="PROCESSING_TIME" property="processingTime" />
+		<result column="STATUS" property="status" />
+	</resultMap>
+
+</mapper>

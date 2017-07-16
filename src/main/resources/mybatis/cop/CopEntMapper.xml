@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cop.dao.CopEntMapper">
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.cop.entity.CopEnt">
+		<id column="UID" jdbcType="VARCHAR" property="uid" />
+		<result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+		<result column="TRADE_CODE" jdbcType="VARCHAR" property="tradeCode" />
+		<result column="COP_GB_CODE" jdbcType="VARCHAR" property="copGbCode" />
+		<result column="ENT_NAME" jdbcType="VARCHAR" property="entName" />
+		<result column="ENT_ADDR" jdbcType="VARCHAR" property="entAddr" />
+		<result column="CUSTOMS_CODE" jdbcType="VARCHAR" property="customsCode" />
+		<result column="AREA_CODE" jdbcType="VARCHAR" property="areaCode" />
+		<result column="ENT_PROPERTY" jdbcType="VARCHAR" property="entProperty" />
+		<result column="ENT_TYPE" jdbcType="VARCHAR" property="entType" />
+		<result column="LAW_MAN" jdbcType="VARCHAR" property="lawMan" />
+		<result column="REG_FUND" jdbcType="DECIMAL" property="regFund" />
+		<result column="TEL_CO" jdbcType="VARCHAR" property="telCo" />
+		<result column="CONTAC_CO" jdbcType="VARCHAR" property="contacCo" />
+		<result column="TRADE_AREA" jdbcType="VARCHAR" property="tradeArea" />
+		<result column="REG_DATE" jdbcType="DATE" property="regDate" />
+		<result column="VALID_DATE" jdbcType="DATE" property="validDate" />
+		<result column="VALID_FLAG" jdbcType="VARCHAR" property="validFlag" />
+		<result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+		<result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+		<result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
+		<result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+		<result column="UPDATE_TIME" jdbcType="DATE" property="updateTime" />
+	</resultMap>
+
+	<resultMap id="uniteQueryResultMap" type="com.powerbridge.bssp.cop.entity.CopEnt">
+		<id column="UID" jdbcType="VARCHAR" property="uid" />
+		<result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+		<result column="TRADE_CODE" jdbcType="VARCHAR" property="tradeCode" />
+		<result column="COP_GB_CODE" jdbcType="VARCHAR" property="copGbCode" />
+		<result column="ENT_NAME" jdbcType="VARCHAR" property="entName" />
+		<result column="ENT_ADDR" jdbcType="VARCHAR" property="entAddr" />
+		<result column="CUSTOMS_CODE" jdbcType="VARCHAR" property="customsCode" />
+		<result column="AREA_CODE" jdbcType="VARCHAR" property="areaCode" />
+		<result column="ENT_PROPERTY" jdbcType="VARCHAR" property="entProperty" />
+		<result column="ENT_TYPE" jdbcType="VARCHAR" property="entType" />
+		<result column="LAW_MAN" jdbcType="VARCHAR" property="lawMan" />
+		<result column="REG_FUND" jdbcType="DECIMAL" property="regFund" />
+		<result column="TEL_CO" jdbcType="VARCHAR" property="telCo" />
+		<result column="CONTAC_CO" jdbcType="VARCHAR" property="contacCo" />
+		<result column="TRADE_AREA" jdbcType="VARCHAR" property="tradeArea" />
+		<result column="REG_DATE" jdbcType="DATE" property="regDate" />
+		<result column="VALID_DATE" jdbcType="DATE" property="validDate" />
+		<result column="VALID_FLAG" jdbcType="VARCHAR" property="validFlag" />
+		<result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+		<result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+		<result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
+		<result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+		<result column="UPDATE_TIME" jdbcType="DATE" property="updateTime" />
+		<collection property="copBusiness" javaType="java.util.List" ofType="com.powerbridge.bssp.cop.entity.CopBusiness">
+			<id column="UID" jdbcType="VARCHAR" property="uid" />
+			<result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+			<result column="STORE_CODE" jdbcType="VARCHAR" property="storeCode" />
+			<result column="STORE_NAME" jdbcType="VARCHAR" property="storeName" />
+			<result column="STORE_TYPE" jdbcType="VARCHAR" property="storeType" />
+			<result column="STORE_LICENCE" jdbcType="VARCHAR" property="storeLicence" />
+			<result column="STORE_AREA" jdbcType="DECIMAL" property="storeArea" />
+			<result column="STORE_VOLUME" jdbcType="DECIMAL" property="storeVolume" />
+			<result column="STORE_ADDRESS" jdbcType="VARCHAR" property="storeAddress" />
+			<result column="STORE_NUMBER" jdbcType="DECIMAL" property="storeNumber" />
+			<result column="PROC_RANG" jdbcType="VARCHAR" property="procRang" />
+			<result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+			<result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+			<result column="CREATE_NAME" jdbcType="VARCHAR" property="createName" />
+			<result column="CREATE_TIME" jdbcType="DATE" property="createTime" />
+			<result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+			<result column="UPDATE_NAME" jdbcType="VARCHAR" property="updateName" />
+			<result column="UPDATE_TIME" jdbcType="DATE" property="updateTime" />
+		</collection>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		A.UID AS UID,
+		A.SEQ_NO AS SEQNO,
+		A.TRADE_CODE AS TRADECODE,
+		A.COP_GB_CODE AS COPGBCODE,
+		A.ENT_NAME AS ENTNAME,
+		A.ENT_ADDR AS ENTADDR,
+		A.CUSTOMS_CODE AS CUSTOMSCODE,
+		A.AREA_CODE AS AREACODE,
+		E.ATTR_NAME AS ENTPROPERTY,
+		C.TYPE_NA AS ENTTYPE,
+		A.LAW_MAN AS LAWMAN,
+		A.REG_FUND AS REGFUND,
+		A.TEL_CO AS TELCO,
+		A.CONTAC_CO AS CONTACCO,
+		A.TRADE_AREA AS TRADEAREA,
+		A.REG_DATE AS REGDATE,
+		A.VALID_DATE AS VALIDDATE,
+		D.ATTR_NAME AS VALIDFLAG,
+		A.REMARKS AS REMARKS,
+		A.CREATE_BY AS CREATEBY,
+		A.CREATE_TIME AS CREATETIME,
+		A.UPDATE_BY AS UPDATEBY,
+		A.UPDATE_TIME AS UPDATETIME
+	</sql>
+
+	<sql id="Base_Business_Column_List">
+		B.UID AS uid, B.SEQ_NO AS seqNo, B.STORE_CODE AS storeCode, B.STORE_NAME AS storeName, B.STORE_TYPE AS storeType,
+		B.STORE_LICENCE AS storeLicence, B.STORE_AREA AS storeArea, B.STORE_VOLUME AS storeVolume,
+        B.STORE_ADDRESS AS storeAddress, B.STORE_NUMBER AS storeNumber, B.PROC_RANG AS procRang, B.REMARKS AS remarks,
+		B.CREATE_BY AS createBy, B.CREATE_NAME AS createName, B.CREATE_TIME AS createTime,
+        B.UPDATE_BY AS updateBy, B.UPDATE_NAME AS updateName, B.UPDATE_TIME AS updateTime
+    </sql>
+
+    <sql id="Base_Join_Clause">
+        LEFT JOIN BSSP_COP.COP_BUSINESS B ON A.SEQ_NO = B.SEQ_NO<!-- 主子表关联 -->
+		LEFT JOIN BSSP_COD.COD_CUS_BUSTTYPE C ON C.TYPE_CO = A.ENT_TYPE <!-- 企业类型 -->
+		LEFT JOIN BSSP_COD.COD_STD_CODES D ON D.ATTR_VALUE = A.VALID_FLAG AND D.DICTIONARY_VALUE='IS_VALIDATE'  <!-- 有效标识 -->
+		LEFT JOIN BSSP_COD.COD_STD_CODES E ON E.ATTR_VALUE = A.ENT_PROPERTY AND E.DICTIONARY_VALUE='ENT_PROPERTY'  <!-- 企业性质 -->
+	</sql>
+
+	<select id="selectByTradeCode" resultMap="uniteQueryResultMap">
+		SELECT
+		<include refid="Base_Column_List"/>,
+ 		<include refid="Base_Business_Column_List"/>
+		FROM cop_ent A
+		<include refid="Base_Join_Clause"/>
+		<where>
+			1 = 1
+			<if test="tradeCode != '' and tradeCode != null">
+				AND A.TRADE_CODE = #{tradeCode}
+			</if>
+		</where>
+	</select>
+
+
+	<select id="selectByCopEnt" resultType="com.powerbridge.bssp.cop.entity.CopEnt">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM COP_ENT A
+		
+		LEFT JOIN BSSP_COD.COD_CUS_BUSTTYPE C ON C.TYPE_CO = A.ENT_TYPE <!-- 企业类型 -->
+		LEFT JOIN BSSP_COD.COD_STD_CODES D ON D.ATTR_VALUE = A.VALID_FLAG AND D.DICTIONARY_VALUE='IS_VALIDATE'  <!-- 有效标识 -->
+		LEFT JOIN BSSP_COD.COD_STD_CODES E ON E.ATTR_VALUE = A.ENT_PROPERTY AND E.DICTIONARY_VALUE='ENT_PROPERTY'  <!-- 企业性质 -->
+	
+		<where>
+			1=1
+			<if test="tradeCode != null and tradeCode !=''">
+				AND A.TRADE_CODE LIKE '%${tradeCode}%' <!-- 企业海关代码(左匹配) -->
+			</if>
+			<if test="copGbCode != null and copGbCode !=''">
+				AND A.COP_GB_CODE LIKE '%${copGbCode}%' <!-- 社会信用代码(右匹配) -->
+			</if>
+			<if test="entName != null and entName !=''">
+				AND A.ENT_NAME LIKE '%${entName}%' <!-- 企业名称(模糊匹配) -->
+			</if>
+			<if test="customsCode != null and customsCode !=''">
+				AND A.CUSTOMS_CODE = #{customsCode} <!-- 主管海关 -->
+			</if>
+			<if test="validFlag != null and validFlag !=''">
+				AND A.VALID_FLAG = #{validFlag} <!-- 有效标识 -->
+			</if>
+			<if test="regDateStart != null and regDateStart !=''">
+				AND A.REG_DATE <![CDATA[>=]]>
+				#{regDateStart} <!-- 备案日期起始 -->
+			</if>
+			<if test="regDateEnd != null and regDateEnd !=''">
+				AND A.REG_DATE <![CDATA[<=]]>
+				'${regDateEnd} 23:59:59' <!-- 备案日期终结 -->
+			</if>
+			<if test="validDateStart != null and validDateStart !=''">
+				AND A.VALID_DATE <![CDATA[>=]]> #{validDateStart} <!-- 有效期(起始) -->
+			</if>
+			<if test="validDateEnd != null and validDateEnd !=''">
+				AND A.VALID_DATE <![CDATA[<=]]> '${validDateEnd} 23:59:59' <!-- 有效期(结束) -->
+			</if>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.sas.dao.SasFixedCardBscMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.sas.entity.SasFixedCardBsc">
+		<id column="UID" property="uid" />
+		<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+		<result column="FIXED_CARD_REGNO" property="fixedCardRegno" />
+		<result column="IC_PHYSICS_CODE" property="icPhysicsCode" />
+		<result column="IC_CODE" property="icCode" />
+		<result column="IC_TYPE" property="icType" />
+		<result column="COP_ENT_NO" property="copEntNo" />
+		<result column="USE_ETPS_CODE" property="useEtpsCode" />
+		<result column="USE_ETPS_NAME" property="useEtpsName" />
+		<result column="USE_ETPS_SCCD" property="useEtpsSccd" />
+		<result column="VALID_DATE" property="validDate" />
+		<result column="VEHICLE_TYPECD" property="vehicleTypecd" />
+		<result column="VEHICLE_NO" property="vehicleNo" />
+		<result column="FIXED_CARD_STATUS" property="fixedCardStatus" />
+		<result column="REG_DATE" property="regDate" />
+		<result column="RMK" property="rmk" />
+		<result column="DEC_TIME" property="decTime" />
+		<result column="MASTER_CUSCD" property="masterCuscd" />
+		<result column="AREA_CODE" property="areaCode" />
+		<result column="BIZ_TYPE" property="bizType" />
+		<result column="CHK_STATUS" property="chkStatus" />
+		<result column="DOC_TYPE" property="docType" />
+		<result column="RET_CHANNEL" property="retChannel" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="CHK_TIME" property="chkTime" />
+		<result column="INPUTER_CODE" property="inputerCode" />
+		<result column="INPUTER_NAME" property="inputerName" />
+		<result column="INPUT_COP_NO" property="inputCopNo" />
+		<result column="INPUT_ETPS_SCCD" property="inputEtpsSccd" />
+		<result column="INPUT_COP_NAME" property="inputCopName" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_NAME" property="createName" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_NAME" property="updateName" />
+		<result column="VEHICLE_SORT" property="vehicleSort" />
+		<result column="UPDATE_TIME" property="updateTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		A.UID AS UID,A.CHG_TMS_CNT AS CHGTMSCNT,A.FIXED_CARD_REGNO AS FIXEDCARDREGNO,A.IC_PHYSICS_CODE AS ICPHYSICSCODE,A.IC_CODE AS ICCODE,
+		G.ATTR_NAME AS ICTYPE,A.COP_ENT_NO AS COPENTNO,A.USE_ETPS_CODE AS USEETPSCODE,A.USE_ETPS_NAME AS USEETPSNAME,A.USE_ETPS_SCCD AS USEETPSSCCD,
+		A.VALID_DATE AS VALIDDATE,B.Name AS VEHICLETYPECD,A.VEHICLE_NO AS VEHICLENO,E.ATTR_NAME AS FIXEDCARDSTATUS,A.REG_DATE AS REGDATE,
+		A.RMK AS RMK,A.DEC_TIME AS DECTIME,H.CUSTOMS_NAME AS MASTERCUSCD,I.AREA_NAME AS AREACODE,A.BIZ_TYPE AS BIZTYPE,F.ATTR_NAME AS CHKSTATUS,A.DOC_TYPE AS DOCTYPE,
+		A.RET_CHANNEL AS RETCHANNEL,A.SEQ_NO AS SEQNO,A.CHK_TIME AS CHKTIME,A.INPUTER_CODE AS INPUTERCODE,A.INPUTER_NAME AS INPUTERNAME,A.INPUT_COP_NO AS INPUTCOPNO,
+		A.INPUT_ETPS_SCCD AS INPUTETPSSCCD,A.INPUT_COP_NAME AS INPUTCOPNAME,A.CREATE_BY AS CREATE_BY,A.CREATE_NAME AS CREATENAME,A.CREATE_TIME AS CREATETIME,A.UPDATE_BY AS UPDATEBY,
+		A.UPDATE_NAME AS UPDATENAME,A.UPDATE_TIME AS UPDATETIME,D.NAME AS VEHICLESORT
+		FROM BSSP_SAS.SAS_FIXED_CARD_BSC A
+		LEFT JOIN BSSP_COD.COD_STD_CAR_TYPE B ON A.VEHICLE_TYPECD=B.CODE  <!--车辆类型-->
+		LEFT JOIN BSSP_COD.COD_STD_CAR_SORT D ON A.VEHICLE_SORT=D.CODE  <!--车辆分类-->
+		LEFT JOIN BSSP_COD.COD_STD_CODES E ON A.FIXED_CARD_STATUS=E.ATTR_VALUE AND E.DICTIONARY_VALUE='FIXED_CARD_STATUS'<!--长期卡状态-->
+		LEFT JOIN BSSP_COD.COD_STD_CODES F ON A.CHK_STATUS=F.ATTR_VALUE AND F.DICTIONARY_VALUE='CHK_STATUS' <!-- 单据状态 -->
+		LEFT JOIN BSSP_COD.COD_STD_CODES G ON A.IC_TYPE=G.ATTR_VALUE  AND G.DICTIONARY_VALUE='IC_TYPE'<!--IC卡状态-->
+		LEFT JOIN BSSP_COD.COD_CUS_CUSTOMSFEC H ON A.MASTER_CUSCD=H.CUSTOMS_CODE  <!--主管海关-->
+		LEFT JOIN BSSP_COD.COD_STD_AREA_CODE I ON A.AREA_CODE=I.AREA_CODE  <!--监督场所-->
+	</sql>
+
+	<select id="selectByFixedCardBsc" parameterType="com.powerbridge.bssp.sas.entity.SasFixedCardBsc" resultType="com.powerbridge.bssp.sas.entity.SasFixedCardBsc">
+		SELECT
+		<include refid="Base_Column_List"/>
+		WHERE
+			1=1
+			<if test="icCode != null and icCode !='' ">
+				AND A.IC_CODE LIKE '%${icCode}%' <!--IC卡号 -->
+			</if>
+			<if test="fixedCardRegno != null and fixedCardRegno !='' ">
+				AND A.FIXED_CARD_REGNO LIKE '%${fixedCardRegno}%' <!--长期卡备案号 -->
+			</if>
+			<if test="regDateStart != null and regDateStart !=''">
+				AND A.REG_DATE <![CDATA[>=]]> #{regDateStart}<!-- 备案日期(起始) -->
+			</if>
+			<if test="regDateEnd != null and regDateEnd !=''">
+				AND A.REG_DATE <![CDATA[<=]]> '${regDateEnd} 23:59:59' <!-- 备案日期日期(结束) -->
+			</if>
+			<if test="vehicleNo != null and vehicleNo !=''">
+				AND A.VEHICLE_NO LIKE '%${vehicleNo}%' <!-- 车牌号 -->
+			</if>
+			<if test="vehicleSort != null and vehicleSort !=''">
+				AND A.VEHICLE_SORT = #{vehicleSort} <!-- 车辆分类 -->
+			</if>
+			<if test="validDateStart != null and validDateStart !=''">
+				AND A.VALID_DATE <![CDATA[>=]]> #{validDateStart} <!-- 有效日期(起始) -->
+			</if>
+			<if test="validDateEnd != null and validDateEnd !=''">
+				AND A.VALID_DATE <![CDATA[<=]]> '${validDateEnd} 23:59:59' <!-- 有效日期(结束) -->
+			</if>
+			<if test="fixedCardStatus != null and fixedCardStatus !=''">
+				AND A.FIXED_CARD_STATUS = #{fixedCardStatus} <!-- 长期卡状态 -->
+			</if>
+			<if test="useEtpsName != null and useEtpsName !=''">
+				AND A.USE_ETPS_NAME LIKE '%${useEtpsName}%'<!-- 领用企业 -->
+			</if>
+			<if test="useEtpsName != null and useEtpsName !=''">
+				AND A.USE_ETPS_CODE LIKE '%${useEtpsCode}%'<!-- 领用企业 -->
+			</if>
+	</select>
+
+	<select id="selectByIcCode" parameterType="com.powerbridge.bssp.sas.entity.SasFixedCardBsc" resultType="com.powerbridge.bssp.sas.entity.SasFixedCardBsc">
+		SELECT
+		<include refid="Base_Column_List"/>
+		WHERE 1=1
+		AND IC_CODE = #{icCode}<!--查找IC卡号-->
+	</select>
+</mapper>

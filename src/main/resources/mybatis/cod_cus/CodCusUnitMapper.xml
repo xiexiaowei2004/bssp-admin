@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusUnitMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusUnit">
+    <result column="CONV_CODE" jdbcType="VARCHAR" property="convCode" />
+    <result column="CONV_RATIO" jdbcType="VARCHAR" property="convRatio" />
+    <result column="UNIT_CODE" jdbcType="VARCHAR" property="unitCode" />
+    <result column="UNIT_NAME" jdbcType="VARCHAR" property="unitName" />
+  </resultMap>
+  
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusUnit">
+    SELECT
+      UNIT_CODE AS id,
+      UNIT_NAME AS text
+    FROM COD_CUS_UNIT
+  </select>
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusUnit">
+    insert into cod_cus_unit (CONV_CODE, CONV_RATIO, UNIT_CODE, 
+      UNIT_NAME)
+    values (#{convCode,jdbcType=VARCHAR}, #{convRatio,jdbcType=VARCHAR}, #{unitCode,jdbcType=VARCHAR}, 
+      #{unitName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusUnit">
+    insert into cod_cus_unit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="convCode != null">
+        CONV_CODE,
+      </if>
+      <if test="convRatio != null">
+        CONV_RATIO,
+      </if>
+      <if test="unitCode != null">
+        UNIT_CODE,
+      </if>
+      <if test="unitName != null">
+        UNIT_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="convCode != null">
+        #{convCode,jdbcType=VARCHAR},
+      </if>
+      <if test="convRatio != null">
+        #{convRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="unitCode != null">
+        #{unitCode,jdbcType=VARCHAR},
+      </if>
+      <if test="unitName != null">
+        #{unitName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

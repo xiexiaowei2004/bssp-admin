@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.edi.dao.EdiXmlMapDbMapper">
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.edi.entity.EdiXmlMapDb">
+    <id column="UID" property="uid" />
+		<result column="AREA_CODE" property="areaCode" />
+		<result column="DOC_TYPE" property="docType" />
+		<result column="BIZ_TYPE" property="bizType" />
+		<result column="XML_NAME" property="xmlName" />
+		<result column="XML_TYPE" property="xmlType" />
+		<result column="XML_LENGTH" property="xmlLength" />
+		<result column="DB_TABLE" property="dbTable" />
+		<result column="DB_COLUMN" property="dbColumn" />
+		<result column="DB_TYPE" property="dbType" />
+		<result column="DB_LENGTH" property="dbLength" />
+		<result column="XML_ROOT" property="xmlRoot" />
+		<result column="STATUS" property="status" />
+		<result column="REMARKS" property="remarks" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_NAME" property="createName" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_NAME" property="updateName" />
+		<result column="UPDATE_TIME" property="updateTime" />
+  </resultMap>
+	<select id="getFieldParameter" parameterType="com.powerbridge.bssp.edi.entity.EdiXmlMapDb" resultType="java.lang.String">
+        SELECT
+        GROUP_CONCAT(#{alias,jdbcType=VARCHAR},'.',DB_COLUMN) AS DB_COLUMN
+		FROM EDI_XML_MAP_DB
+        <where> 
+	        <if test="docType != null and docType !=''">
+	        	AND DOC_TYPE = #{docType,jdbcType=VARCHAR}
+	        </if>
+	        <if test="bizType != null and bizType !=''">
+	        	AND BIZ_TYPE = #{bizType,jdbcType=VARCHAR}
+	        </if>
+	        <if test="dbTable != null and dbTable !=''">
+	        	AND DB_TABLE = #{dbTable,jdbcType=VARCHAR}
+	        </if>
+        </where>
+    </select>
+ 
+    <resultMap id="queryForListMap" type="com.powerbridge.bssp.cop_et.entity.EtArcrpBsc">
+       <id column="UID" property="uid" />
+		<result column="ET_ARCRP_NO" property="etArcrpNo" />
+		<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+		<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+		<result column="BIZOP_ETPS_SCCD" property="bizopEtpsSccd" />
+		<result column="BIZOP_ETPSNO" property="bizopEtpsno" />
+		<result column="BIZOP_ETPS_NM" property="bizopEtpsNm" />
+		<result column="PRCS_ETPS_SCCD" property="prcsEtpsSccd" />
+		<result column="PRCS_ETPSNO" property="prcsEtpsno" />
+		<result column="PRCS_ETPS_NM" property="prcsEtpsNm" />
+		<result column="DCL_ETPS_SCCD" property="dclEtpsSccd" />
+		<result column="DCL_ETPSNO" property="dclEtpsno" />
+		<result column="DCL_ETPS_NM" property="dclEtpsNm" />
+		<result column="DECLARE_ER_TYPE" property="declareErType" />
+		<result column="DECLARE_ER_TYPENM" property="declareErTypenm" />
+		<result column="CONC_ADDR" property="concAddr" />
+		<result column="TELNUM" property="telnum" />
+		<result column="FINISH_VALID_DATE" property="finishValidDate" />
+		<result column="APCRET_NO" property="apcretNo" />
+		<result column="PRCS_PRDC_ABLT_AMT" property="prcsPrdcAbltAmt" />
+		<result column="RISK_ASSURE_MARKCD" property="riskAssureMarkcd" />
+		<result column="RISK_ASSURE_MARKNM" property="riskAssureMarknm" />
+		<result column="DCL_SOURCE_MARKCD" property="dclSourceMarkcd" />
+		<result column="DCL_SOURCE_MARKNM" property="dclSourceMarknm" />
+		<result column="DCL_TIME" property="dclTime" />
+		<result column="DCL_TYPECD" property="dclTypecd" />
+		<result column="DCL_TYPENAME" property="dclTypename" />
+		<result column="EXE_MARKCD" property="exeMarkcd" />
+		<result column="EXE_MARKNM" property="exeMarknm" />
+		<result column="RLT_FORM_NO" property="rltFormNo" />
+		<result column="PUTREC_APPR_TIME" property="putrecApprTime" />
+		<result column="CHG_APPR_TIME" property="chgApprTime" />
+		<result column="EMAPV_STUCD" property="emapvStucd" />
+		<result column="EMAPV_STUNM" property="emapvStunm" />
+		<result column="RMK" property="rmk" />
+		<result column="MASTER_CUSCD" property="masterCuscd" />
+		<result column="MASTER_CUS_NAME" property="masterCusName" />
+		<result column="AREA_CODE" property="areaCode" />
+		<result column="AREA_NAME" property="areaName" />
+		<result column="BIZ_TYPE" property="bizType" />
+		<result column="CHK_STATUS" property="chkStatus" />
+		<result column="DOC_TYPE" property="docType" />
+		<result column="RET_CHANNEL" property="retChannel" />
+		<result column="BIZ_TYPE_NAME" property="bizTypeName" />
+		<result column="CHK_STATUS_NAME" property="chkStatusName" />
+		<result column="DOC_TYPE_NAME" property="docTypeName" />
+		<result column="RET_CHANNEL_NAME" property="retChannelName" />
+		<result column="DEC_TIME" property="decTime" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="CHK_TIME" property="chkTime" />
+		<result column="INPUTER_CODE" property="inputerCode" />
+		<result column="INPUTER_NAME" property="inputerName" />
+		<result column="INPUT_COP_NO" property="inputCopNo" />
+		<result column="INPUT_COP_NAME" property="inputCopName" />
+		<result column="DECLARE_MARK" property="declareMark" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_NAME" property="createName" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_NAME" property="updateName" />
+		<result column="UPDATE_TIME" property="updateTime" />
+        <collection property="etArcrpExgs" javaType="java.util.List" ofType="com.powerbridge.bssp.cop_et.entity.EtArcrpExg">
+            <id column="UID" property="uid" />
+			<result column="ET_ARCRP_NO" property="etArcrpNo" />
+			<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+			<result column="GDS_SEQNO" property="gdsSeqno" />
+			<result column="GDECD" property="gdecd" />
+			<result column="GDS_NM" property="gdsNm" />
+			<result column="MODF_MARKCD" property="modfMarkcd" />
+			<result column="MODF_MARKNAME" property="modfMarkname" />
+			<result column="MTPCK_ENDPRD_TYPECD" property="mtpckEndprdTypecd" />
+			<result column="RMK" property="rmk" />
+			<result column="SEQ_NO" property="seqNo" />
+			<result column="CREATE_BY" property="createBy" />
+			<result column="CREATE_NAME" property="createName" />
+			<result column="CREATE_TIME" property="createTime" />
+			<result column="UPDATE_BY" property="updateBy" />
+			<result column="UPDATE_NAME" property="updateName" />
+			<result column="UPDATE_TIME" property="updateTime" />
+        </collection>
+        <collection property="etArcrpImgs" javaType="java.util.List" ofType="com.powerbridge.bssp.cop_et.entity.EtArcrpImg">
+            <id column="UID" property="uid" />
+			<result column="ET_ARCRP_NO" property="etArcrpNo" />
+			<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+			<result column="GDS_SEQNO" property="gdsSeqno" />
+			<result column="GDECD" property="gdecd" />
+			<result column="GDS_NM" property="gdsNm" />
+			<result column="MODF_MARKCD" property="modfMarkcd" />
+			<result column="MODF_MARKNAME" property="modfMarkname" />
+			<result column="MTPCK_ENDPRD_TYPECD" property="mtpckEndprdTypecd" />
+			<result column="RMK" property="rmk" />
+			<result column="SEQ_NO" property="seqNo" />
+			<result column="CREATE_BY" property="createBy" />
+			<result column="CREATE_NAME" property="createName" />
+			<result column="CREATE_TIME" property="createTime" />
+			<result column="UPDATE_BY" property="updateBy" />
+			<result column="UPDATE_NAME" property="updateName" />
+			<result column="UPDATE_TIME" property="updateTime" />
+        </collection>
+         <collection property="etArcrpAcmpFormDts" javaType="java.util.List" ofType="com.powerbridge.bssp.cop_et.entity.EtArcrpAcmpFormDt">
+            <id column="UID" property="uid" />
+			<result column="NETWK_ETPS_ARCRP_NO" property="netwkEtpsArcrpNo" />
+			<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+			<result column="ACMP_FORM_SEQNO" property="acmpFormSeqno" />
+			<result column="ACMP_FORM_TYPECD" property="acmpFormTypecd" />
+			<result column="ACMP_FORM_TYPENM" property="acmpFormTypenm" />
+			<result column="ACMP_FORM_NO" property="acmpFormNo" />
+			<result column="FIXD_NO" property="fixdNo" />
+			<result column="ACMP_FORM_FILE_NM" property="acmpFormFileNm" />
+			<result column="TGBL_LOSS_RATE" property="tgblLossRate" />
+			<result column="RMK" property="rmk" />
+			<result column="SEQ_NO" property="seqNo" />
+			<result column="CREATE_BY" property="createBy" />
+			<result column="CREATE_NAME" property="createName" />
+			<result column="CREATE_TIME" property="createTime" />
+			<result column="UPDATE_BY" property="updateBy" />
+			<result column="UPDATE_NAME" property="updateName" />
+			<result column="UPDATE_TIME" property="updateTime" />
+        </collection>
+    </resultMap>
+    <select id="getBusinessData" parameterType="java.lang.String" resultMap="queryForListMap">
+         ${str}
+    </select>
+    
+     <select id="getEdiXmlMapDb" parameterType="java.util.Map" resultMap="BaseResultMap">
+          SELECT
+          AREA_CODE,DOC_TYPE,BIZ_TYPE,DB_TABLE,DB_COLUMN,XML_NAME,DB_TYPE,DB_LENGTH,XML_TYPE,XML_LENGTH
+		 FROM EDI_XML_MAP_DB
+        <where> 
+	        <if test="docType != null and docType !=''">
+	        	AND DOC_TYPE = #{docType,jdbcType=VARCHAR}
+	        </if>
+	        <if test="bizType != null and bizType !=''">
+	        	AND BIZ_TYPE = #{bizType,jdbcType=VARCHAR}
+	        </if>
+ 	        <if test="dbTable != null and dbTable !=''">
+ 	        	AND DB_TABLE = #{dbTable,jdbcType=VARCHAR}
+ 	        </if>
+<!-- 	        <if test="dbColumn != null and dbColumn !=''"> -->
+<!-- 	        	AND DB_COLUMN = #{dbColumn,jdbcType=VARCHAR} -->
+<!-- 	        </if> -->
+			AND STATUS ='Y' ORDER BY ORDER_NO ASC
+        </where>
+    </select>
+    
+    
+    
+</mapper> 

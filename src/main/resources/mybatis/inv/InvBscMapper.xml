@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.inv.dao.InvBscMapper">
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.inv.entity.InvBsc">
+		<id column="UID" property="uid" />
+		<result column="BOND_INVT_NO" property="bondInvtNo" />
+		<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+		<result column="INVT_PREENT_NO" property="invtPreentNo" />
+		<result column="PUTREC_NO" property="putrecNo" />
+		<result column="ETPS_INNER_INVT_NO" property="etpsInnerInvtNo" />
+		<result column="BIZOP_ETPS_SCCD" property="bizopEtpsSccd" />
+		<result column="BIZOP_ETPSNO" property="bizopEtpsno" />
+		<result column="BIZOP_ETPS_NM" property="bizopEtpsNm" />
+		<result column="RVSNGD_ETPS_SCCD" property="rvsngdEtpsSccd" />
+		<result column="RCVGD_ETPSNO" property="rcvgdEtpsno" />
+		<result column="RCVGD_ETPS_NM" property="rcvgdEtpsNm" />
+		<result column="DCL_ETPS_SCCD" property="dclEtpsSccd" />
+		<result column="DCL_ETPSNO" property="dclEtpsno" />
+		<result column="DCL_ETPS_NM" property="dclEtpsNm" />
+		<result column="INVT_DCL_TIME" property="invtDclTime" />
+		<result column="ENTRY_DCL_TIME" property="entryDclTime" />
+		<result column="ENTRY_NO" property="entryNo" />
+		<result column="RLT_INVT_NO" property="rltInvtNo" />
+		<result column="RLT_PUTREC_NO" property="rltPutrecNo" />
+		<result column="RLT_ENTRY_NO" property="rltEntryNo" />
+		<result column="RLT_ENTRY_BIZOP_ETPS_SCCD" property="rltEntryBizopEtpsSccd" />
+		<result column="RLT_ENTRY_BIZOP_ETPSNO" property="rltEntryBizopEtpsno" />
+		<result column="RLT_ENTRY_BIZOP_ETPS_NM" property="rltEntryBizopEtpsNm" />
+		<result column="IMPEXP_PORTCD" property="impexpPortcd" />
+		<result column="DCL_PLC_CUSCD" property="dclPlcCuscd" />
+		<result column="DCL_PLC_CUSNAME" property="dclPlcCusname" />
+		<result column="IMPEXP_MARKCD" property="impexpMarkcd" />
+		<result column="MTPCK_ENDPRD_MARKCD" property="mtpckEndprdMarkcd" />
+		<result column="SUPV_MODECD" property="supvModecd" />
+		<result column="TRSP_MODECD" property="trspModecd" />
+		<result column="APPLY_NO" property="applyNo" />
+		<result column="DCLCUS_FLAG" property="dclcusFlag" />
+		<result column="DCLCUS_TYPECD" property="dclcusTypecd" />
+		<result column="PREVD_TIME" property="prevdTime" />
+		<result column="FORMAL_VRFDED_TIME" property="formalVrfdedTime" />
+		<result column="INVT_IOCHKPT_STUCD" property="invtIochkptStucd" />
+		<result column="VRFDED_MARKCD" property="vrfdedMarkcd" />
+		<result column="INVT_STUCD" property="invtStucd" />
+		<result column="VRFDED_MODECD" property="vrfdedModecd" />
+		<result column="DU_CODE" property="duCode" />
+		<result column="BOND_INVT_TYPECD" property="bondInvtTypecd" />
+		<result column="ENTRY_STUCD" property="entryStucd" />
+		<result column="ENTRY_STUNAME" property="entryStuname" />
+		<result column="PASSPORT_USED_TYPECD" property="passportUsedTypecd" />
+		<result column="ORG_FLAG" property="orgFlag" />
+		<result column="I_E_FLAG" property="iEFlag" />
+		<result column="I_E_FLAG1" property="iEFlag1" />
+		<result column="I_E_WAY" property="iEWay" />
+		<result column="BILL_TYPE" property="billType" />
+		<result column="ENT_VERI_NO" property="entVeriNo" />
+		<result column="RLT_ENTRY_RVSNGD_ETPS_SCCD" property="rltEntryRvsngdEtpsSccd" />
+		<result column="RLT_ENTRY_RCVGD_ETPSNO" property="rltEntryRcvgdEtpsno" />
+		<result column="RLT_ENTRY_RCVGD_ETPS_NM" property="rltEntryRcvgdEtpsNm" />
+		<result column="RLT_ENTRY_DCL_ETPS_SCCD" property="rltEntryDclEtpsSccd" />
+		<result column="RLT_ENTRY_DCL_ETPSNO" property="rltEntryDclEtpsno" />
+		<result column="RLT_ENTRY_DCL_ETPS_NM" property="rltEntryDclEtpsNm" />
+		<result column="LIST_TYPE" property="listType" />
+		<result column="CORR_ENTRY_DCL_ETPS_SCCD" property="corrEntryDclEtpsSccd" />
+		<result column="CORR_ENTRY_DCL_ETPSNO" property="corrEntryDclEtpsno" />
+		<result column="CORR_ENTRY_DCL_ETPS_NM" property="corrEntryDclEtpsNm" />
+		<result column="DEC_TYPE" property="decType" />
+		<result column="RMK" property="rmk" />
+		<result column="COP_ENT_NO" property="copEntNo" />
+		<result column="MASTER_CUSCD" property="masterCuscd" />
+		<result column="AREA_CODE" property="areaCode" />
+		<result column="BIZ_TYPE" property="bizType" />
+		<result column="CHK_STATUS" property="chkStatus" />
+		<result column="DOC_TYPE" property="docType" />
+		<result column="RET_CHANNEL" property="retChannel" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="DEC_TIME" property="decTime" />
+		<result column="CHK_TIME" property="chkTime" />
+		<result column="INPUTER_CODE" property="inputerCode" />
+		<result column="INPUTER_NAME" property="inputerName" />
+		<result column="INPUT_ETPS_SCCD" property="inputEtpsSccd" />
+		<result column="INPUT_COP_NO" property="inputCopNo" />
+		<result column="INPUT_COP_NAME" property="inputCopName" />
+		<result column="DECLARE_MARK" property="declareMark" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_NAME" property="createName" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_NAME" property="updateName" />
+		<result column="UPDATE_TIME" property="updateTime" />
+		<result column="NATCD" property="natcd" />
+		<result column="PARAM1" property="param1" />
+		<result column="PARAM2" property="param2" />
+		<result column="PARAM3" property="param3" />
+		<result column="PARAM4" property="param4" />
+		<result column="EMAPV_MARKCD" property="emapvMarkcd" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		 A.UID AS UID,
+		 A.BOND_INVT_NO AS BONDINVTNO,
+		 A.CHG_TMS_CNT AS CHGTMSCNT,
+		 A.INVT_PREENT_NO AS INVTPREENTNO,
+		 A.PUTREC_NO AS PUTRECNO,
+		 A.ETPS_INNER_INVT_NO AS ETPSINNERINVTNO,
+		 A.BIZOP_ETPS_SCCD AS BIZOPETPSSCCD,
+		 A.BIZOP_ETPSNO AS BIZOPETPSNO,
+		 A.BIZOP_ETPS_NM AS BIZOPETPSNM,
+		 A.RVSNGD_ETPS_SCCD AS RVSNGDETPSSCCD,
+		 A.RCVGD_ETPSNO AS RCVGDETPSNO,
+		 A.RCVGD_ETPS_NM AS RCVGDETPSNM,
+		 A.DCL_ETPS_SCCD AS DCLETPSSCCD,
+		 A.DCL_ETPSNO AS DCLETPSNO,
+		 A.DCL_ETPS_NM AS DCLETPSNM,
+		 A.INVT_DCL_TIME AS INVTDCLTIME,
+		 A.ENTRY_DCL_TIME AS ENTRYDCLTIME,
+		 A.ENTRY_NO AS ENTRYNO,
+		 A.RLT_INVT_NO AS RLTINVTNO,
+		 A.RLT_PUTREC_NO AS RLTPUTRECNO,
+		 A.RLT_ENTRY_NO AS RLTENTRYNO,
+		 A.RLT_ENTRY_BIZOP_ETPS_SCCD AS RLTENTRYBIZOPETPSSCCD,
+		 A.RLT_ENTRY_BIZOP_ETPSNO AS RLTENTRYBIZOPETPSNO,
+		 A.RLT_ENTRY_BIZOP_ETPS_NM AS RLTENTRYBIZOPETPSNM,
+		 A.IMPEXP_PORTCD AS IMPEXPPORTCD,
+		 A.DCL_PLC_CUSCD AS DCLPLCCUSCD,
+		 A.DCL_PLC_CUSNAME AS DCLPLCCUSNAME,
+		 A.IMPEXP_MARKCD AS IMPEXPMARKCD,
+		 A.MTPCK_ENDPRD_MARKCD AS MTPCKENDPRDMARKCD,
+		 A.SUPV_MODECD AS SUPVMODECD,
+		 A.TRSP_MODECD AS TRSPMODECD,
+		 A.APPLY_NO AS APPLYNO,
+		 A.DCLCUS_FLAG AS DCLCUSFLAG,
+		 A.DCLCUS_TYPECD AS DCLCUSTYPECD,
+		 A.PREVD_TIME AS PREVDTIME,
+		 A.FORMAL_VRFDED_TIME AS FORMALVRFDEDTIME,
+		 A.INVT_IOCHKPT_STUCD AS INVTIOCHKPTSTUCD,
+		 A.VRFDED_MARKCD AS VRFDEDMARKCD,
+		 A.INVT_STUCD AS INVTSTUCD,
+		 A.VRFDED_MODECD AS VRFDEDMODECD,
+		 A.DU_CODE AS DUCODE,
+		 A.BOND_INVT_TYPECD AS BONDINVTTYPECD,
+		 A.ENTRY_STUCD AS ENTRYSTUCD,
+		 A.ENTRY_STUNAME AS ENTRYSTUNAME,
+		 A.PASSPORT_USED_TYPECD AS PASSPORTUSEDTYPECD,
+		 A.ORG_FLAG AS ORGFLAG,
+		 A.I_E_FLAG AS IEFLAG,
+		 A.I_E_FLAG1 AS IEFLAG1,
+		 A.I_E_WAY AS IEWAY,
+		 A.BILL_TYPE AS BILLTYPE,
+		 A.ENT_VERI_NO AS ENTVERINO,
+		 A.RLT_ENTRY_RVSNGD_ETPS_SCCD AS RLTENTRYRVSNGDETPSSCCD,
+		 A.RLT_ENTRY_RCVGD_ETPSNO AS RLTENTRYRCVGDETPSNO,
+		 A.RLT_ENTRY_RCVGD_ETPS_NM AS RLTENTRYRCVGDETPSNM,
+		 A.RLT_ENTRY_DCL_ETPS_SCCD AS RLTENTRYDCLETPSSCCD,
+		 A.RLT_ENTRY_DCL_ETPSNO AS RLTENTRYDCLETPSNO,
+		 A.RLT_ENTRY_DCL_ETPS_NM AS RLTENTRYDCLETPSNM,
+		 A.LIST_TYPE AS LISTTYPE,
+		 A.CORR_ENTRY_DCL_ETPS_SCCD AS CORRENTRYDCLETPSSCCD,
+		 A.CORR_ENTRY_DCL_ETPSNO AS CORRENTRYDCLETPSNO,
+		 A.CORR_ENTRY_DCL_ETPS_NM AS CORRENTRYDCLETPSNM,
+		 A.DEC_TYPE AS DECTYPE,
+		 A.RMK AS RMK,
+		 A.COP_ENT_NO AS COPENTNO,
+		 A.MASTER_CUSCD AS MASTERCUSCD,
+		 A.AREA_CODE AS AREACODE,
+		 A.BIZ_TYPE AS BIZTYPE,
+		 A.CHK_STATUS AS CHKSTATUS,
+		 A.DOC_TYPE AS DOCTYPE,
+		 A.RET_CHANNEL AS RETCHANNEL,
+		 A.SEQ_NO AS SEQNO,
+		 A.DEC_TIME AS DECTIME,
+		 A.CHK_TIME AS CHKTIME,
+		 A.INPUTER_CODE AS INPUTERCODE,
+		 A.INPUTER_NAME AS INPUTERNAME,
+		 A.INPUT_ETPS_SCCD AS INPUTETPSSCCD,
+		 A.INPUT_COP_NO AS INPUTCOPNO,
+		 A.INPUT_COP_NAME AS INPUTCOPNAME,
+		 A.DECLARE_MARK AS DECLAREMARK,
+		 A.CREATE_BY AS CREATEBY,
+		 A.CREATE_NAME AS CREATENAME,
+		 A.CREATE_TIME AS CREATETIME,
+		 A.UPDATE_BY AS UPDATEBY,
+		 A.UPDATE_NAME AS UPDATENAME,
+		 A.UPDATE_TIME AS UPDATETIME,
+		 A.NATCD AS NATCD,
+		 A.PARAM1 AS PARAM1,
+		 A.PARAM2 AS PARAM2,
+		 A.PARAM3 AS PARAM3,
+		 A.PARAM4 AS PARAM4,
+		 A.EMAPV_MARKCD AS EMAPVMARKCD,
+		 B.CUSTOMS_NAME AS MASTERCUSNAME,
+		 D.ATTR_NAME AS CHKSTATUSNM,
+		 E.ATTR_NAME AS INVTSTUCDNM,
+		 F.ATTR_NAME AS IEFLAGNM,
+		 G.ATTR_NAME AS BONDINVTTYPECDNM,
+		 H.ABBR_TRADE AS supvModecdName,
+		 I.CUSTOMS_NAME AS dclPlcCuscdName
+	</sql>
+
+	<select id="selectByInvBsc" resultType="com.powerbridge.bssp.inv.entity.InvBsc">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM INV_BSC A
+		LEFT JOIN BSSP_COD.COD_CUS_CUSTOMSFEC B ON B.CUSTOMS_CODE = A.MASTER_CUSCD  <!-- 主管海关 -->
+		LEFT JOIN BSSP_COD.COD_STD_CODES D ON D.ATTR_VALUE = A.CHK_STATUS AND D.DICTIONARY_VALUE='CHK_STATUS'  <!--单据状态 -->
+		LEFT JOIN bssp_cod.COD_STD_CODES E ON E.ATTR_VALUE=A.INVT_STUCD AND E.DICTIONARY_VALUE='EMAPV_MARKCD_SAS'  <!-- 清单状态 -->
+		LEFT JOIN bssp_cod.COD_STD_CODES F ON F.ATTR_VALUE=A.I_E_FLAG AND F.DICTIONARY_VALUE='DIRECTION_TYPECD'  <!-- 出入区标识 -->
+		LEFT JOIN bssp_cod.COD_STD_CODES G ON G.ATTR_VALUE=A.BOND_INVT_TYPECD AND G.DICTIONARY_VALUE='BOND_INVT_TYPECD'  <!-- 清单类型 -->
+		LEFT JOIN bssp_cod.COD_CUS_TRADE H ON H.TRADE_MODE=A.SUPV_MODECD   <!-- 监管方式 -->
+		LEFT JOIN bssp_cod.COD_CUS_CUSTOMSFEC I ON I.CUSTOMS_CODE=A.DCL_PLC_CUSCD   <!-- 申报地海关 -->
+		<where>
+			1=1
+			<if test="inputCopNo != null and inputCopNo != ''">
+				AND A.INPUT_COP_NO = #{inputCopNo} <!--过滤企业的数据 -->
+			</if>
+			<if test="docType != null and docType !=''">
+				AND A.DOC_TYPE = #{docType} <!-- 单据类别 -->
+			</if>
+			<if test="iEFlag != null and iEFlag !=''">
+				AND A.I_E_FLAG = #{iEFlag} <!-- 出入区标识 -->
+			</if>
+			<if test="iEFlag1 != null and iEFlag1 !=''">
+				AND A.I_E_FLAG1 = #{iEFlag1} <!-- 出入区标识 -->
+			</if>
+			<if test="bondInvtNo != null and bondInvtNo !=''">
+			 AND A.BOND_INVT_NO LIKE '%${bondInvtNo}%'<!-- 保税清单编号 -->
+			</if>
+			<if test="putrecNo != null and putrecNo !=''">
+			AND A.PUTREC_NO LIKE '%${putrecNo}%'<!-- 备案编号 -->
+			</if>
+			<if test="chkStatus != null and chkStatus !=''">
+				AND A.CHK_STATUS = #{chkStatus} <!-- 单据状态 -->
+			</if>
+			<if test="bondInvtTypecd != null and bondInvtTypecd !=''">
+				AND A.BOND_INVT_TYPECD = #{bondInvtTypecd} <!-- 清单类型 -->
+			</if>
+			<if test="etpsInnerInvtNo != null and etpsInnerInvtNo !=''">
+				AND A.ETPS_INNER_INVT_NO LIKE '%${etpsInnerInvtNo}%'<!-- 企业内部清单编号 -->
+			</if>
+
+			<if test="decTimeStart != null and decTimeStart !=''">
+				AND A.DEC_TIME <![CDATA[>=]]> #{decTimeStart} <!-- 录入日期起始 -->
+			</if>
+			<if test="decTimeEnd != null and decTimeEnd !=''">
+				AND A.DEC_TIME <![CDATA[<=]]> '${decTimeEnd}  23:59:59' <!-- 录入日期终结 -->
+			</if>
+			<if test="isFilterRlt != null and isFilterRlt !=''">
+				AND NOT EXISTS (SELECT 1 FROM BSSP_SAS.SAS_PASSPORT_RLT WHERE RLT_NO=A.SEQ_NO) <!-- 过滤核放单已选单证 -->
+			</if>
+			ORDER BY A.INVT_DCL_TIME DESC
+		</where>
+	</select>
+</mapper>

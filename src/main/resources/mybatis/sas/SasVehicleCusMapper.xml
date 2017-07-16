@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.sas.dao.SasVehicleCusMapper">
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.sas.entity.SasVehicleCus">
+		<id column="UID" property="uid" />
+		<result column="VEHICLE_NO" property="vehicleNo" />
+		<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+		<result column="VEHICLE_TYPECD" property="vehicleTypecd" />
+		<result column="DCL_PREENT_NO" property="dclPreentNo" />
+		<result column="DCl_TYPECD" property="dclTypecd" />
+		<result column="VEHICLE_CUS_NO" property="vehicleCusNo" />
+		<result column="ETPSNO" property="etpsno" />
+		<result column="ETPS_NM" property="etpsNm" />
+		<result column="ETPS_SCCD" property="etpsSccd" />
+		<result column="VEHICLE_WT" property="vehicleWt" />
+		<result column="DCL_ER" property="dclEr" />
+		<result column="DCL_TIME" property="dclTime" />
+		<result column="PUTREC_EMAPV_TIME" property="putrecEmapvTime" />
+		<result column="CHG_EMAPV_TIME" property="chgEmapvTime" />
+		<result column="EMAPV_MARKCD" property="emapvMarkcd" />
+		<result column="OWNER_SYSTEM" property="ownerSystem" />
+		<result column="VALID_FLAG" property="validFlag" />
+		<result column="PLATE_TYPECD" property="plateTypecd" />
+		<result column="SEC_VEHICLE_IC_NO" property="secVehicleIcNo" />
+		<result column="RMK" property="rmk" />
+		<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+		<result column="DCl_TYPENM" property="DClTYPENM" />
+		<result column="MASTER_CUSCD" property="masterCuscd" />
+		<result column="AREA_CODE" property="areaCode" />
+		<result column="BIZ_TYPE" property="bizType" />
+		<result column="CHK_STATUS" property="chkStatus" />
+		<result column="DOC_TYPE" property="docType" />
+		<result column="RET_CHANNEL" property="retChannel" />
+		<result column="DEC_TIME" property="decTime" />
+		<result column="CHK_TIME" property="chkTime" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="COL1" property="col1" />
+		<result column="COL2" property="col2" />
+		<result column="COL3" property="col3" />
+		<result column="COL4" property="col4" />
+		<result column="INPUTER_CODE" property="inputerCode" />
+		<result column="INPUTER_NAME" property="inputerName" />
+		<result column="INPUT_COP_NO" property="inputCopNo" />
+		<result column="INPUT_COP_NAME" property="inputCopName" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_NAME" property="createName" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_NAME" property="updateName" />
+		<result column="UPDATE_TIME" property="updateTime" />
+	</resultMap>
+    
+    <sql id="Base_Column_List">
+        A.UID AS UID,A.VEHICLE_NO AS VEHICLENO,A.CHG_TMS_CNT AS CHGTMSCNT,B.Name AS VEHICLETYPECD,A.DCL_PREENT_NO AS DCLPREENTNO,
+        E.ATTR_NAME AS DClTYPECD,A.VEHICLE_CUS_NO AS VEHICLECUSNO,A.ETPSNO AS ETPSNO,A.ETPS_NM AS ETPSNM,A.ETPS_SCCD AS ETPSSCCD,
+        A.VEHICLE_WT AS VEHICLEWT,A.DCL_ER AS DCLER,A.DCL_TIME AS DCLTIME,A.PUTREC_EMAPV_TIME AS PUTRECEMAPVTIME,A.CHG_EMAPV_TIME AS CHGEMAPVTIME,
+        A.EMAPV_MARKCD AS EMAPVMARKCD,A.OWNER_SYSTEM AS OWNERSYSTEM,A.VALID_FLAG AS VALIDFLAG,D.ATTR_NAME AS PLATETYPECD,A.SEC_VEHICLE_IC_NO AS SECVEHICLEICNO,A.RMK AS RMK,
+        A.ETPS_PREENT_NO AS ETPSPREENTNO,A.MASTER_CUSCD AS MASTERCUDNM,A.MASTER_CUSCD AS MASTERCUSCD,A.AREA_CODE AS AREACODE,A.BIZ_TYPE AS BIZTYPE,F.ATTR_NAME AS CHKSTATUSNM,
+        A.CHK_STATUS AS CHKSTATUS,A.DOC_TYPE AS DOCTYPE,A.RET_CHANNEL AS RETCHANNEL,A.DEC_TIME AS DECTIME,A.CHK_TIME AS CHKTIME,A.SEQ_NO AS SEQNO,
+        A.INPUTER_CODE AS INPUTERCODE,A.INPUTER_NAME AS INPUTERNAME,A.INPUT_COP_NO AS INPUTCOPNO,A.INPUT_COP_NAME AS INPUTCOPNAME,A.CREATE_BY AS CREATEBY,
+        A.CREATE_NAME AS CREATENAME,A.CREATE_TIME AS CREATETIME,A.UPDATE_BY AS UPDATEBY,A.UPDATE_NAME AS UPDATENAME,A.UPDATE_TIME AS UPDATETIME
+        FROM BSSP_SAS.SAS_VEHICLE_CUS A
+        LEFT JOIN BSSP_COD.COD_STD_CAR_TYPE B ON A.VEHICLE_TYPECD=B.CODE <!-- 车辆类型 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES D ON A.PLATE_TYPECD=D.ATTR_VALUE AND D.DICTIONARY_VALUE='PLATE_TYPE' <!-- 车牌类型 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES E ON A.DCL_TYPECD=E.ATTR_VALUE AND E.DICTIONARY_VALUE='DCL_TYPE' <!-- 申报类型 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES F ON A.CHK_STATUS=F.ATTR_VALUE AND F.DICTIONARY_VALUE='CHK_STATUS' <!-- 单据状态 -->
+    </sql>
+
+    <select id="selectByVehicleCus" resultType="com.powerbridge.bssp.sas.entity.SasVehicleCus" parameterType="com.powerbridge.bssp.sas.entity.SasVehicleCus">
+        SELECT
+        <include refid="Base_Column_List"/>
+        <where>
+            1=1
+			<if test="inputCopNo != null and inputCopNo != ''">
+				AND  A.INPUT_COP_NO = #{inputCopNo}          <!-- 过滤不是本企业的 -->
+			</if>
+           <if test="etpsNm != null and etpsNm !=''">
+			   AND A.ETPS_NM LIKE '%${etpsNm}%' <!--所属企业名称 -->
+            </if>
+           <if test="vehicleNo != null and vehicleNo !=''">
+                AND A.VEHICLE_NO LIKE '%${vehicleNo}%' <!-- 车牌号 -->
+            </if>
+            <if test="chkStatus != null and chkStatus !=''">
+                AND A.CHK_STATUS = #{chkStatus} <!-- 单据状态 -->
+            </if>
+			<if test="vehicleTypecd != null and vehicleTypecd !=''">
+                AND A.VEHICLE_TYPECD = #{vehicleTypecd} <!-- 车辆类型 -->
+            </if>
+			<if test="dclTypecd != null and dclTypecd !=''">
+                AND A.DCl_TYPECD = #{dclTypecd} <!-- 申报类型 -->
+            </if>
+			<if test="masterCuscd != null and masterCuscd !=''">
+				AND A.MASTER_CUSCD = #{masterCuscd}<!-- 主管关区代码 -->
+			</if>
+            <if test="decTimeStart != null and decTimeStart !=''">
+                AND A.DEC_TIME <![CDATA[>=]]> #{decTimeStart}<!-- 录入日期(起始) -->
+            </if>
+            <if test="decTimeEnd != null and decTimeEnd !=''">
+                AND A.DEC_TIME <![CDATA[<=]]> '${decTimeEnd} 23;59;59' <!-- 录入日期(结束) -->
+            </if>
+        </where>
+    </select>
+
+    <select id="getBusinessData" parameterType="java.lang.String" resultMap="BaseResultMap">
+         ${str}
+    </select>
+</mapper>

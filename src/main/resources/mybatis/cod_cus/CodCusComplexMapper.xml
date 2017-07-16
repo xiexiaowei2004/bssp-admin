@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusComplexMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusComplex">
+    <id column="PK_SEQ" jdbcType="DOUBLE" property="pkSeq" />
+    <result column="CODE_T" jdbcType="VARCHAR" property="codeT" />
+    <result column="CODE_S" jdbcType="VARCHAR" property="codeS" />
+    <result column="G_NAME" jdbcType="VARCHAR" property="gName" />
+    <result column="LOW_RATE" jdbcType="VARCHAR" property="lowRate" />
+    <result column="HIGH_RATE" jdbcType="VARCHAR" property="highRate" />
+    <result column="OUT_RATE" jdbcType="VARCHAR" property="outRate" />
+    <result column="REG_MARK" jdbcType="VARCHAR" property="regMark" />
+    <result column="REG_RATE" jdbcType="VARCHAR" property="regRate" />
+    <result column="TAX_TYPE" jdbcType="VARCHAR" property="taxType" />
+    <result column="TAX_RATE" jdbcType="VARCHAR" property="taxRate" />
+    <result column="COMM_RATE" jdbcType="VARCHAR" property="commRate" />
+    <result column="TAIWAN_RATE" jdbcType="VARCHAR" property="taiwanRate" />
+    <result column="OTHER_TYPE" jdbcType="VARCHAR" property="otherType" />
+    <result column="OTHER_RATE" jdbcType="VARCHAR" property="otherRate" />
+    <result column="UNIT_1" jdbcType="VARCHAR" property="unit1" />
+    <result column="UNIT_2" jdbcType="VARCHAR" property="unit2" />
+    <result column="ILOW_PRICE" jdbcType="VARCHAR" property="ilowPrice" />
+    <result column="IHIGH_PRICE" jdbcType="VARCHAR" property="ihighPrice" />
+    <result column="ELOW_PRICE" jdbcType="VARCHAR" property="elowPrice" />
+    <result column="EHIGH_PRICE" jdbcType="VARCHAR" property="ehighPrice" />
+    <result column="MAX_IN" jdbcType="VARCHAR" property="maxIn" />
+    <result column="MAX_OUT" jdbcType="VARCHAR" property="maxOut" />
+    <result column="CONTROL_MA" jdbcType="VARCHAR" property="controlMa" />
+    <result column="CHK_PRICE" jdbcType="VARCHAR" property="chkPrice" />
+    <result column="TARIFF_MARK" jdbcType="VARCHAR" property="tariffMark" />
+    <result column="NOTE_S" jdbcType="VARCHAR" property="noteS" />
+    <result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    A.CODE_T AS CODET,A.CODE_S AS CODES,A.G_NAME AS GNAME,A.LOW_RATE AS LOWRATE,A.HIGH_RATE AS HIGHRATE,A.OUT_RATE AS OUTRATE
+    ,A.REG_MARK AS REGMARK,A.REG_RATE AS REGRATE,A.TAX_TYPE AS TAXTYPE,A.TAX_RATE AS TAXRATE,A.COMM_RATE AS COMMRATE,A.TAIWAN_RATE AS TAIWANRATE
+    ,A.OTHER_TYPE AS OTHERTYPE,A.OTHER_RATE AS OTHERRATE,A.UNIT_1 AS UNIT1,A.UNIT_2 AS UNIT2,A.ILOW_PRICE AS ILOWPRICE,A.IHIGH_PRICE AS IHIGHPRICE
+    ,A.ELOW_PRICE AS ELOWPRICE,A.EHIGH_PRICE AS EHIGHPRICE,A.MAX_IN AS MAXIN,A.MAX_OUT AS MAXOUT,A.CONTROL_MA AS CONTROLMA,A.CHK_PRICE AS CHKPRICE
+    ,A.TARIFF_MARK AS TARIFFMARK,A.NOTE_S AS NOTES,A.PK_SEQ AS PKSEQ,A.SEQ_NO AS SEQNO
+    ,b.unit_name as unitname1,c.unit_name as unitname2
+  </sql>
+ <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusComplex">
+    SELECT
+      PK_SEQ AS id,
+      G_NAME AS text
+    FROM COD_CUS_COMPLEX
+  </select>
+  <select id="selectComplexList"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusComplex">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM COD_CUS_COMPLEX A
+    LEFT JOIN COD_CUS_UNIT B ON A.UNIT_1=B.UNIT_CODE
+    LEFT JOIN COD_CUS_UNIT C ON A.UNIT_2=C.UNIT_CODE
+    <where>
+      1=1
+      <if test="codeT != null and codeT !=''">
+        AND A.CODE_T LIKE '${codeT}%' <!-- 商品编码 -->
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Double" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM COD_CUS_COMPLEX A
+    WHERE PK_SEQ = #{pkSeq,jdbcType=DOUBLE}
+  </select>
+  <select id="selectCountByGdecd" resultType="java.lang.String">
+    SELECT COUNT(1) AS CN
+    FROM COD_CUS_COMPLEX A
+    WHERE CONCAT(CODE_T,CODE_S) = #{gdecd}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Double">
+    delete from cod_cus_complex
+    where PK_SEQ = #{pkSeq,jdbcType=DOUBLE}
+  </delete>
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusComplex">
+    insert into cod_cus_complex (PK_SEQ, CODE_T, CODE_S, 
+      G_NAME, LOW_RATE, HIGH_RATE, 
+      OUT_RATE, REG_MARK, REG_RATE, 
+      TAX_TYPE, TAX_RATE, COMM_RATE, 
+      TAIWAN_RATE, OTHER_TYPE, OTHER_RATE, 
+      UNIT_1, UNIT_2, ILOW_PRICE, 
+      IHIGH_PRICE, ELOW_PRICE, EHIGH_PRICE, 
+      MAX_IN, MAX_OUT, CONTROL_MA, 
+      CHK_PRICE, TARIFF_MARK, NOTE_S, 
+      SEQ_NO)
+    values (#{pkSeq,jdbcType=DOUBLE}, #{codeT,jdbcType=VARCHAR}, #{codeS,jdbcType=VARCHAR}, 
+      #{gName,jdbcType=VARCHAR}, #{lowRate,jdbcType=VARCHAR}, #{highRate,jdbcType=VARCHAR}, 
+      #{outRate,jdbcType=VARCHAR}, #{regMark,jdbcType=VARCHAR}, #{regRate,jdbcType=VARCHAR}, 
+      #{taxType,jdbcType=VARCHAR}, #{taxRate,jdbcType=VARCHAR}, #{commRate,jdbcType=VARCHAR}, 
+      #{taiwanRate,jdbcType=VARCHAR}, #{otherType,jdbcType=VARCHAR}, #{otherRate,jdbcType=VARCHAR}, 
+      #{unit1,jdbcType=VARCHAR}, #{unit2,jdbcType=VARCHAR}, #{ilowPrice,jdbcType=VARCHAR}, 
+      #{ihighPrice,jdbcType=VARCHAR}, #{elowPrice,jdbcType=VARCHAR}, #{ehighPrice,jdbcType=VARCHAR}, 
+      #{maxIn,jdbcType=VARCHAR}, #{maxOut,jdbcType=VARCHAR}, #{controlMa,jdbcType=VARCHAR}, 
+      #{chkPrice,jdbcType=VARCHAR}, #{tariffMark,jdbcType=VARCHAR}, #{noteS,jdbcType=VARCHAR}, 
+      #{seqNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusComplex">
+    insert into cod_cus_complex
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pkSeq != null">
+        PK_SEQ,
+      </if>
+      <if test="codeT != null">
+        CODE_T,
+      </if>
+      <if test="codeS != null">
+        CODE_S,
+      </if>
+      <if test="gName != null">
+        G_NAME,
+      </if>
+      <if test="lowRate != null">
+        LOW_RATE,
+      </if>
+      <if test="highRate != null">
+        HIGH_RATE,
+      </if>
+      <if test="outRate != null">
+        OUT_RATE,
+      </if>
+      <if test="regMark != null">
+        REG_MARK,
+      </if>
+      <if test="regRate != null">
+        REG_RATE,
+      </if>
+      <if test="taxType != null">
+        TAX_TYPE,
+      </if>
+      <if test="taxRate != null">
+        TAX_RATE,
+      </if>
+      <if test="commRate != null">
+        COMM_RATE,
+      </if>
+      <if test="taiwanRate != null">
+        TAIWAN_RATE,
+      </if>
+      <if test="otherType != null">
+        OTHER_TYPE,
+      </if>
+      <if test="otherRate != null">
+        OTHER_RATE,
+      </if>
+      <if test="unit1 != null">
+        UNIT_1,
+      </if>
+      <if test="unit2 != null">
+        UNIT_2,
+      </if>
+      <if test="ilowPrice != null">
+        ILOW_PRICE,
+      </if>
+      <if test="ihighPrice != null">
+        IHIGH_PRICE,
+      </if>
+      <if test="elowPrice != null">
+        ELOW_PRICE,
+      </if>
+      <if test="ehighPrice != null">
+        EHIGH_PRICE,
+      </if>
+      <if test="maxIn != null">
+        MAX_IN,
+      </if>
+      <if test="maxOut != null">
+        MAX_OUT,
+      </if>
+      <if test="controlMa != null">
+        CONTROL_MA,
+      </if>
+      <if test="chkPrice != null">
+        CHK_PRICE,
+      </if>
+      <if test="tariffMark != null">
+        TARIFF_MARK,
+      </if>
+      <if test="noteS != null">
+        NOTE_S,
+      </if>
+      <if test="seqNo != null">
+        SEQ_NO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pkSeq != null">
+        #{pkSeq,jdbcType=DOUBLE},
+      </if>
+      <if test="codeT != null">
+        #{codeT,jdbcType=VARCHAR},
+      </if>
+      <if test="codeS != null">
+        #{codeS,jdbcType=VARCHAR},
+      </if>
+      <if test="gName != null">
+        #{gName,jdbcType=VARCHAR},
+      </if>
+      <if test="lowRate != null">
+        #{lowRate,jdbcType=VARCHAR},
+      </if>
+      <if test="highRate != null">
+        #{highRate,jdbcType=VARCHAR},
+      </if>
+      <if test="outRate != null">
+        #{outRate,jdbcType=VARCHAR},
+      </if>
+      <if test="regMark != null">
+        #{regMark,jdbcType=VARCHAR},
+      </if>
+      <if test="regRate != null">
+        #{regRate,jdbcType=VARCHAR},
+      </if>
+      <if test="taxType != null">
+        #{taxType,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRate != null">
+        #{taxRate,jdbcType=VARCHAR},
+      </if>
+      <if test="commRate != null">
+        #{commRate,jdbcType=VARCHAR},
+      </if>
+      <if test="taiwanRate != null">
+        #{taiwanRate,jdbcType=VARCHAR},
+      </if>
+      <if test="otherType != null">
+        #{otherType,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRate != null">
+        #{otherRate,jdbcType=VARCHAR},
+      </if>
+      <if test="unit1 != null">
+        #{unit1,jdbcType=VARCHAR},
+      </if>
+      <if test="unit2 != null">
+        #{unit2,jdbcType=VARCHAR},
+      </if>
+      <if test="ilowPrice != null">
+        #{ilowPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ihighPrice != null">
+        #{ihighPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="elowPrice != null">
+        #{elowPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ehighPrice != null">
+        #{ehighPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="maxIn != null">
+        #{maxIn,jdbcType=VARCHAR},
+      </if>
+      <if test="maxOut != null">
+        #{maxOut,jdbcType=VARCHAR},
+      </if>
+      <if test="controlMa != null">
+        #{controlMa,jdbcType=VARCHAR},
+      </if>
+      <if test="chkPrice != null">
+        #{chkPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="tariffMark != null">
+        #{tariffMark,jdbcType=VARCHAR},
+      </if>
+      <if test="noteS != null">
+        #{noteS,jdbcType=VARCHAR},
+      </if>
+      <if test="seqNo != null">
+        #{seqNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusComplex">
+    update cod_cus_complex
+    <set>
+      <if test="codeT != null">
+        CODE_T = #{codeT,jdbcType=VARCHAR},
+      </if>
+      <if test="codeS != null">
+        CODE_S = #{codeS,jdbcType=VARCHAR},
+      </if>
+      <if test="gName != null">
+        G_NAME = #{gName,jdbcType=VARCHAR},
+      </if>
+      <if test="lowRate != null">
+        LOW_RATE = #{lowRate,jdbcType=VARCHAR},
+      </if>
+      <if test="highRate != null">
+        HIGH_RATE = #{highRate,jdbcType=VARCHAR},
+      </if>
+      <if test="outRate != null">
+        OUT_RATE = #{outRate,jdbcType=VARCHAR},
+      </if>
+      <if test="regMark != null">
+        REG_MARK = #{regMark,jdbcType=VARCHAR},
+      </if>
+      <if test="regRate != null">
+        REG_RATE = #{regRate,jdbcType=VARCHAR},
+      </if>
+      <if test="taxType != null">
+        TAX_TYPE = #{taxType,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRate != null">
+        TAX_RATE = #{taxRate,jdbcType=VARCHAR},
+      </if>
+      <if test="commRate != null">
+        COMM_RATE = #{commRate,jdbcType=VARCHAR},
+      </if>
+      <if test="taiwanRate != null">
+        TAIWAN_RATE = #{taiwanRate,jdbcType=VARCHAR},
+      </if>
+      <if test="otherType != null">
+        OTHER_TYPE = #{otherType,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRate != null">
+        OTHER_RATE = #{otherRate,jdbcType=VARCHAR},
+      </if>
+      <if test="unit1 != null">
+        UNIT_1 = #{unit1,jdbcType=VARCHAR},
+      </if>
+      <if test="unit2 != null">
+        UNIT_2 = #{unit2,jdbcType=VARCHAR},
+      </if>
+      <if test="ilowPrice != null">
+        ILOW_PRICE = #{ilowPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ihighPrice != null">
+        IHIGH_PRICE = #{ihighPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="elowPrice != null">
+        ELOW_PRICE = #{elowPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ehighPrice != null">
+        EHIGH_PRICE = #{ehighPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="maxIn != null">
+        MAX_IN = #{maxIn,jdbcType=VARCHAR},
+      </if>
+      <if test="maxOut != null">
+        MAX_OUT = #{maxOut,jdbcType=VARCHAR},
+      </if>
+      <if test="controlMa != null">
+        CONTROL_MA = #{controlMa,jdbcType=VARCHAR},
+      </if>
+      <if test="chkPrice != null">
+        CHK_PRICE = #{chkPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="tariffMark != null">
+        TARIFF_MARK = #{tariffMark,jdbcType=VARCHAR},
+      </if>
+      <if test="noteS != null">
+        NOTE_S = #{noteS,jdbcType=VARCHAR},
+      </if>
+      <if test="seqNo != null">
+        SEQ_NO = #{seqNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PK_SEQ = #{pkSeq,jdbcType=DOUBLE}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusComplex">
+    update cod_cus_complex
+    set CODE_T = #{codeT,jdbcType=VARCHAR},
+      CODE_S = #{codeS,jdbcType=VARCHAR},
+      G_NAME = #{gName,jdbcType=VARCHAR},
+      LOW_RATE = #{lowRate,jdbcType=VARCHAR},
+      HIGH_RATE = #{highRate,jdbcType=VARCHAR},
+      OUT_RATE = #{outRate,jdbcType=VARCHAR},
+      REG_MARK = #{regMark,jdbcType=VARCHAR},
+      REG_RATE = #{regRate,jdbcType=VARCHAR},
+      TAX_TYPE = #{taxType,jdbcType=VARCHAR},
+      TAX_RATE = #{taxRate,jdbcType=VARCHAR},
+      COMM_RATE = #{commRate,jdbcType=VARCHAR},
+      TAIWAN_RATE = #{taiwanRate,jdbcType=VARCHAR},
+      OTHER_TYPE = #{otherType,jdbcType=VARCHAR},
+      OTHER_RATE = #{otherRate,jdbcType=VARCHAR},
+      UNIT_1 = #{unit1,jdbcType=VARCHAR},
+      UNIT_2 = #{unit2,jdbcType=VARCHAR},
+      ILOW_PRICE = #{ilowPrice,jdbcType=VARCHAR},
+      IHIGH_PRICE = #{ihighPrice,jdbcType=VARCHAR},
+      ELOW_PRICE = #{elowPrice,jdbcType=VARCHAR},
+      EHIGH_PRICE = #{ehighPrice,jdbcType=VARCHAR},
+      MAX_IN = #{maxIn,jdbcType=VARCHAR},
+      MAX_OUT = #{maxOut,jdbcType=VARCHAR},
+      CONTROL_MA = #{controlMa,jdbcType=VARCHAR},
+      CHK_PRICE = #{chkPrice,jdbcType=VARCHAR},
+      TARIFF_MARK = #{tariffMark,jdbcType=VARCHAR},
+      NOTE_S = #{noteS,jdbcType=VARCHAR},
+      SEQ_NO = #{seqNo,jdbcType=VARCHAR}
+    where PK_SEQ = #{pkSeq,jdbcType=DOUBLE}
+  </update>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.sas_cmb.dao.SasCmbRbgMapper">
+
+
+	<!--基本字段-->
+	<sql id="Base_Column_List">
+		A.UID AS UID,
+		A.CMB_NO AS CMBNO,
+		A.CHG_TMS_CNT AS CHGTMSCNT,
+		A.MTPCK_SEQNO AS MTPCKSEQNO,
+		A.GDECD AS GDECD,
+		A.GDS_NM AS GDSNM,
+		A.GDS_SPCF_MODEL_DESC AS GDSSPCFMODELDESC,
+		A.DCL_UNITCD AS DCLUNITCD,
+		A.DCL_QTY AS DCLQTY,
+		C.ATTR_NAME AS MODFMARKCD,
+		A.RMK AS RMK,
+		A.SEQ_NO AS SEQNO
+	</sql>
+	<!--查询列表-->
+	<select id="selectSasCmbRbgList" resultType="com.powerbridge.bssp.sas_cmb.entity.SasCmbRbg">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM SAS_CMB_RBG A
+		LEFT JOIN BSSP_COD.COD_STD_CODES C ON C.ATTR_VALUE =A.MODF_MARKCD AND C.DICTIONARY_VALUE='MODF_MARK' <!-- 修改标记 -->
+	</select>
+</mapper>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.erp.dao.ErpPreDtImgMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.erp.entity.ErpPreDtImg">
+		<id column="UID" property="uid" />
+		<result column="GDS_MTNO" property="gdsMtno" />
+		<result column="GDS_SEQNO" property="gdsSeqno" />
+		<result column="ADJMTR_MARKCD" property="adjmtrMarkcd" />
+		<result column="GDECD" property="gdecd" />
+		<result column="GDS_NM" property="gdsNm" />
+		<result column="GDS_SPCF_MODEL_DESC" property="gdsSpcfModelDesc" />
+		<result column="DCL_UNITCD" property="dclUnitcd" />
+		<result column="LAWF_UNITCD" property="lawfUnitcd" />
+		<result column="SECD_LAWF_UNITCD" property="secdLawfUnitcd" />
+		<result column="LVYRLF_MODECD" property="lvyrlfModecd" />
+		<result column="NATCD" property="natcd" />
+		<result column="DCL_UPRC_AMT" property="dclUprcAmt" />
+		<result column="DCL_CURRCD" property="dclCurrcd" />
+		<result column="DCL_UPRC_AMT_RMB" property="dclUprcAmtRmb" />
+		<result column="FST_SF_VAL" property="fstSfVal" />
+		<result column="SECD_SF_VAL" property="secdSfVal" />
+		<result column="WT_SF_VAL" property="wtSfVal" />
+		<result column="ENG_GDS_NM" property="engGdsNm" />
+		<result column="ENG_GDS_SPCF_MODEL_DESC" property="engGdsSpcfModelDesc" />
+		<result column="ENT_UNITCD" property="entUnitcd" />
+		<result column="ENT_SF_VAL" property="entSfVal" />
+		<result column="SUCCESS_FLAG" property="successFlag" />
+		<result column="RMK" property="rmk" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_TIME" property="updateTime" />
+		<result column="BONDED_FLAG" property="bondedFlag" />
+        <result column="INPUT_ETPS_SCCD" property="inputEtpsSccd" />
+        <result column="INPUT_COP_NO" property="inputCopNo" />
+        <result column="INPUT_COP_NAME" property="inputCopName" />
+        <result column="MODF_MARKCD" property="modfMarkcd" />
+	</resultMap>
+
+    <sql id="Base_Column_List">
+        UID AS UID, GDS_SEQNO as gdsSeqno, GDS_MTNO as gdsMtno, ADJMTR_MARKCD as adjmtrMarkcd, GDECD as gdecd,
+        GDS_NM as gdsNm,  GDS_SPCF_MODEL_DESC as gdsSpcfModelDesc, DCL_UNITCD as dclUnitcd, LAWF_UNITCD as lawfUnitcd,
+        SECD_LAWF_UNITCD as secdLawfUnitcd, LVYRLF_MODECD as lvyrlfModecd, NATCD as natcd, DCL_UPRC_AMT as dclUprcAmt,
+        DCL_CURRCD as dclCurrcd, DCL_UPRC_AMT_RMB as dclUprcAmtRmb, FST_SF_VAL as fstSfVal, SECD_SF_VAL as secdSfVal,
+        WT_SF_VAL as wtSfVal, ENG_GDS_NM as engGdsNm, ENG_GDS_SPCF_MODEL_DESC as engGdsSpcfModelDesc,
+        ENT_UNITCD as entUnitcd, ENT_SF_VAL as entSfVal, SUCCESS_FLAG as successFlag, RMK as rmk, CREATE_BY as createBy,
+        CREATE_TIME as createTime, UPDATE_BY as updateBy, UPDATE_TIME as updateTime, BONDED_FLAG as bondedFlag,
+		INPUT_ETPS_SCCD as inputEtpsSccd, INPUT_COP_NO as inputCopNo, INPUT_COP_NAME as inputCopName, MODF_MARKCD AS modfMarkcd
+    </sql>
+
+    <sql id="Join_Column_List">
+        A.UID AS UID, A.GDS_SEQNO as gdsSeqno, A.GDS_MTNO as gdsMtno, A.ADJMTR_MARKCD as adjmtrMarkcd, A.GDECD as gdecd,
+        A.GDS_NM as gdsNm,  A.GDS_SPCF_MODEL_DESC as gdsSpcfModelDesc, A.DCL_UNITCD as dclUnitcd, A.LAWF_UNITCD as lawfUnitcd,
+        A.SECD_LAWF_UNITCD as secdLawfUnitcd, A.LVYRLF_MODECD as lvyrlfModecd, A.NATCD as natcd, A.DCL_UPRC_AMT as dclUprcAmt,
+        A.DCL_CURRCD as dclCurrcd, A.DCL_UPRC_AMT_RMB as dclUprcAmtRmb, A.FST_SF_VAL as fstSfVal, A.SECD_SF_VAL as secdSfVal,
+        A.WT_SF_VAL as wtSfVal, A.ENG_GDS_NM as engGdsNm, A.ENG_GDS_SPCF_MODEL_DESC as engGdsSpcfModelDesc,
+        A.ENT_UNITCD as entUnitcd, A.ENT_SF_VAL as entSfVal, A.SUCCESS_FLAG as successFlag, A.RMK as rmk, A.CREATE_BY as createBy,
+        A.CREATE_TIME as createTime, A.UPDATE_BY as updateBy, A.UPDATE_TIME as updateTime, A.BONDED_FLAG as bondedFlag,
+        A.INPUT_ETPS_SCCD as inputEtpsSccd, A.INPUT_COP_NO as inputCopNo, A.INPUT_COP_NAME as inputCopName,
+		A.MODF_MARKCD AS modfMarkcd,
+        unit.UNIT_NAME as dclUnitNm, unit1.UNIT_NAME as lawfUnitNm, unit2.UNIT_NAME as secdLawfUnitNm
+    </sql>
+    <!-- 列表页面取数据 -->
+    <select id="getListData" resultType="com.powerbridge.bssp.erp.entity.ErpPreDtImg">
+        SELECT
+        <include refid="Join_Column_List"/>
+        FROM ERP_PRE_DT_IMG A
+        LEFT JOIN BSSP_COD.COD_CUS_UNIT unit on unit.UNIT_CODE = A.DCL_UNITCD
+        LEFT JOIN BSSP_COD.COD_CUS_UNIT unit1 on unit1.UNIT_CODE = A.LAWF_UNITCD
+        LEFT JOIN BSSP_COD.COD_CUS_UNIT unit2 on unit2.UNIT_CODE = A.SECD_LAWF_UNITCD
+
+        <where>
+            <if test="gdsSeqno != null">
+                AND A.GDS_SEQNO = ${gdsSeqno} <!--序号-->
+            </if>
+            <if test="gdsMtno != null and gdsMtno !=''">
+                AND A.GDS_MTNO LIKE '${gdsMtno}%' <!--料号(左匹配) -->
+            </if>
+            <if test="gdecd != null and gdecd !=''">
+                AND A.GDECD LIKE '${gdecd}%' <!--商品编码(左匹配) -->
+            </if>
+            <if test="gdsNm != null and gdsNm !=''">
+                AND A.GDS_NM LIKE '$%{gdsNm}%' <!--商品名称(左匹配) -->
+            </if>
+
+            <if test="createTimeStart != null and createTimeStart !=''">
+                AND A.CREATE_TIME <![CDATA[>=]]> #{createTimeStart} <!-- 录入日期起始 -->
+            </if>
+            <if test="createTimeEnd != null and createTimeEnd !=''">
+                AND A.CREATE_TIME <![CDATA[<=]]> #{createTimeEnd}  <!-- 录入日期终结 -->
+            </if>
+            <if test="filterCond == 2">
+                AND A.SUCCESS_FLAG ='1'  <!-- 已备案 -->
+            </if>
+            <if test="filterCond == 3">
+                AND A.SUCCESS_FLAG ='0' <!-- 未备案 -->
+            </if>
+            <if test="filterCond == 4">
+                AND A.BONDED_FLAG ='1'  <!-- 保税 -->
+            </if>
+            <if test="filterCond == 5">
+                AND A.BONDED_FLAG ='0'  <!-- 非保税 -->
+            </if>
+            <if test="successFlag != null and successFlag !=''">
+                AND A.SUCCESS_FLAG = #{successFlag} <!-- 是否已备案 -->
+            </if>
+            <if test="inputCopNo != null and inputCopNo !=''">
+                AND A.INPUT_COP_NO = #{inputCopNo} <!-- 录入企业 -->
+            </if>
+        </where>
+    </select>
+
+	<select id="getMaxGdsSeqno" resultType="BigDecimal">
+        SELECT max(GDS_SEQNO) as GDS_SEQNO
+		FROM erp_pre_dt_img
+	</select>
+
+	<!-- 根据序号取料件信息 -->
+	<select id="getDataByGdsSeqno" resultType="com.powerbridge.bssp.erp.entity.ErpPreDtImg">
+		SELECT GDS_MTNO as gdsMtno, GDS_SEQNO as gdsSeqno, GDS_NM as gdsNm, GDS_SPCF_MODEL_DESC as gdsSpcfModelDesc, GDECD as gdecd
+		FROM erp_pre_dt_img
+		<where>
+			GDS_SEQNO = #{gdsSeqno}
+		</where>
+
+	</select>
+
+	<!-- 根据组合条件取料件信息 -->
+	<select id="getDataByCond" resultType="com.powerbridge.bssp.erp.entity.ErpPreDtImg">
+	     select
+         <include refid="Base_Column_List"/>
+         from erp_pre_dt_img
+        <where>
+            <if test="successFlag != null and successFlag !=''">
+                SUCCESS_FLAG = #{successFlag}
+            </if>
+            <if test="gdsSeqnoList != null and gdsSeqnoList.size() >0">
+                and GDS_SEQNO in
+                <foreach collection="gdsSeqnoList" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="gdsMtnoList != null and gdsMtnoList.size() >0">
+                and GDS_MTNO in
+                <foreach collection="gdsMtnoList" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+	</select>
+
+    <!-- 根据组合条件删除料件信息 -->
+    <delete id="deleteDataByCond">
+        delete
+        from erp_pre_dt_img
+        <where>
+            <if test="gdsSeqnoList != null and gdsSeqnoList.size() >0">
+                 GDS_SEQNO in
+                <foreach collection="gdsSeqnoList" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="gdsMtnoList != null and gdsMtnoList.size() >0">
+                and GDS_MTNO in
+                <foreach collection="gdsMtnoList" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </delete>
+
+
+</mapper>

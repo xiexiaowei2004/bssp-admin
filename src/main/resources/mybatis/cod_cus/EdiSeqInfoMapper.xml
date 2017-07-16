@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.EdiSeqInfoMapper">
+
+	<!--基本字段 -->
+	<sql id="Base_Column_List">
+	  A.UID AS UID,
+	A.AREA_CODE AS AREACODE,
+	A.TOKEN AS TOKEN,
+	A.DOC_NAME AS DOCTYPE,
+	A.DOC_NAME AS DOCNAME,
+	A.BIZ_TYPE AS BIZTYPE,
+	A.BIZ_NAME AS BIZNAME,
+	A.ROUTE_TYPE AS ROUTETYPE,
+	A.PRONAME AS PRONAME,
+	A.STATUS AS STATUS,
+	A.TRANSMODE AS TRANSMODE,
+	A.CREATE_BY AS CREATEBY,
+	A.CREATE_NAME AS CREATENAME,
+	A.CREATE_TIME AS CREATETIME,
+	A.UPDATE_BY AS UPDATEBY,
+	A.UPDATE_NAME AS UPDATENAME,
+	A.UPDATE_TIME AS UPDATETIME,
+	A.REMARKS AS REMARKS,
+	A.SENDER_ID AS SENDERID,
+	A.RECEIVER_ID AS RECEIVERID,
+	A.TRANS_TYPE AS TRANSTYPE,
+	A.RECL_URL AS RECLURL,
+	A.SEND_URL AS SENDURL
+	</sql>
+	<!--根据单据编号查询单损耗 -->
+	<select id="selectEdiSeqInfoList" resultType="com.powerbridge.bssp.cod_cus.entity.EdiSeqInfo">
+		SELECT
+		<include refid="Base_Column_List"/>edi_routing_info
+		FROM EDI_SQL_INFO A
+		LEFT JOIN BSSP_EDI.EDI_ROUTING_INFO D ON D.DOC_TYPE = A.DOC_TYPE <!-- 国别代码 -->
+		WHERE A.SEQ_NO = #{seqNo}
+	</select>
+</mapper>

@@ -1,0 +1,27 @@
+package com.powerbridge.bssp.common.util.json.parser.deserializer;
+
+import java.lang.reflect.Type;
+import java.net.URI;
+
+import com.powerbridge.bssp.common.util.json.parser.DefaultJSONParser;
+import com.powerbridge.bssp.common.util.json.parser.JSONToken;
+
+public class URIDeserializer implements ObjectDeserializer {
+    public final static URIDeserializer instance = new URIDeserializer();
+
+    @SuppressWarnings("unchecked")
+    public <T> T deserialze(DefaultJSONParser parser, Type clazz, Object fieldName) {
+        
+        String uri = (String) parser.parse();
+        
+        if (uri == null) {
+            return null;
+        }
+        
+        return (T) URI.create(uri);
+    }
+
+    public int getFastMatchToken() {
+        return JSONToken.LITERAL_STRING;
+    }
+}

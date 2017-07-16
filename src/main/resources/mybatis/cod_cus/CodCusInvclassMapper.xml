@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusInvclassMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusInvclass">
+    <result column="INV_CODE" jdbcType="VARCHAR" property="invCode" />
+    <result column="INV_NAME" jdbcType="VARCHAR" property="invName" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusInvclass">
+    SELECT
+      INV_CODE AS id,
+      INV_NAME AS text
+    FROM COD_CUS_INVCLASS
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusInvclass">
+    insert into cod_cus_invclass (INV_CODE, INV_NAME)
+    values (#{invCode,jdbcType=VARCHAR}, #{invName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusInvclass">
+    insert into cod_cus_invclass
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="invCode != null">
+        INV_CODE,
+      </if>
+      <if test="invName != null">
+        INV_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="invCode != null">
+        #{invCode,jdbcType=VARCHAR},
+      </if>
+      <if test="invName != null">
+        #{invName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

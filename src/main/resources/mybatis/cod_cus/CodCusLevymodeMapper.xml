@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusLevymodeMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusLevymode">
+    <result column="DUTY_MODE" jdbcType="VARCHAR" property="dutyMode" />
+    <result column="DUTY_SPEC" jdbcType="VARCHAR" property="dutySpec" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusLevymode">
+    SELECT
+      DUTY_MODE AS id,
+      DUTY_SPEC AS text
+    FROM COD_CUS_LEVYMODE
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusLevymode">
+    insert into cod_cus_levymode (DUTY_MODE, DUTY_SPEC)
+    values (#{dutyMode,jdbcType=VARCHAR}, #{dutySpec,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusLevymode">
+    insert into cod_cus_levymode
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dutyMode != null">
+        DUTY_MODE,
+      </if>
+      <if test="dutySpec != null">
+        DUTY_SPEC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dutyMode != null">
+        #{dutyMode,jdbcType=VARCHAR},
+      </if>
+      <if test="dutySpec != null">
+        #{dutySpec,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

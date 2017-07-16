@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.erp.mapper.ErpMidBondInvtDtMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.erp.entity.ErpMidBondInvtDt">
+		<id column="UID" property="uid" />
+		<result column="ETPS_INNER_INVT_NO" property="etpsInnerInvtNo" />
+		<result column="LIST_G_NO" property="listGNo" />
+		<result column="EMS_G_NO" property="emsGNo" />
+		<result column="COP_G_NO" property="copGNo" />
+		<result column="CODE_TS" property="codeTs" />
+		<result column="G_NAME" property="gName" />
+		<result column="G_MODEL" property="gModel" />
+		<result column="UNIT" property="unit" />
+		<result column="UNIT_1" property="unit1" />
+		<result column="UNIT_2" property="unit2" />
+		<result column="COUNTRY_CODE" property="countryCode" />
+		<result column="DEC_PRICE" property="decPrice" />
+		<result column="DEC_TOTAL" property="decTotal" />
+		<result column="CURR" property="curr" />
+		<result column="QTY_1" property="qty1" />
+		<result column="QTY_2" property="qty2" />
+		<result column="QTY" property="qty" />
+		<result column="FACTOR_1" property="factor1" />
+		<result column="FACTOR_2" property="factor2" />
+		<result column="FACTOR_WT" property="factorWt" />
+		<result column="GROSS_WT" property="grossWt" />
+		<result column="NET_WT" property="netWt" />
+		<result column="USE_TYPE" property="useType" />
+		<result column="DUTY_MODE" property="dutyMode" />
+		<result column="ENT_VERSION" property="entVersion" />
+		<result column="ENTRY_GDS_SEQNO" property="entryGdsSeqno" />
+		<result column="APPLY_TB_SEQNO" property="applyTbSeqno" />
+		<result column="RMK" property="rmk" />
+	</resultMap>
+
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusPortlinMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusPortlin">
+    <result column="PORT_C_COD" jdbcType="VARCHAR" property="portCCod" />
+    <result column="PORT_E_COD" jdbcType="VARCHAR" property="portECod" />
+    <result column="PORT_LINE" jdbcType="VARCHAR" property="portLine" />
+    <result column="PORT_COUNT" jdbcType="VARCHAR" property="portCount" />
+    <result column="PORT_CODE" jdbcType="VARCHAR" property="portCode" />
+    <result column="QUARANTINE" jdbcType="VARCHAR" property="quarantine" />
+    <result column="PK_SEQ" jdbcType="DECIMAL" property="pkSeq" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusPortlin">
+    SELECT
+      PORT_C_COD AS id,
+      PORT_LINE AS text
+    FROM COD_CUS_PORTLIN
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusPortlin">
+    insert into cod_cus_portlin (PORT_C_COD, PORT_E_COD, PORT_LINE, 
+      PORT_COUNT, PORT_CODE, QUARANTINE, 
+      PK_SEQ)
+    values (#{portCCod,jdbcType=VARCHAR}, #{portECod,jdbcType=VARCHAR}, #{portLine,jdbcType=VARCHAR}, 
+      #{portCount,jdbcType=VARCHAR}, #{portCode,jdbcType=VARCHAR}, #{quarantine,jdbcType=VARCHAR}, 
+      #{pkSeq,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusPortlin">
+    insert into cod_cus_portlin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="portCCod != null">
+        PORT_C_COD,
+      </if>
+      <if test="portECod != null">
+        PORT_E_COD,
+      </if>
+      <if test="portLine != null">
+        PORT_LINE,
+      </if>
+      <if test="portCount != null">
+        PORT_COUNT,
+      </if>
+      <if test="portCode != null">
+        PORT_CODE,
+      </if>
+      <if test="quarantine != null">
+        QUARANTINE,
+      </if>
+      <if test="pkSeq != null">
+        PK_SEQ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="portCCod != null">
+        #{portCCod,jdbcType=VARCHAR},
+      </if>
+      <if test="portECod != null">
+        #{portECod,jdbcType=VARCHAR},
+      </if>
+      <if test="portLine != null">
+        #{portLine,jdbcType=VARCHAR},
+      </if>
+      <if test="portCount != null">
+        #{portCount,jdbcType=VARCHAR},
+      </if>
+      <if test="portCode != null">
+        #{portCode,jdbcType=VARCHAR},
+      </if>
+      <if test="quarantine != null">
+        #{quarantine,jdbcType=VARCHAR},
+      </if>
+      <if test="pkSeq != null">
+        #{pkSeq,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

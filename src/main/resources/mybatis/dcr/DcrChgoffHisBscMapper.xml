@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.dcr.dao.DcrChgoffHisBscMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.dcr.entity.DcrChgoffHisBsc">
+		<id column="UID" property="uid" />
+		<result column="EMS_NO" property="emsNo" />
+		<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+		<result column="CHGOFF_TYPECD" property="chgoffTypecd" />
+		<result column="CHGOFF_DUE_TIME" property="chgoffDueTime" />
+		<result column="CHGOFF_BEGIN_TIME" property="chgoffBeginTime" />
+		<result column="BIZOP_ETPS_SCCD" property="bizopEtpsSccd" />
+		<result column="BIZOP_ETPSNO" property="bizopEtpsno" />
+		<result column="BIZOP_ETPS_NM" property="bizopEtpsNm" />
+		<result column="RVSNGD_ETPS_SCCD" property="rvsngdEtpsSccd" />
+		<result column="RCVGD_ETPSNO" property="rcvgdEtpsno" />
+		<result column="RCVGD_ETPS_NM" property="rcvgdEtpsNm" />
+		<result column="DCL_ETPS_SCCD" property="dclEtpsSccd" />
+		<result column="DCL_ETPSNO" property="dclEtpsno" />
+		<result column="DCL_ETPS_NM" property="dclEtpsNm" />
+		<result column="IMP_INVT_TOTAL_CNT" property="impInvtTotalCnt" />
+		<result column="EXP_INVT_TOTAL_CNT" property="expInvtTotalCnt" />
+		<result column="CHGOFF_MTPCK_TOTAL_CNT" property="chgoffMtpckTotalCnt" />
+		<result column="CHGOFF_ENDPRD_TOTAL_CNT" property="chgoffEndprdTotalCnt" />
+		<result column="CHGOFF_LFMT_TOTAL_CNT" property="chgoffLfmtTotalCnt" />
+		<result column="CHGOFF_IMPR_TOTAL_CNT" property="chgoffImprTotalCnt" />
+		<result column="IMP_MTPCK_TOTAL_AMT" property="impMtpckTotalAmt" />
+		<result column="EXP_ENDPRD_TOTAL_AMT" property="expEndprdTotalAmt" />
+		<result column="INPUT_CUSRNO" property="inputCusrno" />
+		<result column="CHGOFF_DCL_TIME" property="chgoffDclTime" />
+		<result column="FST_SPARE_MARKCD" property="fstSpareMarkcd" />
+		<result column="SPARE_AMT" property="spareAmt" />
+		<result column="SPARE_QTY" property="spareQty" />
+		<result column="CHGOFF_MARKCD" property="chgoffMarkcd" />
+		<result column="EMAPV_MARKCD" property="emapvMarkcd" />
+		<result column="DSPS_MARKCD" property="dspsMarkcd" />
+		<result column="DCL_SOURCE_MARKCD" property="dclSourceMarkcd" />
+		<result column="RMK" property="rmk" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="MASTER_CUSCD" property="masterCuscd" />
+		<result column="AREA_CODE" property="areaCode" />
+		<result column="BIZ_TYPE" property="bizType" />
+		<result column="CHK_STATUS" property="chkStatus" />
+		<result column="DOC_TYPE" property="docType" />
+		<result column="RET_CHANNEL" property="retChannel" />
+		<result column="DEC_TIME" property="decTime" />
+		<result column="CHK_TIME" property="chkTime" />
+		<result column="INPUTER_CODE" property="inputerCode" />
+		<result column="INPUTER_NAME" property="inputerName" />
+		<result column="INPUT_COP_NO" property="inputCopNo" />
+		<result column="INPUT_ETPS_SCCD" property="inputEtpsSccd" />
+		<result column="INPUT_COP_NAME" property="inputCopName" />
+		<result column="DECLARE_MARK" property="declareMark" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_NAME" property="createName" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_NAME" property="updateName" />
+		<result column="UPDATE_TIME" property="updateTime" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		A.UID AS UID,A.EMS_NO AS EMSNO,A.CHG_TMS_CNT AS CHGTMSCNT,A.ETPS_PREENT_NO AS etpsPreentNo,B.ATTR_NAME AS CHGOFFTYPENM,A.CHGOFF_TYPECD AS CHGOFFTYPECD,A.CHGOFF_DUE_TIME AS
+		CHGOFFDUETIME,A.CHGOFF_BEGIN_TIME AS CHGOFFBEGINTIME,A.BIZOP_ETPS_SCCD AS BIZOPETPSSCCD,A.BIZOP_ETPSNO AS
+		BIZOPETPSNO,A.BIZOP_ETPS_NM AS BIZOPETPSNM,A.RVSNGD_ETPS_SCCD AS RVSNGDETPSSCCD,A.RCVGD_ETPSNO AS
+		RCVGDETPSNO,A.RCVGD_ETPS_NM AS RCVGDETPSNM,A.DCL_ETPS_SCCD AS DCLETPSSCCD,A.DCL_ETPSNO AS DCLETPSNO,A.DCL_ETPS_NM AS
+		DCLETPSNM,A.IMP_INVT_TOTAL_CNT AS IMPINVTTOTALCNT,A.EXP_INVT_TOTAL_CNT AS EXPINVTTOTALCNT,A.CHGOFF_MTPCK_TOTAL_CNT AS
+		CHGOFFMTPCKTOTALCNT,A.CHGOFF_ENDPRD_TOTAL_CNT AS CHGOFFENDPRDTOTALCNT,A.CHGOFF_LFMT_TOTAL_CNT AS
+		CHGOFFLFMTTOTALCNT,A.CHGOFF_IMPR_TOTAL_CNT AS CHGOFFIMPRTOTALCNT,A.IMP_MTPCK_TOTAL_AMT AS
+		IMPMTPCKTOTALAMT,A.EXP_ENDPRD_TOTAL_AMT AS EXPENDPRDTOTALAMT,A.INPUT_CUSRNO AS INPUTCUSRNO,A.CHGOFF_DCL_TIME AS
+		CHGOFFDCLTIME,A.FST_SPARE_MARKCD AS FSTSPAREMARKCD,A.SPARE_AMT AS SPAREAMT,A.SPARE_QTY AS SPAREQTY,A.CHGOFF_MARKCD AS
+		CHGOFFMARKCD,A.EMAPV_MARKCD AS EMAPVMARKCD,A.DSPS_MARKCD AS DSPSMARKCD,A.DCL_SOURCE_MARKCD AS DCLSOURCEMARKCD,A.RMK AS
+		RMK,A.SEQ_NO AS SEQNO,A.MASTER_CUSCD AS MASTERCUSCD,A.AREA_CODE AS AREACODE,A.BIZ_TYPE AS
+		BIZTYPE,A.CHK_STATUS AS CHKSTATUS,C.ATTR_NAME AS CHKSTATUSNM,A.DOC_TYPE AS DOCTYPE,A.RET_CHANNEL AS RETCHANNEL,A.DEC_TIME AS DECTIME,A.CHK_TIME AS
+		CHKTIME,A.INPUTER_CODE AS INPUTERCODE,A.INPUT_COP_NO AS INPUTCOPNO,A.INPUT_ETPS_SCCD AS INPUTETPSSCCD,A.INPUT_COP_NAME
+		AS INPUTCOPNAME,A.DECLARE_MARK AS DECLAREMARK,A.CREATE_BY AS CREATEBY,A.CREATE_NAME AS CREATENAME,A.CREATE_TIME AS CREATETIME,A.UPDATE_BY AS
+		UPDATEBY,A.UPDATE_TIME AS UPDATETIME,A.UPDATE_NAME AS UPDATENAME
+	</sql>
+	<select id="selectByList" resultType="com.powerbridge.bssp.dcr.entity.DcrChgoffHisBsc">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM DCR_CHGOFF_HIS_BSC A
+		LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE = A.CHGOFF_TYPECD AND B.DICTIONARY_VALUE='CHGOFF_TYPECD' <!-- 申报类型 -->
+		LEFT JOIN BSSP_COD.COD_STD_CODES C ON C.ATTR_VALUE = A.CHK_STATUS AND C.DICTIONARY_VALUE='CHK_STATUS' <!-- 单据状态 -->
+		<where>
+			1=1
+			<if test="inputCopNo != null and inputCopNo != ''">
+				AND  A.INPUT_COP_NO = #{inputCopNo}          <!-- 过滤不是本企业的 -->
+			</if>
+			<if test="emsNo != null and emsNo !=''">
+				AND A.EMS_NO LIKE '%${emsNo}%'  <!-- 账册编号匹配 -->
+			</if>
+			<if test="bizopEtpsno != null and bizopEtpsno !=''">
+				AND A.BIZOP_ETPSNO LIKE '%${bizopEtpsno}%' <!-- 经营单位代码(模糊匹配) -->
+			</if>
+			<if test="bizopEtpsNm != null and bizopEtpsNm !=''">
+				AND A.BIZOP_ETPS_NM LIKE '%${bizopEtpsNm}%'  <!-- 经营单位名称(模糊匹配) -->
+			</if>
+			<if test="chgoffTypecd != null and chgoffTypecd !=''">
+				AND A.CHGOFF_TYPECD = #{chgoffTypecd}           <!-- 申报类型匹配 -->
+			</if>
+			<if test="chgoffDclTimeStart != null and chgoffDclTimeStart !=''">
+				AND A.CHGOFF_DCL_TIME <![CDATA[>=]]> #{chgoffDclTimeStart} <!-- 报核申报日期起始 -->
+			</if>
+			<if test="chgoffDclTimeEnd != null and chgoffDclTimeEnd !=''">
+				AND A.CHGOFF_DCL_TIME <![CDATA[<=]]> '${chgoffDclTimeEnd} 23:59:59' <!-- 报核申报日期终结 -->
+			</if>
+			<if test="docType != null and docType !=''">
+				AND A.DOC_TYPE = #{docType} <!-- 过滤单据类型 -->
+			</if>
+			<if test="decTimeStart != null and decTimeStart !=''">
+				AND A.DEC_TIME <![CDATA[>=]]> #{decTimeStart} <!-- 操作时间起始 -->
+			</if>
+			<if test="decTimeEnd != null and decTimeEnd !=''">
+				AND A.DEC_TIME <![CDATA[<=]]> '${decTimeEnd} 23:59:59' <!-- 操作时间终结 -->
+			</if>
+		</where>
+	</select>
+
+</mapper>

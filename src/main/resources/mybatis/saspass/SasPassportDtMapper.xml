@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.saspass.dao.SasPassportDtMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.saspass.entity.SasPassportDt">
+    <id column="UID" jdbcType="VARCHAR" property="uid" />
+    <result column="PASSPORT_NO" jdbcType="VARCHAR" property="passportNo" />
+    <result column="PASSPORT_SEQNO" jdbcType="INTEGER" property="passportSeqno" />
+    <result column="CHG_TMS_CNT" jdbcType="INTEGER" property="chgTmsCnt" />
+    <result column="GDS_MTNO" jdbcType="VARCHAR" property="gdsMtno" />
+    <result column="GDECD" jdbcType="VARCHAR" property="gdecd" />
+    <result column="GDS_NM" jdbcType="VARCHAR" property="gdsNm" />
+    <result column="GROSS_WT" jdbcType="DECIMAL" property="grossWt" />
+    <result column="NET_WT" jdbcType="DECIMAL" property="netWt" />
+    <result column="RLT_GDS_SEQNO" jdbcType="INTEGER" property="rltGdsSeqno" />
+    <result column="DCL_UNITCD" jdbcType="VARCHAR" property="dclUnitcd" />
+    <result column="DCL_QTY" jdbcType="DECIMAL" property="dclQty" />
+    <result column="RMK" jdbcType="VARCHAR" property="rmk" />
+    <result column="ETPS_PREENT_NO" jdbcType="VARCHAR" property="etpsPreentNo" />
+    <result column="RLT_NO" jdbcType="VARCHAR" property="rltNo" />
+    <result column="COP_ENT_NO" jdbcType="VARCHAR" property="copEntNo" />
+    <result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+    <result column="INPUTER_CODE" jdbcType="VARCHAR" property="inputerCode" />
+    <result column="INPUTER_NAME" jdbcType="VARCHAR" property="inputerName" />
+    <result column="INPUT_COP_NO" jdbcType="VARCHAR" property="inputCopNo" />
+    <result column="INPUT_COP_NAME" jdbcType="VARCHAR" property="inputCopName" />
+    <result column="DECLARE_MARK" jdbcType="VARCHAR" property="declareMark" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="CREATE_NAME" jdbcType="VARCHAR" property="createName" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="UPDATE_NAME" jdbcType="VARCHAR" property="updateName" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="COL1" jdbcType="VARCHAR" property="col1" />
+    <result column="COL2" jdbcType="VARCHAR" property="col2" />
+    <result column="COL3" jdbcType="TIMESTAMP" property="col3" />
+    <result column="COL4" jdbcType="DOUBLE" property="col4" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    A.UID AS uid, A.PASSPORT_NO AS passportNo, A.PASSPORT_SEQNO AS passportSeqno,
+    A.CHG_TMS_CNT AS chgTmsCnt, A.GDS_MTNO AS gdsMtno, A.GDECD AS gdecd,
+    A.GDS_NM AS gdsNm, A.GROSS_WT AS grossWt, A.NET_WT AS netWt, A.RLT_GDS_SEQNO AS rltGdsSeqno,
+    A.DCL_UNITCD AS dclUnitcd, A.DCL_QTY AS dclQty, A.RMK AS rmk, A.ETPS_PREENT_NO AS etpsPreentNo,
+    A.RLT_NO AS rltNo, A.COP_ENT_NO AS copEntNo, A.SEQ_NO AS seqNo, A.INPUTER_CODE AS inputerCode,
+    A.INPUTER_NAME AS inputerName, A.INPUT_COP_NO AS inputCopNo, A.INPUT_COP_NAME AS inputCopName,
+    A.DECLARE_MARK AS declareMark, A.CREATE_BY AS createBy, A.CREATE_NAME AS createName, A.CREATE_TIME AS createTime,
+    A.UPDATE_BY AS updateBy, A.UPDATE_NAME AS updateName, A.UPDATE_TIME AS updateTime,
+    A.COL1 AS col1, A.COL2 AS col2, A.COL3 AS col3, A.COL4 AS col4,
+    B.UNIT_NAME AS dclUnitcdName
+  </sql>
+
+  <sql id="Base_Join_Clause">
+    LEFT JOIN BSSP_COD.COD_CUS_UNIT B ON B.UNIT_CODE = A.DCL_UNITCD<!-- 计量单位 -->
+  </sql>
+
+  <select id="selectBySasPassportDt" parameterType="com.powerbridge.bssp.saspass.entity.SasPassportDt" resultType="com.powerbridge.bssp.saspass.entity.SasPassportDt">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM SAS_PASSPORT_DT A
+    <include refid="Base_Join_Clause" />
+    <where>
+      1 = 1
+      <if test="seqNo != null and seqNo !=''">
+        AND A.SEQ_NO = #{seqNo}
+      </if>
+    </where>
+  </select>
+  <select id="selectByUid" parameterType="java.lang.String" resultType="com.powerbridge.bssp.saspass.entity.SasPassportDt">
+    select 
+    <include refid="Base_Column_List" />
+    from sas_passport_dt A
+    <include refid="Base_Join_Clause" />
+    where UID = #{uid,jdbcType=VARCHAR}
+  </select>
+  <!-- 批量插入 -->
+  <insert id="insertByBatch" parameterType="java.util.List">
+    INSERT INTO SAS_PASSPORT_DT(UID,PASSPORT_NO,PASSPORT_SEQNO,CHG_TMS_CNT,GDS_MTNO,GDECD,GDS_NM,GROSS_WT,NET_WT,
+    RLT_GDS_SEQNO,DCL_UNITCD,DCL_QTY,RMK,ETPS_PREENT_NO,RLT_NO,COP_ENT_NO,
+    SEQ_NO,INPUTER_CODE,INPUTER_NAME,INPUT_COP_NO,INPUT_COP_NAME,DECLARE_MARK,CREATE_BY,
+    CREATE_NAME,CREATE_TIME,UPDATE_BY,UPDATE_NAME,UPDATE_TIME,COL1,COL2,COL3,COL4)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+      (#{item.uid}, #{item.passportNo}, #{item.passportSeqno}, #{item.chgTmsCnt}, #{item.gdsMtno}, #{item.gdecd}, #{item.gdsNm},
+      #{item.grossWt}, #{item.netWt}, #{item.rltGdsSeqno}, #{item.dclUnitcd}, #{item.dclQty}, #{item.rmk},
+      #{item.etpsPreentNo}, #{item.rltNo}, #{item.copEntNo}, #{item.seqNo}, #{item.inputerCode}, #{item.inputerName}, #{item.inputCopNo},
+      #{item.inputCopName}, #{item.declareMark}, #{item.createBy}, #{item.createName}, #{item.createTime}, #{item.updateBy}, #{item.updateName},
+      #{item.updateTime}, #{item.col1}, #{item.col2}, #{item.col3}, #{item.col4})
+    </foreach>
+  </insert>
+</mapper>

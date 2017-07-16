@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.inv.dao.InvExgMapper">
+    <resultMap id="BaseResultMap" type="com.powerbridge.bssp.inv.entity.InvExg">
+        <id column="UID" jdbcType="VARCHAR" property="uid"/>
+        <result column="BOND_INVT_NO" jdbcType="VARCHAR" property="bondInvtNo"/>
+        <result column="CHG_TMS_CNT" jdbcType="INTEGER" property="chgTmsCnt"/>
+        <result column="GDS_SEQNO" jdbcType="INTEGER" property="gdsSeqno"/>
+        <result column="PUTREC_SEQNO" jdbcType="INTEGER" property="putrecSeqno"/>
+        <result column="GDS_MTNO" jdbcType="VARCHAR" property="gdsMtno"/>
+        <result column="GDECD" jdbcType="VARCHAR" property="gdecd"/>
+        <result column="GDS_NM" jdbcType="VARCHAR" property="gdsNm"/>
+        <result column="ENDPRD_GDS_SPCF_MODEL_DESC" jdbcType="VARCHAR" property="endprdGdsSpcfModelDesc"/>
+        <result column="USD_STAT_TOTAL_AMT" jdbcType="DECIMAL" property="usdStatTotalAmt"/>
+        <result column="DCL_UNITCD" jdbcType="VARCHAR" property="dclUnitcd"/>
+        <result column="DCL_TOTAL_CHT" jdbcType="DECIMAL" property="dclTotalCht"/>
+        <result column="LAWF_UNITCD" jdbcType="VARCHAR" property="lawfUnitcd"/>
+        <result column="SECD_LAWF_UNITCD" jdbcType="VARCHAR" property="secdLawfUnitcd"/>
+        <result column="DCL_UPRC_AMT" jdbcType="DECIMAL" property="dclUprcAmt"/>
+        <result column="DCL_CURRCD" jdbcType="VARCHAR" property="dclCurrcd"/>
+        <result column="DCL_QTY" jdbcType="DECIMAL" property="dclQty"/>
+        <result column="LVYRLF_MODECD" jdbcType="VARCHAR" property="lvyrlfModecd"/>
+        <result column="NATCD" jdbcType="VARCHAR" property="natcd"/>
+        <result column="LAWF_QTY" jdbcType="DECIMAL" property="lawfQty"/>
+        <result column="SECD_LAWF_QTY" jdbcType="DECIMAL" property="secdLawfQty"/>
+        <result column="WT_SF_VAL" jdbcType="DECIMAL" property="wtSfVal"/>
+        <result column="ENTRY_GDS_SEQNO" jdbcType="INTEGER" property="entryGdsSeqno"/>
+        <result column="APPLY_TB_SEQNO" jdbcType="INTEGER" property="applyTbSeqno"/>
+        <result column="CLY_MARKCD" jdbcType="VARCHAR" property="clyMarkcd"/>
+        <result column="CLY_MARKNAME" jdbcType="VARCHAR" property="clyMarkname"/>
+        <result column="ETPS_INNER_INVT_NO" jdbcType="VARCHAR" property="etpsInnerInvtNo"/>
+        <result column="FST_SF_VAL" jdbcType="DECIMAL" property="fstSfVal"/>
+        <result column="SECD_SF_VAL" jdbcType="DECIMAL" property="secdSfVal"/>
+        <result column="GROSS_WT" jdbcType="DECIMAL" property="grossWt"/>
+        <result column="NET_WT" jdbcType="DECIMAL" property="netWt"/>
+        <result column="UCNS_VERNO" jdbcType="VARCHAR" property="ucnsVerno"/>
+        <result column="PUTREC_NO" jdbcType="VARCHAR" property="putrecNo"/>
+        <result column="COP_ENT_NO" jdbcType="VARCHAR" property="copEntNo"/>
+        <result column="RMK" jdbcType="VARCHAR" property="rmk"/>
+        <result column="MTPCK_ENDPRD_TYPECD" jdbcType="VARCHAR" property="mtpckEndprdTypecd"/>
+        <result column="DCL_UNITNAME" jdbcType="VARCHAR" property="dclUnitname"/>
+        <result column="LAWF_UNITNAME" jdbcType="VARCHAR" property="lawfUnitname"/>
+        <result column="SECD_LAWF_UNITNAME" jdbcType="VARCHAR" property="secdLawfUnitname"/>
+        <result column="DCL_CURRNAME" jdbcType="VARCHAR" property="dclCurrname"/>
+        <result column="DCL_TOTAL_AMT" jdbcType="DECIMAL" property="dclTotalAmt"/>
+        <result column="I_E_FLAG" jdbcType="VARCHAR" property="iEFlag"/>
+        <result column="ORG_NO" jdbcType="INTEGER" property="orgNo"/>
+        <result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo"/>
+        <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy"/>
+        <result column="CREATE_NAME" jdbcType="VARCHAR" property="createName"/>
+        <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime"/>
+        <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="UPDATE_NAME" jdbcType="VARCHAR" property="updateName"/>
+        <result column="UPDATE_TIME" jdbcType="VARCHAR" property="updateTime"/>
+        <result column="PARAM1" property="param1" />
+        <result column="PARAM2" property="param2" />
+        <result column="PARAM3" property="param3" />
+        <result column="PARAM4" property="param4" />
+        <result column="USE_CD" property="useCd" />
+        <result column="ACTL_PASS_QTY" property="actlPassQty" />
+        <result column="PASSPORT_USED_QTY" property="passportUsedQty" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    UID, BOND_INVT_NO, CHG_TMS_CNT, GDS_SEQNO, PUTREC_SEQNO, GDS_MTNO, GDECD, GDS_NM,
+    ENDPRD_GDS_SPCF_MODEL_DESC, USD_STAT_TOTAL_AMT, DCL_UNITCD, DCL_TOTAL_CHT, LAWF_UNITCD, 
+    SECD_LAWF_UNITCD, DCL_UPRC_AMT, DCL_CURRCD, DCL_QTY, LVYRLF_MODECD, NATCD, LAWF_QTY, 
+    SECD_LAWF_QTY, WT_SF_VAL, ENTRY_GDS_SEQNO, APPLY_TB_SEQNO, CLY_MARKCD, CLY_MARKNAME, 
+    ETPS_INNER_INVT_NO, FST_SF_VAL, SECD_SF_VAL, GROSS_WT, NET_WT, 
+    UCNS_VERNO, PUTREC_NO, COP_ENT_NO, RMK, MTPCK_ENDPRD_TYPECD, DCL_UNITNAME, LAWF_UNITNAME, 
+    SECD_LAWF_UNITNAME, DCL_CURRNAME, DCL_TOTAL_AMT, I_E_FLAG, ORG_NO, SEQ_NO, CREATE_BY, 
+    CREATE_NAME, CREATE_TIME, UPDATE_BY, UPDATE_NAME, UPDATE_TIME
+  </sql>
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO INV_EXG (UID, BOND_INVT_NO, CHG_TMS_CNT,
+        GDS_SEQNO, PUTREC_SEQNO, GDS_MTNO,
+        GDECD, GDS_NM, ENDPRD_GDS_SPCF_MODEL_DESC,
+        USD_STAT_TOTAL_AMT, DCL_UNITCD, DCL_TOTAL_CHT,
+        LAWF_UNITCD, SECD_LAWF_UNITCD, DCL_UPRC_AMT,
+        DCL_CURRCD, DCL_QTY, LVYRLF_MODECD,
+        NATCD, LAWF_QTY, SECD_LAWF_QTY,
+        WT_SF_VAL, ENTRY_GDS_SEQNO, APPLY_TB_SEQNO,
+        CLY_MARKCD, CLY_MARKNAME, ETPS_INNER_INVT_NO,
+        FST_SF_VAL, SECD_SF_VAL,
+        GROSS_WT, NET_WT, UCNS_VERNO,
+        PUTREC_NO, COP_ENT_NO, RMK,
+        MTPCK_ENDPRD_TYPECD, DCL_UNITNAME, LAWF_UNITNAME,
+        SECD_LAWF_UNITNAME, DCL_CURRNAME, DCL_TOTAL_AMT,
+        I_E_FLAG, ORG_NO, SEQ_NO,
+        CREATE_BY, CREATE_NAME, CREATE_TIME,
+        UPDATE_BY, UPDATE_NAME, UPDATE_TIME
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.uid}, #{item.bondInvtNo}, #{item.chgTmsCnt},
+            #{item.gdsSeqno}, #{item.putrecSeqno}, #{item.gdsMtno},
+            #{item.gdecd}, #{item.gdsNm}, #{item.endprdGdsSpcfModelDesc},
+            #{item.usdStatTotalAmt}, #{item.dclUnitcd}, #{item.dclTotalCht},
+            #{item.lawfUnitcd}, #{item.secdLawfUnitcd}, #{item.dclUprcAmt},
+            #{item.dclCurrcd}, #{item.dclQty}, #{item.lvyrlfModecd},
+            #{item.natcd}, #{item.lawfQty}, #{item.secdLawfQty},
+            #{item.wtSfVal}, #{item.entryGdsSeqno}, #{item.applyTbSeqno},
+            #{item.clyMarkcd}, #{item.clyMarkname}, #{item.etpsInnerInvtNo},
+            #{item.fstSfVal}, #{item.secdSfVal},
+            #{item.grossWt}, #{item.netWt}, #{item.ucnsVerno},
+            #{item.putrecNo}, #{item.copEntNo}, #{item.rmk},
+            #{item.mtpckEndprdTypecd}, #{item.dclUnitname}, #{item.lawfUnitname},
+            #{item.secdLawfUnitname}, #{item.dclCurrname}, #{item.dclTotalAmt},
+            #{item.iEFlag}, #{item.orgNo}, #{item.seqNo},
+            #{item.createBy}, #{item.createName}, #{item.createTime},
+            #{item.updateBy}, #{item.updateName}, #{item.updateTime}
+            )
+        </foreach>
+    </insert>
+
+    <!-- 自动合并-->
+    <select id="selectByBondInvtExgList" resultMap="BaseResultMap">
+        SELECT
+        t.SEQ_NO,
+        t.PUTREC_NO,
+        t.GDS_MTNO,
+        t.GDECD,
+        t.GDS_NM,
+        t.ENDPRD_GDS_SPCF_MODEL_DESC,
+        t.LAWF_UNITCD,
+        t.DCL_UNITCD,
+        t.SECD_LAWF_UNITCD,
+        t.NATCD,
+        t.DCL_CURRCD,
+        t.LVYRLF_MODECD,
+        t.UCNS_VERNO,
+        t.rmk,
+        t.LAWF_QTY,
+        t.SECD_LAWF_QTY,
+        t.WT_SF_VAL,
+        t.FST_SF_VAL,
+        t.SECD_SF_VAL,
+        t.GROSS_WT,
+        t.NET_WT,
+        t.USE_CD,
+        sum(t.DCL_QTY) DCL_QTY,
+        sum(t.DCL_TOTAL_AMT)DCL_TOTAL_AMT,
+        FORMAT(sum(t.DCL_TOTAL_AMT)/sum(t.DCL_QTY),5) DCL_UPRC_AMT
+        FROM
+        INV_EXG t
+        GROUP BY
+        t.GDECD,
+        t.DCL_UNITCD,
+        t.NATCD,
+        t.DCL_CURRCD,
+        t.LVYRLF_MODECD;
+    </select>
+
+    <!-- 检索存在两条以上的相同报关单商品序号-->
+    <select id="selectSameEntryGdsSeqNoList" resultMap="BaseResultMap">
+        SELECT
+        t.UID,
+        t.SEQ_NO,
+        t.ENTRY_GDS_SEQNO
+        FROM
+        inv_img T
+        GROUP BY
+        t.ENTRY_GDS_SEQNO,
+        t.SEQ_NO
+        HAVING
+        count(t.ENTRY_GDS_SEQNO) > 1
+    </select>
+
+    <!-- 查询相同报关单商品序号记录-->
+    <select id="selectSameGdSNoData" resultMap="BaseResultMap">
+        SELECT
+        t.SEQ_NO,
+        t.ENTRY_GDS_SEQNO,
+        t.GDECD,
+        t.DCL_UNITCD,
+        t.NATCD,
+        t.DCL_CURRCD,
+        t.LVYRLF_MODECD
+        FROM
+        inv_img t
+        WHERE SEQ_NO = #{seqNo}
+        AND ENTRY_GDS_SEQNO = #{entryGdsSeqno}
+    </select>
+</mapper>

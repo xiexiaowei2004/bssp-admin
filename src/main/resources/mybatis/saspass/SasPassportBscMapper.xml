@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.saspass.dao.SasPassportBscMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.saspass.entity.SasPassportBsc">
+    <id column="UID" property="uid" />
+    <result column="PASSPORT_NO" jdbcType="VARCHAR" property="passportNo" />
+    <result column="CHG_TMS_CNT" jdbcType="INTEGER" property="chgTmsCnt" />
+    <result column="PASSPORT_TYPECD" jdbcType="VARCHAR" property="passportTypecd" />
+    <result column="SAS_PASSPORT_PREENT_NO" jdbcType="VARCHAR" property="sasPassportPreentNo" />
+    <result column="DCL_TYPECD" jdbcType="VARCHAR" property="dclTypecd" />
+    <result column="IO_TYPECD" jdbcType="VARCHAR" property="ioTypecd" />
+    <result column="BIND_TYPECD" jdbcType="VARCHAR" property="bindTypecd" />
+    <result column="RLT_TB_TYPECD" jdbcType="VARCHAR" property="rltTbTypecd" />
+    <result column="RLT_NO" jdbcType="VARCHAR" property="rltNo" />
+    <result column="AREAIN_ETPSNO" jdbcType="VARCHAR" property="areainEtpsno" />
+    <result column="AREAIN_ETPS_NM" jdbcType="VARCHAR" property="areainEtpsNm" />
+    <result column="AREAIN_ETPS_SCCD" jdbcType="VARCHAR" property="areainEtpsSccd" />
+    <result column="VEHICLE_NO" jdbcType="VARCHAR" property="vehicleNo" />
+    <result column="VEHICLE_IC_NO" jdbcType="VARCHAR" property="vehicleIcNo" />
+    <result column="CONTAINER_NO" jdbcType="VARCHAR" property="containerNo" />
+    <result column="VEHICLE_WT" jdbcType="DECIMAL" property="vehicleWt" />
+    <result column="VEHICLE_FRAME_NO" jdbcType="VARCHAR" property="vehicleFrameNo" />
+    <result column="VEHICLE_FRAME_WT" jdbcType="DECIMAL" property="vehicleFrameWt" />
+    <result column="CONTAINER_TYPE" jdbcType="VARCHAR" property="containerType" />
+    <result column="CONTAINER_WT" jdbcType="DECIMAL" property="containerWt" />
+    <result column="TOTAL_WT" jdbcType="DECIMAL" property="totalWt" />
+    <result column="PASS_COLLECT_WT" jdbcType="DECIMAL" property="passCollectWt" />
+    <result column="WT_ERROR" jdbcType="DECIMAL" property="wtError" />
+    <result column="TOTAL_GROSS_WT" jdbcType="DECIMAL" property="totalGrossWt" />
+    <result column="TOTAL_NET_WT" jdbcType="DECIMAL" property="totalNetWt" />
+    <result column="DCL_ER_CONC" jdbcType="VARCHAR" property="dclErConc" />
+    <result column="DCL_TIME" jdbcType="TIMESTAMP" property="dclTime" />
+    <result column="PASS_ID" jdbcType="VARCHAR" property="passId" />
+    <result column="SECD_PASS_ID" jdbcType="VARCHAR" property="secdPassId" />
+    <result column="PASS_TIME" jdbcType="TIMESTAMP" property="passTime" />
+    <result column="SECD_PASS_TIME" jdbcType="TIMESTAMP" property="secdPassTime" />
+    <result column="STUCD" jdbcType="VARCHAR" property="stucd" />
+    <result column="EMAPV_MARKCD" jdbcType="VARCHAR" property="emapvMarkcd" />
+    <result column="LOGISTICS_STUCD" jdbcType="VARCHAR" property="logisticsStucd" />
+    <result column="OWNER_SYSTEM" jdbcType="VARCHAR" property="ownerSystem" />
+    <result column="ETPS_PREENT_NO" jdbcType="VARCHAR" property="etpsPreentNo" />
+    <result column="ClEARANCE_TYPE" jdbcType="VARCHAR" property="clearanceType" />
+    <result column="I_E_FLOW" jdbcType="VARCHAR" property="iEFlow" />
+    <result column="BIND_FLAG" jdbcType="VARCHAR" property="bindFlag" />
+    <result column="VEHICLE_I_REGNO" jdbcType="VARCHAR" property="vehicleIRegno" />
+    <result column="BIND_TIME" jdbcType="VARCHAR" property="bindTime" />
+    <result column="PASSPORT_TYPENM" jdbcType="VARCHAR" property="passportTypenm" />
+    <result column="DCL_TYPENM" jdbcType="VARCHAR" property="dclTypenm" />
+    <result column="IO_TYPENM" jdbcType="VARCHAR" property="ioTypenm" />
+    <result column="BIND_TYPENM" jdbcType="VARCHAR" property="bindTypenm" />
+    <result column="RLT_TB_TYPENM" jdbcType="VARCHAR" property="rltTbTypenm" />
+    <result column="RMK" jdbcType="VARCHAR" property="rmk" />
+    <result column="CONTAINER_TYPE_NM" jdbcType="VARCHAR" property="containerTypeNm" />
+    <result column="STUNM" jdbcType="VARCHAR" property="stunm" />
+    <result column="EMAPV_MARKNM" jdbcType="VARCHAR" property="emapvMarknm" />
+    <result column="LOGISTICS_STUNM" jdbcType="VARCHAR" property="logisticsStunm" />
+    <result column="I_E_FLOW_NM" jdbcType="VARCHAR" property="iEFlowNm" />
+    <result column="BIND_FLAG_NM" jdbcType="VARCHAR" property="bindFlagNm" />
+    <result column="COP_ENT_NO" jdbcType="VARCHAR" property="copEntNo" />
+    <result column="MASTER_CUSCD" jdbcType="VARCHAR" property="masterCuscd" />
+    <result column="MASTER_CUSNAME" jdbcType="VARCHAR" property="masterCusname" />
+    <result column="AREA_CODE" jdbcType="VARCHAR" property="areaCode" />
+    <result column="AREA_NAME" jdbcType="VARCHAR" property="areaName" />
+    <result column="BIZ_TYPE" jdbcType="VARCHAR" property="bizType" />
+    <result column="CHK_STATUS" jdbcType="VARCHAR" property="chkStatus" />
+    <result column="DOC_TYPE" jdbcType="VARCHAR" property="docType" />
+    <result column="RET_CHANNEL" jdbcType="VARCHAR" property="retChannel" />
+    <result column="BIZ_TYPE_NAME" jdbcType="VARCHAR" property="bizTypeName" />
+    <result column="CHK_STATUS_NAME" jdbcType="VARCHAR" property="chkStatusName" />
+    <result column="DOC_TYPE_NAME" jdbcType="VARCHAR" property="docTypeName" />
+    <result column="RET_CHANNEL_NAME" jdbcType="VARCHAR" property="retChannelName" />
+    <result column="DEC_TIME" jdbcType="TIMESTAMP" property="decTime" />
+    <result column="CHK_TIME" jdbcType="TIMESTAMP" property="chkTime" />
+    <result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+    <result column="INPUTER_CODE" jdbcType="VARCHAR" property="inputerCode" />
+    <result column="INPUTER_NAME" jdbcType="VARCHAR" property="inputerName" />
+    <result column="INPUT_COP_NO" jdbcType="VARCHAR" property="inputCopNo" />
+    <result column="INPUT_COP_NAME" jdbcType="VARCHAR" property="inputCopName" />
+    <result column="DECLARE_MARK" jdbcType="VARCHAR" property="declareMark" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="CREATE_NAME" jdbcType="VARCHAR" property="createName" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="UPDATE_NAME" jdbcType="VARCHAR" property="updateName" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="COL1" jdbcType="VARCHAR" property="col1" />
+    <result column="COL2" jdbcType="VARCHAR" property="col2" />
+    <result column="COL3" jdbcType="TIMESTAMP" property="col3" />
+    <result column="COL4" jdbcType="DOUBLE" property="col4" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    A.UID AS uid, A.PASSPORT_NO AS passportNo, A.CHG_TMS_CNT AS chgTmsCnt, A.PASSPORT_TYPECD AS passportTypecd,
+    A.SAS_PASSPORT_PREENT_NO AS sasPassportPreentNo, A.DCL_TYPECD AS dclTypecd, A.IO_TYPECD AS ioTypecd,
+    A.BIND_TYPECD AS bindTypecd, A.RLT_TB_TYPECD AS rltTbTypecd, A.RLT_NO AS rltNo, A.AREAIN_ETPSNO AS areainEtpsno,
+    A.AREAIN_ETPS_NM AS areainEtpsNm, A.AREAIN_ETPS_SCCD AS areainEtpsSccd, A.VEHICLE_NO AS vehicleNo,
+    A.VEHICLE_IC_NO AS vehicleIcNo, A.CONTAINER_NO AS containerNo, A.VEHICLE_WT AS vehicleWt, A.VEHICLE_FRAME_NO AS vehicleFrameNo,
+    A.VEHICLE_FRAME_WT AS vehicleFrameWt, A.CONTAINER_TYPE AS containerType, A.CONTAINER_WT AS containerWt, A.TOTAL_WT AS totaLWt,
+    A.PASS_COLLECT_WT AS passCollectWt, A.WT_ERROR AS wtError, A.TOTAL_GROSS_WT AS totalGrossWt, A.TOTAL_NET_WT AS totalNetWt,
+    A.DCL_ER_CONC AS dclErConc, A.DCL_TIME AS dclTime, A.PASS_ID AS passId, A.SECD_PASS_ID AS secdPassId,
+    A.PASS_TIME AS passTime, A.SECD_PASS_TIME AS secdPassTime, A.STUCD AS stucd, A.EMAPV_MARKCD AS emapvMarkcd,
+    A.LOGISTICS_STUCD AS logisticsStucd, A.OWNER_SYSTEM AS ownerSystem, A.ETPS_PREENT_NO AS etpsPreentNo,
+    A.ClEARANCE_TYPE AS clearaNceType, A.I_E_FLOW AS iEFlow, A.BIND_FLAG AS bindFlag, A.VEHICLE_I_REGNO AS vehicleIRegno,
+    A.BIND_TIME AS bindTime, A.PASSPORT_TYPENM AS passportTypenm, A.DCL_TYPENM AS dclTypenm, A.IO_TYPENM AS ioTyoenm,
+    A.BIND_TYPENM AS bindTypenm, A.RLT_TB_TYPENM AS rltTbTypenm, A.RMK AS rmk, A.CONTAINER_TYPE_NM AS containerTypeNm,
+    A.STUNM AS stunm, A.EMAPV_MARKNM AS emapvMarknm, A.LOGISTICS_STUNM AS logisticsStunm, A.I_E_FLOW_NM AS iEFlowNm,
+    A.BIND_FLAG_NM AS bindFlagNm, A.COP_ENT_NO AS copEntNo, A.MASTER_CUSCD AS masterCuscd, A.MASTER_CUSNAME AS masterCusname,
+    A.AREA_CODE AS areaCode, A.AREA_NAME AS areaName, A.BIZ_TYPE AS bizType, A.CHK_STATUS AS chkStatus, A.DOC_TYPE AS docType,
+    A.RET_CHANNEL AS retChannel, A.BIZ_TYPE_NAME AS bizTypeName, A.DOC_TYPE_NAME AS docTypeName,
+    A.RET_CHANNEL_NAME AS retChannelName, A.DEC_TIME AS decTime, A.CHK_TIME AS chkTime, A.SEQ_NO AS seqNo, A.INPUTER_CODE AS inputerCode,
+    A.INPUTER_NAME AS inputerName, A.INPUT_COP_NO AS inputCopNo, A.INPUT_COP_NAME AS inputCopName, A.DECLARE_MARK AS declareMark,
+    A.CREATE_NAME AS createName, A.CREATE_TIME AS createTime, A.CREATE_BY AS createBy, A.UPDATE_BY AS updateBy, A.UPDATE_NAME AS updateName,
+    A.UPDATE_TIME AS updateTime, A.COL1 AS col1, A.COL2 AS col2, A.COL3 AS col3, A.COL4 AS col4,
+    B.ATTR_NAME AS passportTypecdName, C.ATTR_NAME AS ioTypecdName, D.ATTR_NAME AS emapvMarkcdName,
+    E.ATTR_NAME AS dclTypecdName, F.ATTR_NAME AS rltTbTypecdName, G.ATTR_NAME AS bindTypecdName, H.CUSTOMS_NAME AS masterCuscdName,
+    I.ATTR_NAME AS chkStatusName, J.AREA_NAME AS areaCodeName
+  </sql>
+
+  <sql id="Base_Join_Clause">
+    left join BSSP_COD.COD_STD_CODES B on B.ATTR_VALUE = A.PASSPORT_TYPECD and B.DICTIONARY_VALUE = 'PASSPORT_TYPECD'<!--核放单类型-->
+    left join BSSP_COD.COD_STD_CODES C on C.ATTR_VALUE = A.IO_TYPECD and C.DICTIONARY_VALUE = 'STOCK_TYPECD'<!--进出标志-->
+    left join BSSP_COD.COD_STD_CODES D on D.ATTR_VALUE = A.EMAPV_MARKCD and D.DICTIONARY_VALUE = 'EMAPV_MARKCD_SAS'<!--审批标志-->
+    left join BSSP_COD.COD_STD_CODES E on E.ATTR_VALUE = A.DCL_TYPECD and E.DICTIONARY_VALUE = 'DCL_TYPECD_STOCK'<!--申报类型-->
+    left join BSSP_COD.COD_STD_CODES F on F.ATTR_VALUE = A.RLT_TB_TYPECD and F.DICTIONARY_VALUE = 'RLT_TB_TYPECD'<!--关联单证类型-->
+    left join BSSP_COD.COD_STD_CODES G on G.ATTR_VALUE = A.BIND_TYPECD and G.DICTIONARY_VALUE = 'BIND_TYPECD'<!--绑定类型-->
+    left join BSSP_COD.COD_STD_CODES I on I.ATTR_VALUE = A.CHK_STATUS and I.DICTIONARY_VALUE = 'CHK_STATUS'<!-- 单据状态 -->
+    left join BSSP_COD.COD_CUS_CUSTOMSREL H on H.CUSTOMS_CODE = A.MASTER_CUSCD<!--主管关区-->
+    left join BSSP_COD.COD_STD_AREA_CODE J on J.AREA_CODE = A.AREA_CODE <!-- 监管场所 -->
+  </sql>
+
+  <select id="selectByUid" parameterType="String" resultType="com.powerbridge.bssp.saspass.entity.SasPassportBsc">
+    select
+    <include refid="Base_Column_List" />
+    from SAS_PASSPORT_BSC A
+    <include refid="Base_Join_Clause" />
+    <where>
+      1=1
+      <if test="uid != null and uid !=''">
+        and A.UID = #{uid}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectBySasPassportBsc" resultType="com.powerbridge.bssp.saspass.entity.SasPassportBsc">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM sas_passport_bsc A
+    <include refid="Base_Join_Clause" />
+    <where>
+      1=1
+      <if test="inputCopNo != null and inputCopNo != ''">
+        AND A.INPUT_COP_NO = #{inputCopNo} <!--过滤企业的数据 -->
+      </if>
+      <if test="passportNo != null and passportNo !=''">
+        AND A.PASSPORT_NO like '%${passportNo}%' <!-- 核放单编号 -->
+      </if>
+      <if test="ioTypecd != null and ioTypecd !=''">
+        AND A.IO_TYPECD = #{ioTypecd} <!-- 进出标志 -->
+      </if>
+      <if test="passportTypecd != null and passportTypecd !=''">
+        <choose> <!-- 核放单类型 -->
+          <when test="2 == passportTypecd or 3 == passportTypecd">
+            AND A.PASSPORT_TYPECD IN ('2','3')
+          </when>
+          <otherwise>
+            AND A.PASSPORT_TYPECD = #{passportTypecd}
+          </otherwise>
+        </choose>
+      </if>
+      <if test="sasPassportPreentNo != null and sasPassportPreentNo !=''">
+        AND A.SAS_PASSPORT_PREENT_NO like '%${sasPassportPreentNo}%' <!-- 核放单预录入编号 -->
+      </if>
+      <if test="bindTypecd != null and bindTypecd !=''">
+        AND A.BIND_TYPECD = #{bindTypecd} <!-- 绑定类型 -->
+      </if>
+      <if test="vehicleNo != null and vehicleNo !=''">
+        AND A.VEHICLE_NO like '%${vehicleNo}%' <!-- 承运车牌号 -->
+      </if>
+      <if test="emapvMarkcd != null and emapvMarkcd !=''">
+        AND A.EMAPV_MARKCD = #{emapvMarkcd} <!-- 审批标志 -->
+      </if>
+      <if test="chkStatus != null and chkStatus != ''">
+        AND A.CHK_STATUS = #{chkStatus}<!-- 单据状态 -->
+      </if>
+      <if test="finishValidateDateStart != null and finishValidateDateStart !=''">
+        AND A.DCL_TIME <![CDATA[>=]]> #{finishValidateDateStart} <!-- 申请起始日期 -->
+      </if>
+      <if test="finishValidateDateEnd != null and finishValidateDateEnd !=''">
+        AND A.DCL_TIME <![CDATA[<=]]> '${finishValidateDateEnd} 23:59:59' <!-- 申请结束日期 -->
+      </if>
+      <if test="etpsPreentNo != null and etpsPreentNo !=''">
+        AND A.ETPS_PREENT_NO like '%${etpsPreentNo}%' <!-- 企业预录入编号 -->
+      </if>
+      <if test="vehicleIcNo != null and vehicleIcNo !=''">
+        AND A.VEHICLE_IC_NO like '%${vehicleIcNo}%' <!-- IC卡号 -->
+      </if>
+      <if test="vehicleFrameNo != null and vehicleFrameNo !=''">
+        AND A.VEHICLE_FRAME_NO like '%${vehicleFrameNo}%' <!-- 车架号 -->
+      </if>
+      <if test="dclTypecd != null and dclTypecd !=''">
+        AND A.DCL_TYPECD = #{dclTypecd} <!-- 申报类型 -->
+      </if>
+      <if test="docType != null and docType != ''">
+        AND  A.DOC_TYPE = #{docType}<!--单据类别-->
+      </if>
+      <if test="decTimeStart != null and decTimeStart !=''">
+        AND A.DEC_TIME <![CDATA[>=]]> #{decTimeStart} <!-- 操作开始日期 -->
+      </if>
+      <if test="decTimeEnd != null and decTimeEnd !=''">
+        AND A.DEC_TIME <![CDATA[<=]]> '${decTimeEnd} 23:59:59' <!-- 操作结束日期 -->
+      </if>
+    </where>
+  </select>
+</mapper>

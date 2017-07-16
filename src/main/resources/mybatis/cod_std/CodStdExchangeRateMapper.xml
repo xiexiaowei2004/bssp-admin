@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_std.dao.CodStdExchangeRateMapper">
+
+    <sql id="Base_Column_List">
+        A.UID AS uid,
+        A.CODE AS code,
+        A.NAME AS name,
+        A.E_NAME AS eName,
+        A.RMB_RATE AS rmbRate,
+        A.USD_RATE AS usdRate,
+        A.IS_ENABLE AS isEnable,
+        A.CREATE_BY AS createBy,
+        A.CREATE_TIME AS createTime,
+        A.UPDATE_BY AS updateBy,
+        A.UPDATE_TIME AS updateTime
+    </sql>
+
+    <select id="selectRedisDropDown" parameterType="java.lang.String"
+            resultType="com.powerbridge.bssp.cod_std.entity.CodStdExchangeRate">
+
+
+        SELECT
+        A.CODE AS id,
+        A.NAME AS text,
+        <include refid="Base_Column_List"/>
+        FROM COD_STD_EXCHANGE_RATE A
+
+    </select>
+
+</mapper> 

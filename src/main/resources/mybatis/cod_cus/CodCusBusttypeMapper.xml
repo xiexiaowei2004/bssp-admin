@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusBusttypeMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusBusttype">
+    <result column="TYPE_CO" jdbcType="VARCHAR" property="typeCo" />
+    <result column="TYPE_NA" jdbcType="VARCHAR" property="typeNa" />
+  </resultMap>
+  <select id="selectBusttypeByList"  resultType="java.util.HashMap">
+    SELECT TYPE_CO AS ID,TYPE_NA AS TEXT FROM COD_CUS_BUSTTYPE ORDER BY TYPE_CO
+  </select>
+  
+  
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusBusttype">
+    SELECT
+      TYPE_CO AS id,
+      TYPE_NA AS text
+    FROM COD_CUS_BUSTTYPE
+  </select>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusLctypeMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusLctype">
+    <result column="PAY_WAY" jdbcType="VARCHAR" property="payWay" />
+    <result column="PAY_NAME" jdbcType="VARCHAR" property="payName" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusLctype">
+    SELECT
+      PAY_WAY AS id,
+      PAY_NAME AS text
+    FROM COD_CUS_LCTYPE
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusLctype">
+    insert into cod_cus_lctype (PAY_WAY, PAY_NAME)
+    values (#{payWay,jdbcType=VARCHAR}, #{payName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusLctype">
+    insert into cod_cus_lctype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="payWay != null">
+        PAY_WAY,
+      </if>
+      <if test="payName != null">
+        PAY_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="payWay != null">
+        #{payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="payName != null">
+        #{payName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

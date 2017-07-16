@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.edi.dao.EdiCirclationInfoMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.edi.entity.EdiCirclationInfo">
+		<id column="UID" property="uid" />
+		<result column="AREA_CODE" property="areaCode" />
+		<result column="DOC_TYPE" property="docType" />
+		<result column="BIZ_TYPE" property="bizType" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="CHANNEL" property="channel" />
+		<result column="POS_CODE" property="posCode" />
+		<result column="NEXT_CHANNEL" property="nextChannel" />
+		<result column="NEXT_POST_CODE" property="nextPostCode" />
+		<result column="STATUS" property="status" />
+		<result column="OP_USER" property="opUser" />
+		<result column="OP_DATE" property="opDate" />
+		<result column="REMARKS" property="remarks" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_NAME" property="createName" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_NAME" property="updateName" />
+		<result column="UPDATE_TIME" property="updateTime" />
+	</resultMap>
+
+</mapper>

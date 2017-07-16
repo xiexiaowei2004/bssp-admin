@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusCustomsfecMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusCustomsfec">
+    <result column="CUSTOMS_CODE" jdbcType="VARCHAR" property="customsCode" />
+    <result column="CUSTOMS_NAME" jdbcType="VARCHAR" property="customsName" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusCustomsfec">
+    SELECT
+      CUSTOMS_CODE AS id,
+      CUSTOMS_NAME AS text
+    FROM COD_CUS_CUSTOMSFEC
+  </select>
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusCustomsfec">
+    insert into cod_cus_customsfec (CUSTOMS_CODE, CUSTOMS_NAME)
+    values (#{customsCode,jdbcType=VARCHAR}, #{customsName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusCustomsfec">
+    insert into cod_cus_customsfec
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customsCode != null">
+        CUSTOMS_CODE,
+      </if>
+      <if test="customsName != null">
+        CUSTOMS_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customsCode != null">
+        #{customsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customsName != null">
+        #{customsName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

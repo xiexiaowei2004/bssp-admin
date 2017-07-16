@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.entry.dao.EntryEdocRealationMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.entry.entity.EntryEdocRealation">
+		<result column="UID" property="uid" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+		<result column="EDOC_ID" property="edocId" />
+		<result column="EDOC_CODE" property="edocCode" />
+		<result column="EDOC_FOMAT_TYPE" property="edocFomatType" />
+		<result column="OP_NOTE" property="opNote" />
+		<result column="EDOC_COP_ID" property="edocCopId" />
+		<result column="EDOC_OWNER_CODE" property="edocOwnerCode" />
+		<result column="SIGN_UNIT" property="signUnit" />
+		<result column="SIGN_TIME" property="signTime" />
+		<result column="EDOC_OWNER_NAME" property="edocOwnerName" />
+	</resultMap>
+
+</mapper>

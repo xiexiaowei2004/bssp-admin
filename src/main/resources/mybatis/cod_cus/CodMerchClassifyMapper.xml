@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodMerchClassifyMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodMerchClassify">
+    
+  </resultMap>
+
+	<!-- <select id="selectBriefByList"  parameterType="java.lang.String" resultType="java.util.HashMap">
+    SELECT AREA_CODE AS ID,AREA_NAME AS TEXT FROM COD_STD_AREA_CODE
+    <if test="_parameter != null and _parameter !=''">
+    	where CUSTOMS_CODE=#{_parameter}
+    </if>
+    
+  </select>   -->
+  
+  
+</mapper> 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.inv.dao.InvCusDecBscMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.inv.entity.InvCusDecBsc">
+		<result column="UID" property="uid" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+		<result column="DEC_SEQ_NO" property="decSeqNo" />
+		<result column="PUTREC_NO" property="putrecNo" />
+		<result column="BIZOP_ETPS_SCCD" property="bizopEtpsSccd" />
+		<result column="BIZOP_ETPSNO" property="bizopEtpsno" />
+		<result column="BIZOP_ETPS_NM" property="bizopEtpsNm" />
+		<result column="RVSNGD_ETPS_SCCD" property="rvsngdEtpsSccd" />
+		<result column="RCVGD_ETPSNO" property="rcvgdEtpsno" />
+		<result column="RCVGD_ETPS_NM" property="rcvgdEtpsNm" />
+		<result column="DCL_ETPS_SCCD" property="dclEtpsSccd" />
+		<result column="DCL_ETPSNO" property="dclEtpsno" />
+		<result column="DCL_ETPS_NM" property="dclEtpsNm" />
+		<result column="INPUT_ETPS_SCCD" property="inputEtpsSccd" />
+		<result column="INPUT_COP_NO" property="inputCopNo" />
+		<result column="INPUT_COP_NAME" property="inputCopName" />
+		<result column="IMPEXP_PORTCD" property="impexpPortcd" />
+		<result column="DCL_PLC_CUSCD" property="dclPlcCuscd" />
+		<result column="IMPEXP_MARKCD" property="impexpMarkcd" />
+		<result column="SUPV_MODECD" property="supvModecd" />
+		<result column="TRSP_MODECD" property="trspModecd" />
+		<result column="DEC_TYPECD" property="decTypecd" />
+		<result column="RMK" property="rmk" />
+		<result column="CREATE_FLAG" property="createFlag" />
+		<result column="ADD_TIME" property="addTime" />
+	</resultMap>
+
+</mapper>

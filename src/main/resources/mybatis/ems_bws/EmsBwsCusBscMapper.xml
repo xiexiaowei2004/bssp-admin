@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.ems_bws.dao.EmsBwsCusBscMapper">
+
+
+    <!--基本字段-->
+    <sql id="Base_Column_List">
+    A.UID AS UID,
+	A.BWS_NO AS BWSNO,
+	A.CHG_TMS_CNT AS CHGTMSCNT,
+	A.ETPS_PREENT_NO AS ETPSPREENTNO,
+	E.ATTR_NAME AS DCLTYPECD,
+	A.BWL_TYPECD AS BWLTYPECD,
+	A.MASTER_CUSCD AS MASTERCUSCD,
+	A.BIZOP_ETPSNO AS BIZOPETPSNO,
+	A.BIZOP_ETPS_NM AS BIZOPETPSNM,
+	A.BIZOP_ETPS_SCCD AS BIZOPETPSSCCD,
+	A.HOUSE_NO AS HOUSENO,
+	A.HOUSE_NM AS HOUSENM,
+	A.DCL_ETPSNO AS DCLETPSNO,
+	A.DCL_ETPS_NM AS DCLETPSNM,
+	A.DCL_ETPS_SCCD AS DCLETPSSCCD,
+	A.DCL_ETPS_TYPECD AS DCLETPSTYPECD,
+	A.CONTACT_ER AS CONTACTER,
+	A.CONTACT_TELE AS CONTACTTELE,
+	A.HOUSE_TYPECD AS HOUSETYPECD,
+	A.HOUSE_AREA AS HOUSEAREA,
+	A.HOUSE_VOLUME AS HOUSEVOLUME,
+	A.HOUSE_ADDRESS AS HOUSEADDRESS,
+	A.DCL_TIME AS DCLTIME,
+	A.DEC_TIME AS DECTIME,
+	A.TAX_TYPECD AS TAXTYPECD,
+	A.PUTREC_APPR_TIME AS PUTRECAPPRTIME,
+	A.CHG_APPR_TIME AS CHGAPPRTIME,
+	A.FINISH_VALID_DATE AS FINISHVALIDDATE,
+	A.PAUSE_CHG_MARKCD AS PAUSECHGMARKCD,
+	D.ATTR_NAME AS EMAPVSTUCD,
+	A.DCL_MARKCD AS DCLMARKCD,
+	A.APPEND_TYPECD AS APPENDTYPECD,
+	A.RMK AS RMK,
+	A.OWNER_SYSTEM AS OWNERSYSTEM,
+	A.COP_ENT_NO AS COPENTNO,
+	A.DECLARE_MARK AS DECLAREMARK,
+	A.AREA_CODE AS AREACODE,
+	A.BIZ_TYPE AS BIZTYPE,
+	C.ATTR_NAME AS CHKSTATUS,
+	A.DOC_TYPE AS DOCTYPE,
+	A.RET_CHANNEL AS RETCHANNEL,
+	A.SEQ_NO AS SEQNO,
+	A.CREATE_BY AS CREATEBY,
+	A.CREATE_NAME AS CREATENAME,
+	A.CREATE_TIME AS CREATETIME,
+	A.UPDATE_BY AS UPDATEBY,
+	A.UPDATE_NAME AS UPDATENAME,
+	A.UPDATE_TIME AS UPDATETIME,
+	A.INPUT_COP_NO AS INPUTCOPNO,
+	A.INPUT_COP_NAME AS INPUTCOPNAME,
+	A.INPUTER_CODE AS INPUTERCODE,
+	A.INPUTER_NAME AS INPUTERNAME
+    </sql>
+    <!--查询列表-->
+    <select id="selectEmsBwsCusBscList" resultType="com.powerbridge.bssp.ems_bws.entity.EmsBwsCusBsc">
+        SELECT C.ATTR_NAME AS CHKSTATUSNAME,
+        <include refid="Base_Column_List"/>
+       	FROM EMS_BWS_CUS_BSC A
+       	LEFT JOIN BSSP_COD.COD_STD_CODES C ON C.ATTR_VALUE = A.CHK_STATUS AND C.DICTIONARY_VALUE='CHK_STATUS' <!-- 单据状态 -->
+		LEFT JOIN BSSP_COD.COD_STD_CODES D ON D.ATTR_VALUE=A.EMAPV_STUCD AND D.DICTIONARY_VALUE='EMAPV_STUCD_BWS'  <!-- 审批状态 -->
+		LEFT JOIN bssp_cod.COD_STD_CODES E ON E.ATTR_VALUE=A.DCL_TYPECD AND E.DICTIONARY_VALUE='DCL_TYPECD_BWS' <!-- 申报类型 -->
+        <where>
+            1=1
+            <if test="inputCopNo != null and inputCopNo !=''">
+                AND A.INPUT_COP_NO = #{inputCopNo} <!-- 录入单位编码 -->
+            </if>
+            <if test="bwsNo != null and bwsNo !=''">
+				AND A.BWS_NO LIKE '%${bwsNo}%' <!-- 仓库账册号-->
+            </if>
+            <if test="etpsPreentNo != null and etpsPreentNo !=''">
+                AND A.ETPS_PREENT_NO = #{etpsPreentNo} <!-- 企业内部编号 -->
+            </if>
+			<if test="bizopEtpsNm != null and bizopEtpsNm !=''">
+				AND A.BIZOP_ETPS_NM LIKE '%${bizopEtpsNm}%'<!-- 经营企业名称 -->
+			</if>
+            <if test="dclTypecd != null and dclTypecd !=''">
+                AND A.DCL_TYPECD = #{dclTypecd} <!-- 申报类型 -->
+            </if>
+            <if test="emapvStucd != null and emapvStucd !=''">
+                AND A.EMAPV_STUCD = #{emapvStucd} <!-- 审批状态 -->
+            </if>
+            <if test="finishValidDateStart != null and finishValidDateStart !=''">
+                AND A.FINISH_VALID_DATE <![CDATA[>=]]> #{finishValidDateStart} <!-- 结束有效日期起始 -->
+            </if>
+            <if test="finishValidDateEnd != null and finishValidDateEnd !=''">
+                AND A.FINISH_VALID_DATE <![CDATA[<=]]> '${finishValidDateEnd} 23:59:59' <!-- 结束有效日期终结 -->
+            </if>
+            <if test="decTimeStart != null and decTimeStart !=''">
+                AND A.DEC_TIME <![CDATA[>=]]> #{decTimeStart} <!-- 录入日期起始 -->
+            </if>
+            <if test="decTimeEnd != null and decTimeEnd !=''">
+                AND A.DEC_TIME <![CDATA[<=]]> '{decTimeEnd}  23:59:59' <!-- 录入日期终结 -->
+            </if>
+        </where>
+    </select>
+    <!--根据录入单位编码查找该企业下的账册-->
+    <select id="selectBwsNoList" resultType="java.util.HashMap">
+        SELECT BWS_NO AS id,BWS_NO AS text FROM EMS_BWS_CUS_BSC A
+        <where>
+            FINISH_VALID_DATE>=CURDATE()
+            <if test="inputCopNo != null and inputCopNo !=''">
+                AND A.INPUT_COP_NO = #{inputCopNo} <!-- 录入单位编码 -->
+            </if>
+        </where>
+    </select>
+</mapper>

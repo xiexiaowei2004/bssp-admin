@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.sas_cmb.dao.SasCmbBscMapper">
+	<!--基本字段 -->
+	<sql id="Base_Column_List">
+		A.UID AS UID,
+		A.CMB_NO AS CMBNO,
+		A.CHG_TMS_CNT AS CHGTMSCNT,
+		A.SAS_CMB_PREENT_NO AS SASCMBPREENTNO,
+		E.ATTR_NAME AS DCLTYPECD,
+		A.CM_TYPECD AS CMTYPECD,
+		A.EMS_NO AS EMSNO,
+		A.MASTER_CUSCD AS MASTERCUSCD,
+		A.CM_BEGIN_TIME AS CMBEGINTIME,
+		A.CM_END_TIME AS CMENDTIME,
+		A.BIZOP_ETPS_SCCD AS BIZOPETPSSCCD,
+		A.BIZOP_ETPSNO AS BIZOPETPSNO,
+		A.BIZOP_ETPS_NM AS BIZOPETPSNM,
+		A.RVSNGD_ETPS_SCCD AS RVSNGDETPSSCCD,
+		A.RCVGD_ETPSNO AS RCVGDETPSNO,
+		A.RCVGD_ETPS_NM AS RCVGDETPSNM,
+		A.EMAPV_STUCD AS emapvStucd,
+		A.PUTREC_APPR_TIME AS PUTRECAPPRTIME,
+		A.CHG_APPR_TIME AS CHGAPPRTIME,
+		A.DCL_TIME AS DCLTIME,
+		A.DCL_MARKCD AS DCLMARKCD,
+		A.STUCD AS STUCD,
+		A.RMK AS RMK,
+		A.AREA_CODE AS AREACODE,
+		A.BIZ_TYPE AS BIZTYPE,
+		C.ATTR_NAME AS chkstatusName,
+		A.DOC_TYPE AS DOCTYPE,
+		A.RET_CHANNEL AS RETCHANNEL,
+		A.DEC_TIME AS DECTIME,
+		A.SEQ_NO AS SEQNO,
+		A.CHK_TIME AS CHKTIME,
+		A.INPUTER_CODE AS INPUTERCODE,
+		A.INPUTER_NAME AS INPUTERNAME,
+		A.INPUT_COP_NO AS INPUTCOPNO,
+		A.INPUT_ETPS_SCCD AS INPUTETPSSCCD,
+		A.INPUT_COP_NAME AS INPUTCOPNAME,
+		A.CREATE_BY AS CREATEBY,
+		A.CREATE_NAME AS CREATENAME,
+		A.CREATE_TIME AS CREATETIME,
+		A.UPDATE_BY AS UPDATEBY,
+		A.UPDATE_NAME AS UPDATENAME,
+		A.UPDATE_TIME AS UPDATETIME,
+		A.CHK_STATUS AS CHKSTATUS
+	</sql>
+	<!--查询列表 -->
+	<select id="selectSasCmbBscList" resultType="com.powerbridge.bssp.sas_cmb.entity.SasCmbBsc">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM BSSP_SAS.SAS_CMB_BSC A
+		LEFT JOIN BSSP_COD.COD_STD_CODES C ON C.ATTR_VALUE =A.CHK_STATUS AND C.DICTIONARY_VALUE='CHK_STATUS' <!-- 单据状态 -->
+		LEFT JOIN bssp_cod.COD_STD_CODES E ON E.ATTR_VALUE=A.DCL_TYPECD AND E.DICTIONARY_VALUE='DCL_TYPECD_STOCK' <!-- 申报类型 -->
+		<where>
+			1=1
+			<if test="emsNo != null and emsNo !=''">
+				AND A.EMS_NO LIKE '%${emsNo}%' <!--账册编号 -->
+			</if>
+			<if test="dclTypecd != null and dclTypecd !=''"><!-- 申报类型 -->
+				AND A.DCL_TYPECD = #{dclTypecd}
+			</if>
+			<if test="sasCmbPreentNo != null and sasCmbPreentNo !=''"><!-- 耗料单预录入编号 -->
+				AND A.SAS_CMB_PREENT_NO = #{sasCmbPreentNo}
+			</if>
+			<if test="cmbNo != null and cmbNo !=''">
+				AND A.CMB_NO = #{cmbNo} <!-- 耗料单编号 -->
+			</if>
+			<if test="chkStatus != null and chkStatus !=''">
+				AND A.CHK_STATUS = #{chkStatus} <!-- 单据状态 -->
+			</if>
+			<if test="dclTimeStart != null and dclTimeStart !=''">
+				AND A.DCL_TIME <![CDATA[>=]]>
+				#{dclTimeStart} <!-- 申报时间起始 -->
+			</if>
+
+			<if test="dclTimeEnd != null and dclTimeEnd !=''">
+				AND A.DCL_TIME <![CDATA[<=]]>
+				'${dclTimeEnd} 23:59:59' <!-- 申报时间终结 -->
+			</if>
+		</where>
+	</select>
+</mapper>

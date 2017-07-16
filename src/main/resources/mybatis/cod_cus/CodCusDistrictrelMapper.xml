@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusDistrictrelMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusDistrictrel">
+    <result column="DISTRICT_CODE" jdbcType="VARCHAR" property="districtCode" />
+    <result column="DISTRICT_NAME" jdbcType="VARCHAR" property="districtName" />
+    <result column="DISTRICT_TYPE" jdbcType="VARCHAR" property="districtType" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusDistrictrel">
+    SELECT
+      DISTRICT_CODE AS id,
+      DISTRICT_NAME AS text
+    FROM COD_CUS_DISTRICTREL
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusDistrictrel">
+    insert into cod_cus_districtrel (DISTRICT_CODE, DISTRICT_NAME, DISTRICT_TYPE
+      )
+    values (#{districtCode,jdbcType=VARCHAR}, #{districtName,jdbcType=VARCHAR}, #{districtType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusDistrictrel">
+    insert into cod_cus_districtrel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="districtCode != null">
+        DISTRICT_CODE,
+      </if>
+      <if test="districtName != null">
+        DISTRICT_NAME,
+      </if>
+      <if test="districtType != null">
+        DISTRICT_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="districtCode != null">
+        #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null">
+        #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtType != null">
+        #{districtType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

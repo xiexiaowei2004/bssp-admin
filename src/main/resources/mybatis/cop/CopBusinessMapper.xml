@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cop.dao.CopBusinessMapper">
+    <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cop.entity.CopBusiness">
+        <id column="UID" jdbcType="VARCHAR" property="uid" />
+        <result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+        <result column="STORE_CODE" jdbcType="VARCHAR" property="storeCode" />
+        <result column="STORE_NAME" jdbcType="VARCHAR" property="storeName" />
+        <result column="STORE_TYPE" jdbcType="VARCHAR" property="storeType" />
+        <result column="STORE_LICENCE" jdbcType="VARCHAR" property="storeLicence" />
+        <result column="STORE_AREA" jdbcType="DECIMAL" property="storeArea" />
+        <result column="STORE_VOLUME" jdbcType="DECIMAL" property="storeVolume" />
+        <result column="STORE_ADDRESS" jdbcType="VARCHAR" property="storeAddress" />
+        <result column="STORE_NUMBER" jdbcType="DECIMAL" property="storeNumber" />
+        <result column="PROC_RANG" jdbcType="VARCHAR" property="procRang" />
+        <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+        <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+        <result column="CREATE_NAME" jdbcType="VARCHAR" property="createName" />
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+        <result column="UPDATE_NAME" jdbcType="VARCHAR" property="updateName" />
+        <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        bus.UID, bus.SEQ_NO, bus.STORE_CODE, bus.STORE_NAME, bus.STORE_TYPE, bus.STORE_LICENCE, bus.STORE_AREA, bus.STORE_VOLUME,
+        bus.STORE_ADDRESS, bus.STORE_NUMBER, bus.PROC_RANG, bus.REMARKS, bus.CREATE_BY, bus.CREATE_NAME, bus.CREATE_TIME,
+        bus.UPDATE_BY, bus.UPDATE_NAME, bus.UPDATE_TIME
+    </sql>
+
+
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO COP_BUSINESS(UID,SEQ_NO,STORE_CODE,STORE_NAME,STORE_TYPE,STORE_LICENCE,STORE_AREA,STORE_VOLUME,
+        STORE_ADDRESS,STORE_NUMBER,PROC_RANG,REMARKS,CREATE_BY,CREATE_NAME,CREATE_TIME,UPDATE_BY,UPDATE_NAME,UPDATE_TIME)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.uid},#{item.seqNo},#{item.storeCode},#{item.storeName},#{item.storeType},#{item.storeLicence},#{item.storeArea},
+            #{item.storeVolume},#{item.storeAddress},#{item.storeNumber},#{item.procRang},#{item.remarks},#{item.createBy},
+            #{item.createName},#{item.createTime},#{item.updateBy},#{item.updateName},#{item.updateTime})
+        </foreach>
+    </insert>
+
+</mapper>

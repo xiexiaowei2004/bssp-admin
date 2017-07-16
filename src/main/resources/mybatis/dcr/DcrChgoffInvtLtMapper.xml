@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.dcr.dao.DcrChgoffInvtLtMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.powerbridge.bssp.dcr.entity.DcrChgoffInvtLt">
+        <id column="UID" property="uid"/>
+        <result column="EMS_NO" property="emsNo"/>
+        <result column="CHG_TMS_CNT" property="chgTmsCnt"/>
+        <!--<result column="DCR_INVT_NO" property="dcrInvtNo"/>-->
+        <result column="BOND_INVT_NO" property="bondInvtNo"/>
+        <result column="L_NO" property="lNo"/>
+        <result column="IE_FLAG" property="ieFlag"/>
+        <result column="DCL_TYPECD" property="dclTypecd"/>
+        <result column="SEQ_NO" property="seqNo"/>
+        <result column="MODF_MARKCD" property="modfMarkcd"/>
+        <result column="RMK" property="rmk"/>
+        <!--<result column="MASTER_CUSCD" property="masterCuscd"/>-->
+        <!--<result column="AREA_CODE" property="areaCode"/>-->
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		A.UID AS UID,A.EMS_NO AS EMSNO,A.CHG_TMS_CNT AS CHGTMSCNT,A.BOND_INVT_NO AS
+        BONDINVTNO,A.L_NO AS LNO,B.ATTR_NAME AS IEFLAG,C.ATTR_NAME AS DCLTYPECD,A.SEQ_NO AS SEQNO,
+        D.ATTR_NAME AS MODFMARKCD,A.RMK AS RMK
+	</sql>
+    <select id="selectByList" resultType="com.powerbridge.bssp.dcr.entity.DcrChgoffInvtLt">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM DCR_CHGOFF_INVT_LT A
+        LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE = A.IE_FLAG AND B.DICTIONARY_VALUE='IMPEXP_MARKCD' <!-- 进出口标记代码 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES C ON C.ATTR_VALUE = A.DCL_TYPECD AND C.DICTIONARY_VALUE='CHGOFF_TYPECD' <!-- 申报类型 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES D ON D.ATTR_VALUE = A.MODF_MARKCD AND D.DICTIONARY_VALUE='MODF_MARK' <!-- 修改标记 -->
+        WHERE A.SEQ_NO = #{seqNo}
+    </select>
+
+    <update id="updateLno">
+        UPDATE DCR_CHGOFF_INVT_LT SET L_NO = L_NO - 1 WHERE SEQ_NO = #{seqNo} AND L_NO <![CDATA[>]]> #{lNo};
+    </update>
+</mapper>

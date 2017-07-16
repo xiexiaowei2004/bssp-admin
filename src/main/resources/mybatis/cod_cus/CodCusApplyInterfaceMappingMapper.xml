@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusApplyInterfaceMappingMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusApplyInterfaceMapping">
+    <id column="APPLY_ID" jdbcType="VARCHAR" property="applyId" />
+    <result column="INTERFACE_INFO" jdbcType="OTHER" property="interfaceInfo" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    APPLY_ID, INTERFACE_INFO, CREATE_TIME, CREATE_BY, REMARKS
+  </sql>
+  
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusApplyInterfaceMapping">
+    SELECT
+      CUSTOMS_CODE AS ID,
+      CUSTOMS_NAME AS TEXT
+    FROM COD_CUS_CUSTOMSFEC
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cod_cus_apply_interface_mapping
+    where APPLY_ID = #{applyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cod_cus_apply_interface_mapping
+    where APPLY_ID = #{applyId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusApplyInterfaceMapping">
+    insert into cod_cus_apply_interface_mapping (APPLY_ID, INTERFACE_INFO, CREATE_TIME, 
+      CREATE_BY, REMARKS)
+    values (#{applyId,jdbcType=VARCHAR}, #{interfaceInfo,jdbcType=OTHER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusApplyInterfaceMapping">
+    insert into cod_cus_apply_interface_mapping
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="applyId != null">
+        APPLY_ID,
+      </if>
+      <if test="interfaceInfo != null">
+        INTERFACE_INFO,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="remarks != null">
+        REMARKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="applyId != null">
+        #{applyId,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceInfo != null">
+        #{interfaceInfo,jdbcType=OTHER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusApplyInterfaceMapping">
+    update cod_cus_apply_interface_mapping
+    <set>
+      <if test="interfaceInfo != null">
+        INTERFACE_INFO = #{interfaceInfo,jdbcType=OTHER},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where APPLY_ID = #{applyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusApplyInterfaceMapping">
+    update cod_cus_apply_interface_mapping
+    set INTERFACE_INFO = #{interfaceInfo,jdbcType=OTHER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR}
+    where APPLY_ID = #{applyId,jdbcType=VARCHAR}
+  </update>
+</mapper>

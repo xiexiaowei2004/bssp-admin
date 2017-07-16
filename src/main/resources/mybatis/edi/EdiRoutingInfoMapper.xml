@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.edi.dao.EdiRoutingInfoMapper">
+	<!--基本字段 -->
+	<sql id="Base_Column_List">
+	A.UID AS UID,
+	A.AREA_CODE AS AREACODE,
+	A.TOKEN AS TOKEN,
+	A.DOC_TYPE AS DOCTYPE,
+	A.DOC_NAME AS DOCNAME,
+	A.BIZ_TYPE AS BIZTYPE,
+	A.BIZ_NAME AS BIZNAME,
+	A.ROUTE_TYPE AS ROUTETYPE,
+	A.PRONAME AS PRONAME,
+	E.ATTR_NAME AS STATUS,
+	A.TRANSMODE AS TRANSMODE,
+	A.CREATE_BY AS CREATEBY,
+	A.CREATE_NAME AS CREATENAME,
+	A.CREATE_TIME AS CREATETIME,
+	A.UPDATE_BY AS UPDATEBY,
+	A.UPDATE_NAME AS UPDATENAME,
+	A.UPDATE_TIME AS UPDATETIME,
+	A.REMARKS AS REMARKS,
+	A.SENDER_ID AS SENDERID,
+	A.RECEIVER_ID AS RECEIVERID,
+	C.ATTR_NAME AS PASSAGEWAY,
+	A.RECL_URL AS RECLURL,
+	A.SEND_URL AS SENDURL
+
+
+	</sql>
+	<!--查询列表 -->
+	<select id="selectEdiRoutingInfoList" resultType="com.powerbridge.bssp.edi.entity.EdiRoutingInfo">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM BSSP_EDI.EDI_ROUTING_INFO A
+		LEFT JOIN BSSP_COD.COD_STD_CODES C ON C.ATTR_VALUE =A.PASSAGEWAY AND C.DICTIONARY_VALUE='PASSAGEWAY' <!-- 传输类型 -->
+		LEFT JOIN BSSP_COD.COD_STD_CODES E ON E.ATTR_VALUE =A.STATUS AND E.DICTIONARY_VALUE='IS_VALIDATE' <!--是否启用 -->
+		<where>
+			1=1
+			<if test="docType != null and docType != ''">
+			AND  A.DOC_TYPE LIKE '%${docType}%'  		 <!-- 单据类型 -->
+			</if>
+			<if test="bizType != null and bizType !=''">
+				AND A.BIZ_TYPE LIKE '%${bizType}%'  	 <!-- 账册编号 -->
+			</if>
+			<if test="areaCode != null and areaCode !=''">
+				AND A.AREA_CODE = #{areaCode}		  	 <!-- 监管场所 -->
+			</if>
+			<if test="proname != null and proname !=''">
+				AND A.PRONAME LIKE '%${proname}%'  	 	<!-- 报文头 -->
+			</if>
+			<if test="status != null and status !=''">
+				AND A.STATUS = #{status}		  	 	<!-- 启用标识 -->
+			</if>
+			<if test="passageway != null and passageway !=''">
+				AND A.PASSAGEWAY = #{passageway}		  	<!-- 账册编号匹配 -->
+			</if>
+		</where>
+	</select>
+</mapper>
+

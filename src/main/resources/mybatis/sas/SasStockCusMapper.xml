@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.sas.dao.SasStockCusMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.powerbridge.bssp.sas.entity.SasStockCus">
+        <id column="UID" property="uid"/>
+        <result column="SAS_STOCK_NO" property="sasStockNo"/>
+        <result column="CHG_TMS_CNT" property="chgTmsCnt"/>
+        <result column="DCL_TYPECD" property="dclTypecd"/>
+        <result column="SAS_DCL_NO" property="sasDclNo"/>
+        <result column="SAS_STOCK_PREENT_NO" property="sasStockPreentNo"/>
+        <result column="MASTER_CUSCD" property="masterCuscd"/>
+        <result column="STOCK_TYPECD" property="stockTypecd"/>
+        <result column="RLT_BOND_INVT_NO" property="rltBondInvtNo"/>
+        <result column="BUSINESS_TYPECD" property="businessTypecd"/>
+        <result column="CENTRALIZED_DCL_TYPECD" property="centralizedDclTypecd"/>
+        <result column="RLT_SAS_STOCK_NO" property="rltSasStockNo"/>
+        <result column="DCL_ER" property="dclEr"/>
+        <result column="DCL_TIME" property="dclTime"/>
+        <result column="PACKAGE_QTY" property="packageQty"/>
+        <result column="GROSS_WT" property="grossWt"/>
+        <result column="NET_WT" property="netWt"/>
+        <result column="PACK_TYPE" property="packType"/>
+        <result column="LEVY_BL_AMT" property="levyBlAmt"/>
+        <result column="PASS_TYPECD" property="passTypecd"/>
+        <result column="PASSPORT_USED_TYPECD" property="passportUsedTypecd"/>
+        <result column="STUCD" property="stucd"/>
+        <result column="EMAPV_MARKCD" property="emapvMarkcd"/>
+        <result column="EMAPV_DESCRIPTION" property="emapvDescription"/>
+        <result column="OWNER_SYSTEM" property="ownerSystem"/>
+        <result column="RMK" property="rmk"/>
+        <result column="ETPS_PREENT_NO" property="etpsPreentNo"/>
+        <result column="COP_ENT_NO" property="copEntNo"/>
+        <result column="AREA_CODE" property="areaCode"/>
+        <result column="DOC_TYPE" property="docType"/>
+        <result column="OPERATE_TYPE" property="operateType"/>
+        <result column="DEC_TIME" property="decTime"/>
+        <result column="COL1" property="col1" />
+        <result column="COL2" property="col2" />
+        <result column="COL3" property="col3" />
+        <result column="COL4" property="col4" />
+        <result column="INPUTER_CODE" property="inputerCode"/>
+        <result column="INPUTER_NAME" property="inputerName"/>
+        <result column="INPUT_COP_NO" property="inputCopNo"/>
+        <result column="INPUT_COP_NAME" property="inputCopName"/>
+        <result column="CREATE_BY" property="createBy"/>
+        <result column="CREATE_NAME" property="createName"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_BY" property="updateBy"/>
+        <result column="UPDATE_NAME" property="updateName"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        A.UID AS UID,A.SAS_STOCK_NO AS SASSTOCKNO,A.CHG_TMS_CNT AS CHGTMSCNT,B.ATTR_NAME AS DCLTYPECD,A.SAS_DCL_NO AS SASDCLNO,C.ATTR_NAME AS EMAPVMARKNM,
+        A.SAS_STOCK_PREENT_NO AS SASSTOCKPREENTNO,A.MASTER_CUSCD AS MASTERCUSCD,A.STOCK_TYPECD AS STOCKTYPECD,A.RLT_BOND_INVT_NO AS RLTBONDINVTNO,
+        A.BUSINESS_TYPECD AS BUSINESSTYPECD,D.ATTR_NAME AS CENTRALIZEDDCLTYPECD,A.RLT_SAS_STOCK_NO AS RLTSASSTOCKNO,A.DCL_ER AS DCLER,
+        A.DCL_TIME AS DCLTIME,A.PACKAGE_QTY AS PACKAGEQTY,A.GROSS_WT AS GROSSWT,A.NET_WT AS NETWT,A.PACK_TYPE AS PACKTYPE,A.LEVY_BL_AMT AS LEVYBLAMT,
+        G.ATTR_NAME AS PASSTYPECD,F.ATTR_NAME AS PASSPORTUSEDTYPECD,A.STUCD AS STUCD,A.EMAPV_MARKCD AS EMAPVMARKCD,E.ATTR_NAME AS CHKSTATUSNM,
+        A.EMAPV_DESCRIPTION AS EMAPVDESCRIPTION,A.OWNER_SYSTEM AS OWNERSYSTEM,A.RMK AS RMK,A.ETPS_PREENT_NO AS ETPSPREENTNO,A.COP_ENT_NO AS COPENTNO,
+        A.AREA_CODE AS AREACODE,A.DOC_TYPE AS DOCTYPE,A.OPERATE_TYPE AS OPERATETYPE,A.BIZ_TYPE AS BIZTYPE,A.CHK_STATUS AS CHKSTATUS,
+        A.RET_CHANNEL AS RETCHANNEL,A.DEC_TIME AS DECTIME,A.SEQ_NO AS SEQNO,A.CHK_TIME AS CHKTIME,A.DECLARE_MARK AS DECLAREMARK,
+        A.INPUTER_CODE AS INPUTERCODE,A.INPUTER_NAME AS INPUTERNAME,A.INPUT_COP_NO AS INPUTCOPNO,A.INPUT_COP_NAME AS INPUTCOPNAME,A.CREATE_BY AS CREATEBY,
+        A.CREATE_NAME AS CREATENAME,A.CREATE_TIME AS CREATETIME,A.UPDATE_BY AS UPDATEBY,A.UPDATE_NAME AS UPDATENAME,A.UPDATE_TIME AS UPDATETIME
+        FROM SAS_STOCK_CUS A
+        LEFT JOIN BSSP_COD.COD_STD_CODES B ON A.DCL_TYPECD=B.ATTR_VALUE AND B.DICTIONARY_VALUE='DCL_TYPECD_STOCK' <!-- 申报类型 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES C ON A.EMAPV_MARKCD=C.ATTR_VALUE AND C.DICTIONARY_VALUE='EMAPV_MARKCD_SAS' <!-- 审批标志 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES D ON A.CENTRALIZED_DCL_TYPECD=D.ATTR_VALUE AND D.DICTIONARY_VALUE='CENTRALIZED_DCL_TYPECD' <!-- 集报标志 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES E ON A.CHK_STATUS=E.ATTR_VALUE AND E.DICTIONARY_VALUE='CHK_STATUS' <!-- 单据状态 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES F ON A.PASSPORT_USED_TYPECD=F.ATTR_VALUE AND F.DICTIONARY_VALUE='PASSPORT_USED_TYPECD' <!-- 核放单生成标志 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES G ON A.PASS_TYPECD=G.ATTR_VALUE AND G.DICTIONARY_VALUE='PASS_TYPECD' <!-- 过卡标志 -->
+    </sql>
+
+    <select id="selectBySasStockCus" resultType="com.powerbridge.bssp.sas.entity.SasStockCus"
+            parameterType="com.powerbridge.bssp.sas.entity.SasStockCus">
+        SELECT
+        <include refid="Base_Column_List"/>
+        <where>
+            1=1
+            <if test="inputCopNo != null and inputCopNo != ''">
+                AND  A.INPUT_COP_NO = #{inputCopNo}          <!--只显示本企业的数据 -->
+            </if>
+            <if test="sasStockNo != null and sasStockNo !=''">
+                AND A.SAS_STOCK_NO LIKE '%${sasStockNo}%' <!-- 出入库单编号 -->
+            </if>
+            <if test="etpsPreentNo != null and etpsPreentNo !=''">
+                AND A.ETPS_PREENT_NO LIKE '%${etpsPreentNo}%' <!-- 企业预录入编号 -->
+            </if>
+            <if test="sasDclNo != null and sasDclNo !=''">
+                AND A.SAS_DCL_NO LIKE '%${sasDclNo}%' <!-- 申报表编号 -->
+            </if>
+            <if test="centralizedDclTypecd != null and centralizedDclTypecd != ''">
+                AND  A.CENTRALIZED_DCL_TYPECD = #{centralizedDclTypecd}          <!--集报标志 -->
+            </if>
+            <if test="passportUsedTypecd != null and passportUsedTypecd != ''">
+                AND  A.PASSPORT_USED_TYPECD = #{passportUsedTypecd}          <!--核放单生成标志 -->
+            </if>
+            <if test="passTypecd != null and passTypecd != ''">
+                AND  A.PASS_TYPECD = #{passTypecd}          <!--过卡标志 -->
+            </if>
+            <if test="dclTypecd != null and dclTypecd !=''">
+                AND A.DCL_TYPECD != #{dclTypecd} <!-- 申报类型 -->
+            </if>
+            <if test="chkStatus != null and chkStatus !=''">
+                AND A.CHK_STATUS = #{chkStatus}           <!-- 单据状态匹配 -->
+            </if>
+            <if test="decTimeStart != null and decTimeStart !=''">
+                AND A.DEC_TIME <![CDATA[>=]]> #{decTimeStart}<!-- 录入日期(起始) -->
+            </if>
+            <if test="decTimeEnd != null and decTimeEnd !=''">
+                AND A.DEC_TIME <![CDATA[<=]]> '${decTimeEnd} 23;59;59' <!-- 录入日期(结束) -->
+            </if>
+            <if test="stockTypecd != null and stockTypecd != ''">
+                AND  A.STOCK_TYPECD = #{stockTypecd}          <!--出入库单类型 -->
+            </if>
+            <if test="docType != null and docType !=''">
+                AND A.DOC_TYPE = #{docType}           <!-- 单据类型匹配 -->
+            </if>
+            <if test="bizType != null and bizType !=''">
+                AND A.BIZ_TYPE = #{bizType}           <!-- 业务类型匹配 -->
+            </if>
+            <if test="rltBondInvtNo != null and rltBondInvtNo !=''">
+                AND A.RLT_BOND_INVT_NO = #{rltBondInvtNo}           <!--关联核注清单编号 -->
+            </if>
+            <if test="centralizedDclTypecd != null and centralizedDclTypecd !=''">
+                AND A.CENTRALIZED_DCL_TYPECD = #{centralizedDclTypecd}           <!--关联核注清单编号 -->
+            </if>
+            <if test="isFilterRlt != null and isFilterRlt !=''">
+                AND NOT EXISTS (SELECT 1 FROM SAS_PASSPORT_RLT WHERE RLT_NO=A.SEQ_NO) <!-- 过滤核放单已选单证 -->
+            </if>
+        </where>
+    </select>
+
+</mapper>

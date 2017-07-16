@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.sas.dao.SasDclBscMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.powerbridge.bssp.sas.entity.SasDclBsc">
+        <id column="UID" property="uid" />
+        <result column="SAS_DCL_NO" property="sasDclNo" />
+        <result column="CHG_TMS_CNT" property="chgTmsCnt" />
+        <result column="MASTER_CUSCD" property="masterCuscd" />
+        <result column="SAS_DCL_PREENT_NO" property="sasDclPreentNo" />
+        <result column="DCL_TYPECD" property="dclTypecd" />
+        <result column="BUSINESS_TYPECD" property="businessTypecd" />
+        <result column="DIRECTION_TYPECD" property="directionTypecd" />
+        <result column="AREAIN_ORIACT_NO" property="areainOriactNo" />
+        <result column="AREAOUT_ORIACT_NO" property="areaoutOriactNo" />
+        <result column="AREAIN_ETPSNO" property="areainEtpsno" />
+        <result column="AREAIN_ETPS_NM" property="areainEtpsNm" />
+        <result column="AREAIN_ETPS_SCCD" property="areainEtpsSccd" />
+        <result column="AREAOUT_ETPSNO" property="areaoutEtpsno" />
+        <result column="AREAOUT_ETPS_NM" property="areaoutEtpsNm" />
+        <result column="AREAOUT_ETPS_SCCD" property="areaoutEtpsSccd" />
+        <result column="DPST_LEVY_BL_NO" property="dpstLevyBlNo" />
+        <result column="VALID_TIME" property="validTime" />
+        <result column="EXHIBITION_PLACE" property="exhibitionPlace" />
+        <result column="DCL_ER" property="dclEr" />
+        <result column="DCL_TIME" property="dclTime" />
+        <result column="PUTREC_EMAPV_TIME" property="putrecEmapvTime" />
+        <result column="CHG_EMAPV_TIME" property="chgEmapvTime" />
+        <result column="CLS_CASE_TIME" property="clsCaseTime" />
+        <result column="EMAPV_MARKCD" property="emapvMarkcd" />
+        <result column="DCL_TB_STUCD" property="dclTbStucd" />
+        <result column="OWNER_SYSTEM" property="ownerSystem" />
+        <result column="RMK" property="rmk" />
+        <result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+        <result column="COP_ENT_NO" property="copEntNo" />
+        <result column="DECLARE_MARK" property="declareMark" />
+        <result column="AREA_CODE" property="areaCode" />
+        <result column="DOC_TYPE" property="docType" />
+        <result column="CHK_STATUS" property="chkStatus" />
+        <result column="RET_CHANNEL" property="retChannel" />
+        <result column="INPUT_COP_NO" property="inputCopNo" />
+        <result column="INPUT_COP_NAME" property="inputCopName" />
+        <result column="INPUTER_NAME" property="inputerName" />
+        <result column="INPUTER_CODE" property="inputerCode" />
+        <result column="DEC_TIME" property="decTime" />
+        <result column="SEQ_NO" property="seqNo" />
+        <result column="CHK_TIME" property="chkTime" />
+        <result column="CREATE_BY" property="createBy" />
+        <result column="CREATE_NAME" property="createName" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_BY" property="updateBy" />
+        <result column="UPDATE_NAME" property="updateName" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="BIZ_TYPE" property="bizType" />
+        <result column="EMAPV_DESCRIPTION" property="emapvDescription" />
+        <result column="COL1" property="col1" />
+        <result column="COL2" property="col2" />
+        <result column="COL3" property="col3" />
+        <result column="COL4" property="col4" />
+    </resultMap>
+
+    <select id="selectByList" resultType="com.powerbridge.bssp.sas.entity.SasDclBsc">
+        SELECT
+            A.UID AS UID,SAS_DCL_NO AS SASDCLNO,CHG_TMS_CNT AS CHGTMSCNT,MASTER_CUSCD AS MASTERCUSCD,
+            SAS_DCL_PREENT_NO AS SASDCLPREENTNO,A.DCL_TYPECD AS DCLTYPECD,B.ATTR_NAME AS DCLTYPENM,BUSINESS_TYPECD AS BUSINESSTYPECD,
+            D.ATTR_NAME AS DIRECTIONTYPECD,AREAIN_ORIACT_NO AS AREAINORIACTNO,AREAOUT_ORIACT_NO AS AREAOUTORIACTNO,
+            AREAIN_ETPSNO AS AREAINETPSNO,AREAIN_ETPS_NM AS AREAINETPSNM,AREAIN_ETPS_SCCD AS AREAINETPSSCCD,
+            AREAOUT_ETPSNO AS AREAOUTETPSNO,AREAOUT_ETPS_NM AS AREAOUTETPSNM,AREAOUT_ETPS_SCCD AS AREAOUTETPSSCCD,
+            DPST_LEVY_BL_NO AS DPSTLEVYBLNO,VALID_TIME AS VALIDTIME,EXHIBITION_PLACE AS EXHIBITIONPLACE,DCL_ER AS DCLER,
+            DCL_TIME AS DCLTIME,PUTREC_EMAPV_TIME AS PUTRECEMAPVTIME,CHG_EMAPV_TIME AS CHGEMAPVTIME,CLS_CASE_TIME AS CLSCASETIME,
+            EMAPV_MARKCD AS EMAPVMARKCD,C.ATTR_NAME AS DCLTBSTUCD,OWNER_SYSTEM AS OWNERSYSTEM,RMK AS RMK,
+            ETPS_PREENT_NO AS ETPSPREENTNO,COP_ENT_NO AS COPENTNO,DECLARE_MARK AS DECLAREMARK,AREA_CODE AS AREACODE,
+            DOC_TYPE AS DOCTYPE,CHK_STATUS AS CHKSTATUS,E.ATTR_NAME AS CHKSTATUSNM,RET_CHANNEL AS RETCHANNEL,A.INPUT_COP_NO AS INPUTCOPNO,
+            A.INPUT_COP_NAME AS INPUTCOPNAME,A.INPUTER_NAME AS INPUTERNAME,A.INPUTER_CODE AS INPUTERCODE,A.DEC_TIME AS DECTIME,
+            A.SEQ_NO AS SEQNO,A.CHK_TIME AS CHKTIME,A.CREATE_BY AS CREATEBY,A.CREATE_NAME AS CREATENAME,A.CREATE_TIME AS CREATETIME,
+            A.UPDATE_BY AS UPDATEBY,A.UPDATE_NAME AS UPDATENAME,A.UPDATE_TIME AS UPDATETIME,A.BIZ_TYPE AS BIZTYPE,A.EMAPV_DESCRIPTION AS EMAPVDESCRIPTION,
+            A.COL1 AS COL1,A.COL2 AS COL2,A.COL3 AS COL3,A.COL4 AS COL4
+        FROM SAS_DCL_BSC A
+        LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE = A.DCL_TYPECD AND B.DICTIONARY_VALUE='DCL_TYPECD_SAS' <!-- 申报类型 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES C ON C.ATTR_VALUE = A.DCL_TB_STUCD AND C.DICTIONARY_VALUE='DCL_TB_STUCD' <!-- 申报表状态-->
+        LEFT JOIN BSSP_COD.COD_STD_CODES D ON D.ATTR_VALUE = A.DIRECTION_TYPECD AND D.DICTIONARY_VALUE='DIRECTION_TYPECD' <!-- 货物流向-->
+        LEFT JOIN BSSP_COD.COD_STD_CODES E ON E.ATTR_VALUE = A.CHK_STATUS AND E.DICTIONARY_VALUE='CHK_STATUS' <!-- 单据状态 -->
+        <where>
+            1=1
+            <if test="inputCopNo != null and inputCopNo != ''">
+                AND  A.INPUT_COP_NO = #{inputCopNo}          <!-- 过滤不是本企业的 -->
+            </if>
+            <if test="sasDclNo != null and sasDclNo !=''">
+                AND A.SAS_DCL_NO LIKE '%${sasDclNo}%'  <!-- 申报表编号匹配 -->
+            </if>
+            <if test="etpsPreentNo != null and etpsPreentNo !=''">
+                AND A.ETPS_PREENT_NO LIKE '%${etpsPreentNo}%'  <!-- 企业预录入编号匹配 -->
+            </if>
+            <if test="sasDclPreentNo != null and sasDclPreentNo !=''">
+                AND A.SAS_DCL_PREENT_NO LIKE '%${sasDclPreentNo}%' <!-- 申报表预录入编号匹配 -->
+            </if>
+            <if test="dclTypecd != null and dclTypecd !=''">
+                AND A.DCL_TYPECD = #{dclTypecd}           <!-- 申报类型匹配 -->
+            </if>
+            <if test="validTimeStart != null and validTimeStart !=''">
+                AND A.VALID_TIME <![CDATA[>=]]> #{validTimeStart} <!-- 有效期起始 -->
+            </if>
+            <if test="validTimeEnd != null and validTimeEnd !=''">
+                AND A.VALID_TIME <![CDATA[<=]]> #{validTimeEnd} <!-- 有效期终结 -->
+            </if>
+            <if test="emapvMarkcd != null and emapvMarkcd !=''">
+                AND A.EMAPV_MARKCD = #{emapvMarkcd}           <!-- 审批状态匹配 -->
+            </if>
+            <if test="chkStatus != null and chkStatus !=''">
+                AND A.CHK_STATUS = #{chkStatus}           <!-- 单据状态匹配 -->
+            </if>
+            <if test="decTimeStart != null and decTimeStart !=''">
+                AND A.DEC_TIME <![CDATA[>=]]> #{decTimeStart} <!-- 录入日期起始 -->
+            </if>
+            <if test="decTimeEnd != null and decTimeEnd !=''">
+                AND A.DEC_TIME <![CDATA[<=]]> '${decTimeEnd} 23:59:59' <!-- 录入日期终结 -->
+            </if>
+            <if test="areainEtps != null and areainEtps !=''">
+                AND (A.AREAIN_ETPS_NM LIKE '%${areainEtps}%' or A.AREAIN_ETPSNO LIKE '%${areainEtps}%')<!--区内企业编码或名称双匹配，编号：左匹配，名称：模糊匹配 -->
+            </if>
+            <if test="areainOriactNo != null and areainOriactNo !=''">
+                AND A.AREAIN_ORIACT_NO LIKE '%${areainOriactNo}%' <!--区内账册编号模糊匹配 -->
+            </if>
+            <if test="directionTypecd != null and directionTypecd !=''">
+                AND A.DIRECTION_TYPECD = #{directionTypecd}  <!-- 货物流向 -->
+            </if>
+            <if test="docType != null and docType !=''">
+                AND A.DOC_TYPE = #{docType}  <!-- 单据类型 -->
+            </if>
+            <if test="businessTypecd != null and businessTypecd !=''">
+                AND A.BUSINESS_TYPECD = #{businessTypecd}  <!-- 业务类型 -->
+            </if>
+        </where>
+    </select>
+
+
+    <select id="selectBySasDclBscList" resultType="com.powerbridge.bssp.sas.entity.SasDclBsc">
+        SELECT
+        A.UID AS UID,SAS_DCL_NO AS SASDCLNO,CHG_TMS_CNT AS CHGTMSCNT,MASTER_CUSCD AS MASTERCUSCD,
+        SAS_DCL_PREENT_NO AS SASDCLPREENTNO,A.DCL_TYPECD AS DCLTYPECD,B.ATTR_NAME AS DCLTYPENM,BUSINESS_TYPECD AS BUSINESSTYPECD,
+        D.ATTR_NAME AS DIRECTIONTYPECD,AREAIN_ORIACT_NO AS AREAINORIACTNO,AREAOUT_ORIACT_NO AS AREAOUTORIACTNO,
+        AREAIN_ETPSNO AS AREAINETPSNO,AREAIN_ETPS_NM AS AREAINETPSNM,AREAIN_ETPS_SCCD AS AREAINETPSSCCD,
+        AREAOUT_ETPSNO AS AREAOUTETPSNO,AREAOUT_ETPS_NM AS AREAOUTETPSNM,AREAOUT_ETPS_SCCD AS AREAOUTETPSSCCD,
+        DPST_LEVY_BL_NO AS DPSTLEVYBLNO,VALID_TIME AS VALIDTIME,EXHIBITION_PLACE AS EXHIBITIONPLACE,DCL_ER AS DCLER,
+        DCL_TIME AS DCLTIME,PUTREC_EMAPV_TIME AS PUTRECEMAPVTIME,CHG_EMAPV_TIME AS CHGEMAPVTIME,CLS_CASE_TIME AS CLSCASETIME,
+        EMAPV_MARKCD AS EMAPVMARKCD,C.ATTR_NAME AS DCLTBSTUCD,OWNER_SYSTEM AS OWNERSYSTEM,RMK AS RMK,
+        ETPS_PREENT_NO AS ETPSPREENTNO,COP_ENT_NO AS COPENTNO,DECLARE_MARK AS DECLAREMARK,AREA_CODE AS AREACODE,
+        DOC_TYPE AS DOCTYPE,CHK_STATUS AS CHKSTATUS,E.ATTR_NAME AS CHKSTATUSNM,RET_CHANNEL AS RETCHANNEL,A.INPUT_COP_NO AS INPUTCOPNO,
+        A.INPUT_COP_NAME AS INPUTCOPNAME,A.INPUTER_NAME AS INPUTERNAME,A.INPUTER_CODE AS INPUTERCODE,A.DEC_TIME AS DECTIME,
+        A.SEQ_NO AS SEQNO,A.CHK_TIME AS CHKTIME,A.CREATE_BY AS CREATEBY,A.CREATE_NAME AS CREATENAME,A.CREATE_TIME AS CREATETIME,
+        A.UPDATE_BY AS UPDATEBY,A.UPDATE_NAME AS UPDATENAME,A.UPDATE_TIME AS UPDATETIME,A.BIZ_TYPE AS BIZTYPE,A.EMAPV_DESCRIPTION AS EMAPVDESCRIPTION,
+        A.COL1 AS COL1,A.COL2 AS COL2,A.COL3 AS COL3,A.COL4 AS COL4
+        FROM SAS_DCL_BSC A
+        LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE = A.DCL_TYPECD AND B.DICTIONARY_VALUE='DCL_TYPECD_SAS' <!-- 申报类型 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES C ON C.ATTR_VALUE = A.DCL_TB_STUCD AND C.DICTIONARY_VALUE='DCL_TB_STUCD' <!-- 申报表状态-->
+        LEFT JOIN BSSP_COD.COD_STD_CODES D ON D.ATTR_VALUE = A.DIRECTION_TYPECD AND D.DICTIONARY_VALUE='DIRECTION_TYPECD' <!-- 货物流向-->
+        LEFT JOIN BSSP_COD.COD_STD_CODES E ON E.ATTR_VALUE = A.CHK_STATUS AND E.DICTIONARY_VALUE='CHK_STATUS' <!-- 单据状态 -->
+        <where>
+            1=1
+            AND A.DCL_TYPECD IN (1,2)  <!-- 申报类型为备案、变更 -->
+            <if test="inputCopNo != null and inputCopNo != ''">
+                AND  A.INPUT_COP_NO = #{inputCopNo}          <!-- 过滤不是本企业的 -->
+            </if>
+            <if test="sasDclNo != null and sasDclNo !=''">
+                AND A.SAS_DCL_NO LIKE '%${sasDclNo}%'  <!-- 申报表编号匹配 -->
+            </if>
+            <if test="sasDclPreentNo != null and sasDclPreentNo !=''">
+                AND A.SAS_DCL_PREENT_NO LIKE '%${sasDclPreentNo}%' <!-- 申报表预录入编号匹配 -->
+            </if>
+            <if test="etpsPreentNo != null and etpsPreentNo !=''">
+                AND A.ETPS_PREENT_NO LIKE '%${etpsPreentNo}%' <!-- 企业预录入编号匹配 -->
+            </if>
+            <if test="validTimeStart != null and validTimeStart !=''">
+                AND A.VALID_TIME <![CDATA[>=]]> #{validTimeStart} <!-- 有效期起始 -->
+            </if>
+            <if test="validTimeEnd != null and validTimeEnd !=''">
+                AND A.VALID_TIME <![CDATA[<=]]> #{validTimeEnd} <!-- 有效期终结 -->
+            </if>
+            <if test="emapvMarkcd != null and emapvMarkcd !=''">
+                AND A.EMAPV_MARKCD = #{emapvMarkcd}           <!-- 审批状态匹配 -->
+            </if>
+            <if test="chkStatus != null and chkStatus !=''">
+                AND A.CHK_STATUS = #{chkStatus}           <!-- 单据状态匹配 -->
+            </if>
+            <if test="decTimeStart != null and decTimeStart !=''">
+                AND A.DEC_TIME <![CDATA[>=]]> #{decTimeStart} <!-- 录入日期起始 -->
+            </if>
+            <if test="decTimeEnd != null and decTimeEnd !=''">
+                AND A.DEC_TIME <![CDATA[<=]]> '${decTimeEnd} 23:59:59' <!-- 录入日期终结 -->
+            </if>
+            <if test="areainEtps != null and areainEtps !=''">
+                AND (A.AREAIN_ETPS_NM LIKE '%${areainEtps}%' or A.AREAIN_ETPSNO LIKE '%${areainEtps}%')<!--区内企业编码或名称双匹配，编号：左匹配，名称：模糊匹配 -->
+            </if>
+            <if test="directionTypecd != null and directionTypecd !=''">
+                AND A.DIRECTION_TYPECD = #{directionTypecd}  <!-- 货物流向 -->
+            </if>
+            <if test="docType != null and docType !=''">
+                AND A.DOC_TYPE = #{docType}  <!-- 单据类型 -->
+            </if>
+            <if test="businessTypecd != null and businessTypecd !=''">
+                AND A.BUSINESS_TYPECD = #{businessTypecd}  <!-- 业务类型 -->
+            </if>
+        </where>
+    </select>
+</mapper>

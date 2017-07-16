@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.sas.dao.SasDclCusDtMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.sas.entity.SasDclCusDt">
+		<id column="UID" property="uid" />
+		<result column="SAS_DCL_NO" property="sasDclNo" />
+		<result column="SAS_DCL_SEQNO" property="sasDclSeqno" />
+		<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+		<result column="MTPCK_ENDPRD_TYPECD" property="mtpckEndprdTypecd" />
+		<result column="ORIACT_GDS_SEQNO" property="oriactGdsSeqno" />
+		<result column="GDECD" property="gdecd" />
+		<result column="GDS_NM" property="gdsNm" />
+		<result column="GDS_SPCF_MODEL_DESC" property="gdsSpcfModelDesc" />
+		<result column="DCL_QTY" property="dclQty" />
+		<result column="DCL_UNITCD" property="dclUnitcd" />
+		<result column="DCL_UPRC_AMT" property="dclUprcAmt" />
+		<result column="DCL_TOTAL_AMT" property="dclTotalAmt" />
+		<result column="DCL_CURRCD" property="dclCurrcd" />
+		<result column="LICENCE_NO" property="licenceNo" />
+		<result column="LICENCE_VALID_TIME" property="licenceValidTime" />
+		<result column="ACTL_AREAOUT_QTY" property="actlAreaoutQty" />
+		<result column="ACTL_AREAIN_QTY" property="actlAreainQty" />
+		<result column="GDS_MARKCD" property="gdsMarkcd" />
+		<result column="GDS_RMK" property="gdsRmk" />
+		<result column="INVT_VDEDT_QTY" property="invtVdedtQty" />
+		<result column="RCNT_VDEDT_TIME" property="rcntVdedtTime" />
+		<result column="MODF_MARKCD" property="modfMarkcd" />
+		<result column="RMK" property="rmk" />
+		<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="COL4" property="col4" />
+		<result column="COL3" property="col3" />
+		<result column="COL1" property="col1" />
+		<result column="COL2" property="col2" />
+	</resultMap>
+
+	<select id="selectByList" resultType="com.powerbridge.bssp.sas.entity.SasDclCusDt">
+		SELECT
+		A.UID AS UID,SAS_DCL_NO AS SASDCLNO,SAS_DCL_SEQNO AS SASDCLSEQNO,
+		CHG_TMS_CNT AS CHGTMSCNT,MTPCK_ENDPRD_TYPECD AS MTPCKENDPRDTYPECD,ORIACT_GDS_SEQNO AS ORIACTGDSSEQNO,
+		GDECD AS GDECD,GDS_NM AS GDSNM,GDS_SPCF_MODEL_DESC AS GDSSPCFMODELDESC,DCL_QTY AS DCLQTY,
+		B.UNIT_NAME AS DCLUNITCD,DCL_UPRC_AMT AS DCLUPRCAMT,DCL_TOTAL_AMT AS DCLTOTALAMT,C.CURR_NAME AS DCLCURRCD,
+		LICENCE_NO AS LICENCENO,LICENCE_VALID_TIME AS LICENCEVALIDTIME,ACTL_AREAOUT_QTY AS ACTLAREAOUTQTY,
+		ACTL_AREAIN_QTY AS ACTLAREAINQTY,GDS_MARKCD AS GDSMARKCD,GDS_RMK AS GDSRMK,INVT_VDEDT_QTY AS INVTVDEDTQTY,
+		RCNT_VDEDT_TIME AS RCNTVDEDTTIME,MODF_MARKCD AS MODFMARKCD,RMK AS RMK,ETPS_PREENT_NO AS ETPSPREENTNO,
+		A.SEQ_NO AS SEQNO,A.COL1 AS COL1,A.COL2 AS COL2,A.COL3 AS COL3,A.COL4 AS COL4,D.ATTR_NAME As modfMarkname
+		FROM SAS_DCL_CUS_DT A
+		LEFT JOIN BSSP_COD.COD_CUS_UNIT B ON B.UNIT_CODE = A.DCL_UNITCD
+		LEFT JOIN BSSP_COD.COD_CUS_CURR C ON C.CURR_CODE = A.DCL_CURRCD
+		LEFT JOIN BSSP_COD.COD_STD_CODES D ON D.ATTR_VALUE = A.MODF_MARKCD AND D.DICTIONARY_VALUE='MODF_MARK' <!-- 修改标记 -->
+		<where>
+			1=1
+			<if test="mtpckEndprdTypecd != null and mtpckEndprdTypecd != ''">
+				AND A.MTPCK_ENDPRD_TYPECD = #{mtpckEndprdTypecd}             <!-- 料件成品标志 -->
+			</if>
+			<if test="seqNo != null and seqNo != ''">
+				AND A.SEQ_NO = #{seqNo}                     <!-- 单据编号 -->
+			</if>
+			<if test="chgTmsCnt != null and chgTmsCnt != '' or chgTmsCnt == 0">
+				AND A.CHG_TMS_CNT = #{chgTmsCnt}           <!-- 变更次数 -->
+			</if>
+			<if test="sasDclNo != null and sasDclNo != ''">
+				AND A.SAS_DCL_NO = #{sasDclNo}             <!-- 申报表序号 -->
+			</if>
+			<if test="modfMarkcd != null and modfMarkcd != ''">
+				AND A.MODF_MARKCD != #{modfMarkcd}          <!-- 修改标记代码 -->
+			</if>
+			<if test="gdecd != null and gdecd != ''">
+				AND A.GDECD LIKE '%${gdecd}%'               <!-- 商品编码 模糊匹配 -->
+			</if>
+			<if test="sasDclSeqno != null and sasDclSeqno != ''">
+				AND A.SAS_DCL_SEQNO LIKE '%${sasDclSeqno}%'<!-- 申报序号 模糊匹配 -->
+			</if>
+			<if test="gdsNm != null and gdsNm != ''">
+				AND A.GDS_NM LIKE '%${gdsNm}%'             <!-- 商品名称 模糊匹配 -->
+			</if>
+		</where>
+	</select>
+</mapper>

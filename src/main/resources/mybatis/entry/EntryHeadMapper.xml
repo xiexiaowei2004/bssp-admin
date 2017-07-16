@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.entry.dao.EntryHeadMapper">
+
+    <!-- 通用查询映射结果 -->
+    <!--	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.entry.entity.EntryHead">
+            <result column="UID" property="uid" />
+            <result column="SEQ_NO" property="seqNo" />
+            <result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+            <result column="I_E_FLAG" property="iEFlag" />
+            <result column="TYPE" property="type" />
+            <result column="AGENT_CODE" property="agentCode" />
+            <result column="AGENT_NAME" property="agentName" />
+            <result column="APPR_NO" property="apprNo" />
+            <result column="BILL_NO" property="billNo" />
+            <result column="CONTR_NO" property="contrNo" />
+            <result column="CUT_MODE" property="cutMode" />
+            <result column="DISTINATE_PORT" property="distinatePort" />
+            <result column="DISTRICT_CODE" property="districtCode" />
+            <result column="FEE_CURR" property="feeCurr" />
+            <result column="FEE_MARK" property="feeMark" />
+            <result column="FEE_RATE" property="feeRate" />
+            <result column="GROSS_WET" property="grossWet" />
+            <result column="I_E_DATE" property="iEDate" />
+            <result column="I_E_PORT" property="iEPort" />
+            <result column="IN_RATIO" property="inRatio" />
+            <result column="INSUR_CURR" property="insurCurr" />
+            <result column="INSUR_MARK" property="insurMark" />
+            <result column="INSUR_RATE" property="insurRate" />
+            <result column="LICENSE_NO" property="licenseNo" />
+            <result column="MANUAL_NO" property="manualNo" />
+            <result column="NET_WT" property="netWt" />
+            <result column="NOTE_S" property="noteS" />
+            <result column="OTHER_CURR" property="otherCurr" />
+            <result column="OTHER_MARK" property="otherMark" />
+            <result column="OTHER_RATE" property="otherRate" />
+            <result column="OWNER_CODE" property="ownerCode" />
+            <result column="OWNER_NAME" property="ownerName" />
+            <result column="PACK_NO" property="packNo" />
+            <result column="PAY_WAY" property="payWay" />
+            <result column="PAYMENT_MARK" property="paymentMark" />
+            <result column="TRADE_CODE" property="tradeCode" />
+            <result column="TRADE_COUNTRY" property="tradeCountry" />
+            <result column="TRADE_MODE" property="tradeMode" />
+            <result column="TRADE_NAME" property="tradeName" />
+            <result column="TRAF_MODE" property="trafMode" />
+            <result column="TRAF_NAME" property="trafName" />
+            <result column="TRANS_MODE" property="transMode" />
+            <result column="WRAP_TYPE" property="wrapType" />
+            <result column="ENTRY_ID" property="entryId" />
+            <result column="EDI_ID" property="ediId" />
+            <result column="RISK" property="risk" />
+            <result column="ENTRY_TYPE" property="entryType" />
+            <result column="P_DATE" property="pDate" />
+            <result column="TYPIST_NO" property="typistNo" />
+            <result column="TGD_NO" property="tgdNo" />
+            <result column="DATA_SOURCE" property="dataSource" />
+            <result column="DECL_TRN_REL" property="declTrnRel" />
+            <result column="CHK_SURETY" property="chkSurety" />
+            <result column="BILL_TYPE" property="billType" />
+            <result column="AGENT_CODE_SCC" property="agentCodeScc" />
+            <result column="OWNER_CODE_SCC" property="ownerCodeScc" />
+            <result column="TRADE_CODE_SCC" property="tradeCodeScc" />
+            <result column="COP_CODE_SCC" property="copCodeScc" />
+            <result column="PROMISE_ITMES" property="promiseItmes" />
+            <result column="TRADE_AREA_CODE" property="tradeAreaCode" />
+            <result column="MASTER_CUSCD" property="masterCuscd" />
+            <result column="AREA_CODE" property="areaCode" />
+            <result column="BIZ_TYPE" property="bizType" />
+            <result column="CHK_STATUS" property="chkStatus" />
+            <result column="DOC_TYPE" property="docType" />
+            <result column="RET_CHANNEL" property="retChannel" />
+            <result column="DCL_TYPECD" property="dclTypecd" />
+            <result column="DEC_TIME" property="decTime" />
+            <result column="CHK_TIME" property="chkTime" />
+            <result column="INPUTER_CODE" property="inputerCode" />
+            <result column="INPUTER_NAME" property="inputerName" />
+            <result column="INPUT_COP_NO" property="inputCopNo" />
+            <result column="INPUT_ETPS_SCCD" property="inputEtpsSccd" />
+            <result column="INPUT_COP_NAME" property="inputCopName" />
+            <result column="CREATE_BY" property="createBy" />
+            <result column="CREATE_NAME" property="createName" />
+            <result column="CREATE_TIME" property="createTime" />
+            <result column="UPDATE_BY" property="updateBy" />
+            <result column="UPDATE_NAME" property="updateName" />
+            <result column="DCL_TIME" property="dclTime" />
+        </resultMap>-->
+    <!--基础字段-->
+    <sql id="Base_Column_List">
+		A.UID AS UID,A.SEQ_NO AS SEQNO,A.ETPS_PREENT_NO AS ETPSPREENTNO,
+		A.I_E_FLAG AS IEFLAG,A.TYPE AS TYPE,A.AGENT_CODE AS AGENTCODE,
+		A.AGENT_NAME AS AGENTNAME,A.APPR_NO AS APPRNO,A.BILL_NO AS BILLNO,
+		A.CONTR_NO AS CONTRNO,A.CUT_MODE AS CUTMODE,A.DISTINATE_PORT AS DISTINATEPORT,
+		A.DISTRICT_CODE AS DISTRICTCODE,A.FEE_CURR AS FEECURR,A.FEE_MARK AS FEEMARK,
+		A.FEE_RATE AS FEERATE,A.GROSS_WET AS GROSSWET,A.I_E_DATE AS IEDATE,
+		A.I_E_PORT AS IEPORT,A.IN_RATIO AS INRATIO,A.INSUR_CURR AS INSURCURR,
+		A.INSUR_MARK AS INSURMARK,A.INSUR_RATE AS INSURRATE,A.LICENSE_NO AS LICENSENO,
+		A.MANUAL_NO AS MANUALNO,A.NET_WT AS NETWT,A.NOTE_S AS NOTES,A.OTHER_CURR AS OTHERCURR,
+		A.OTHER_MARK AS OTHERMARK,A.OTHER_RATE AS OTHERRATE,A.OWNER_CODE AS OWNERCODE,
+		A.OWNER_NAME AS OWNERNAME,A.PACK_NO AS PACKNO,A.PAY_WAY AS PAYWAY,
+		A.PAYMENT_MARK AS PAYMENTMARK,A.TRADE_CODE AS TRADECODE,A.TRADE_COUNTRY AS TRADECOUNTRY,
+		A.TRADE_MODE AS TRADEMODE,A.TRADE_NAME AS TRADENAME,A.TRAF_MODE AS TRAFMODE,
+		A.TRAF_NAME AS TRAFNAME,A.TRANS_MODE AS TRANSMODE,A.WRAP_TYPE AS WRAPTYPE,
+		A.ENTRY_ID AS ENTRYID,A.EDI_ID AS EDIID,A.RISK AS RISK,A.ENTRY_TYPE AS ENTRYTYPE,
+		A.P_DATE AS PDATE,A.TYPIST_NO AS TYPISTNO,A.TGD_NO AS TGDNO,A.DATA_SOURCE AS DATASOURCE,
+		A.DECL_TRN_REL AS DECLTRNREL,A.CHK_SURETY AS CHKSURETY,A.BILL_TYPE AS BILLTYPE,
+		A.AGENT_CODE_SCC AS AGENTCODESCC,A.OWNER_CODE_SCC AS OWNERCODESCC,
+		A.TRADE_CODE_SCC AS TRADECODESCC,A.COP_CODE_SCC AS COPCODESCC,A.PROMISE_ITMES AS PROMISEITMES,
+		A.TRADE_AREA_CODE AS TRADEAREACODE,A.RELATE_ENTRY AS RELATEENTRY,A.RELATE_REG AS RELATEREG,
+		A.SUPERVISE_HOUSE_NO AS SUPERVISEHOUSENO,A.CONTAINER_NO AS CONTAINERNO,A.DECLARANT AS DECLARANT,
+		A.ACMP_FORM AS ACMPFORM,A.WAREHOSE_NO AS WAREHOSENO,A.MASTER_CUSCD AS MASTERCUSCD,
+		A.AREA_CODE AS AREACODE,A.BIZ_TYPE AS BIZTYPE,A.CHK_STATUS AS CHKSTATUS,
+		A.DOC_TYPE AS DOCTYPE,A.RET_CHANNEL AS RETCHANNEL,A.DCL_TYPECD AS DCLTYPECD,
+		A.DCL_TIME AS DCLTIME,A.DEC_TIME AS DECTIME,A.CHK_TIME AS CHKTIME,
+		A.INPUTER_CODE AS INPUTERCODE,A.INPUTER_NAME AS INPUTERNAME,A.INPUT_COP_NO AS INPUTCOPNO,
+		A.INPUT_ETPS_SCCD AS INPUTETPSSCCD,A.INPUT_COP_NAME AS INPUTCOPNAME,A.CREATE_BY AS CREATEBY,
+		A.CREATE_NAME AS CREATENAME,A.CREATE_TIME AS CREATETIME,A.UPDATE_BY AS UPDATEBY,
+		A.UPDATE_NAME AS UPDATENAME,A.UPDATE_TIME AS UPDATETIME
+	</sql>
+    <!--查询列表 -->
+    <select id="selectEntryHead" resultType="com.powerbridge.bssp.entry.entity.EntryHead">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM BSSP_ENTRY.ENTRY_HEAD A
+        LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE =A.ENTRY_TYPE AND B.DICTIONARY_VALUE='DEC_TYPE'<!-- 报关单类型 -->
+        LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE =A.CHK_STATUS AND B.DICTIONARY_VALUE='CHK_STATUS'<!-- 单据状态 -->
+        /*LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE =A.ENTRY_TYPE AND B.DICTIONARY_VALUE='DEC_TYPE'*/<!-- 运输方式 -->
+        <where>
+            1=1
+            <if test="seqNo != null and seqNo !=''">
+                AND A.SEQ_NO LIKE '%${seqNo}%' <!--统一编号 -->
+            </if>
+            <if test="etpsPreentNo != null and etpsPreentNo !=''">
+                AND A.ETPS_PREENT_NO LIKE '%${etpsPreentNo}%' <!--预录入号 -->
+            </if>
+            <if test="entryId != null and entryId !=''">
+                AND A.ENTRY_ID LIKE '%${entryId}%' <!-- 报关单号 -->
+            </if>
+            <if test="iEPort != null and iEPort !=''">
+                AND A.I_E_PORT = #{iEPort} <!-- 进出口岸 -->
+            </if>
+            <if test="ownerCode != null and ownerCode !=''">
+                AND A.OWNER_CODE = LIKE '%${ownerCode}%' <!-- 收发货人代码 -->
+            </if>
+            <if test="dclTimeStart != null and dclTimeStart !=''">
+                AND A.DCL_TIME <![CDATA[>=]]>
+                #{dclTimeStart} <!--申报日期起始 -->
+            </if>
+
+            <if test="dclTimeEnd != null and dclTimeEnd !=''">
+                AND A.DCL_TIME <![CDATA[<=]]>
+                '${dclTimeEnd} 23:59:59' <!-- 申报日期终结 -->
+            </if>
+            <if test="updateTimeStart != null and updateTimeStart !=''">
+                AND A.UPDATE_TIME <![CDATA[>=]]>
+                #{updateTimeStart} <!-- 操作日期起始 -->
+            </if>
+
+            <if test="updateTimeEnd != null and updateTimeEnd !=''">
+                AND A.UPDATE_TIME <![CDATA[<=]]>
+                '${updateTimeEnd} 23:59:59' <!-- 操作日期终结 -->
+            </if>
+        </where>
+    </select>
+</mapper>

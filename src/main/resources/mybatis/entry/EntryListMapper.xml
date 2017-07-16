@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.entry.dao.EntryListMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.entry.entity.EntryList">
+		<result column="UID" property="uid" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+		<result column="CLASS_MARK" property="classMark" />
+		<result column="CODE_T_S" property="codeTS" />
+		<result column="CONTR_ITEM" property="contrItem" />
+		<result column="DECL_PRICE" property="declPrice" />
+		<result column="DUTY_MODE" property="dutyMode" />
+		<result column="FACTOR" property="factor" />
+		<result column="G_MODEL" property="gModel" />
+		<result column="G_NAME" property="gName" />
+		<result column="G_NO" property="gNo" />
+		<result column="ORIGIN_COUNTRY" property="originCountry" />
+		<result column="TRADE_CURR" property="tradeCurr" />
+		<result column="DECL_TOTAL" property="declTotal" />
+		<result column="G_QTY" property="gQty" />
+		<result column="FIRST_QTY" property="firstQty" />
+		<result column="SECOND_QTY" property="secondQty" />
+		<result column="G_UNIT" property="gUnit" />
+		<result column="FIRST_UNIT" property="firstUnit" />
+		<result column="SECOND_UNIT" property="secondUnit" />
+		<result column="USE_TO" property="useTo" />
+		<result column="WORK_USD" property="workUsd" />
+		<result column="EXG_NO" property="exgNo" />
+		<result column="EXG_VERSION" property="exgVersion" />
+		<result column="DESTINATION_COUNTRY" property="destinationCountry" />
+	</resultMap>
+
+</mapper>

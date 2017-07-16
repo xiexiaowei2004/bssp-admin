@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+    
+    <description>mybatis Configuration</description>
+                            
+    <!-- 数据源配置, 使用 BoneCP 数据库连接池 -->
+	<bean id="dataSource_bssp" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	    <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+	    <property name="driverClassName" value="${bssp.driver}" />
+	    
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${bssp.url}" />
+		<property name="username" value="${bssp.username}" />
+		<property name="password" value="${bssp.password}" />
+		
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${bssp.pool.init}" />
+		<property name="minIdle" value="${bssp.pool.minIdle}" />
+		<property name="maxActive" value="${bssp.pool.maxActive}" />
+		
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${bssp.maxWait}" />
+		
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${bssp.timeBetweenEvictionRunsMillis}" />
+		
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${bssp.minEvictableIdleTimeMillis}" />
+		
+		<property name="validationQuery" value="${bssp.testSql}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
+		
+		<!-- 配置监控统计拦截的filters -->
+	    <property name="filters" value="stat" /> 
+	</bean>
+	
+	<!-- 数据源配置, 使用 BoneCP 数据库连接池 -->
+	<bean id="dataSource_parameter" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	    <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+	    <property name="driverClassName" value="${parameter.driver}" />
+	    
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${parameter.url}" />
+		<property name="username" value="${parameter.username}" />
+		<property name="password" value="${parameter.password}" />
+		
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${parameter.pool.init}" />
+		<property name="minIdle" value="${parameter.pool.minIdle}" />
+		<property name="maxActive" value="${parameter.pool.maxActive}" />
+		
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${parameter.maxWait}" />
+		
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${parameter.timeBetweenEvictionRunsMillis}" />
+		
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${parameter.minEvictableIdleTimeMillis}" />
+		
+		<property name="validationQuery" value="${parameter.testSql}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
+		
+		<!-- 配置监控统计拦截的filters -->
+	    <property name="filters" value="stat" /> 
+	</bean>
+	
+	
+	
+	<!-- 数据源配置, 使用 BoneCP 数据库连接池 -->
+	<bean id="dataSource_edi" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	    <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+	    <property name="driverClassName" value="${edi.driver}" />
+	    
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${edi.url}" />
+		<property name="username" value="${edi.username}" />
+		<property name="password" value="${edi.password}" />
+		
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${edi.pool.init}" />
+		<property name="minIdle" value="${edi.pool.minIdle}" />
+		<property name="maxActive" value="${edi.pool.maxActive}" />
+		
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${edi.maxWait}" />
+		
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${edi.timeBetweenEvictionRunsMillis}" />
+		
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${edi.minEvictableIdleTimeMillis}" />
+		
+		<property name="validationQuery" value="${edi.testSql}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
+		
+		<!-- 配置监控统计拦截的filters -->
+	    <property name="filters" value="stat" /> 
+	</bean>
+	
+	<!-- 数据源配置, 使用 BoneCP 数据库连接池 -->
+	<bean id="dataSource_ems" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	    <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+	    <property name="driverClassName" value="${ems.driver}" />
+	    
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${ems.url}" />
+		<property name="username" value="${ems.username}" />
+		<property name="password" value="${ems.password}" />
+		
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${ems.pool.init}" />
+		<property name="minIdle" value="${ems.pool.minIdle}" />
+		<property name="maxActive" value="${ems.pool.maxActive}" />
+		
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${ems.maxWait}" />
+		
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${ems.timeBetweenEvictionRunsMillis}" />
+		
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${ems.minEvictableIdleTimeMillis}" />
+		
+		<property name="validationQuery" value="${ems.testSql}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
+		
+		<!-- 配置监控统计拦截的filters -->
+	    <property name="filters" value="stat" /> 
+	</bean>
+	
+	<bean id="dataSource_sas" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	    <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+	    <property name="driverClassName" value="${sas.driver}" />
+	    
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${sas.url}" />
+		<property name="username" value="${sas.username}" />
+		<property name="password" value="${sas.password}" />
+		
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${sas.pool.init}" />
+		<property name="minIdle" value="${sas.pool.minIdle}" />
+		<property name="maxActive" value="${sas.pool.maxActive}" />
+		
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${sas.maxWait}" />
+		
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${sas.timeBetweenEvictionRunsMillis}" />
+		
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${sas.minEvictableIdleTimeMillis}" />
+		
+		<property name="validationQuery" value="${sas.testSql}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
+		
+		<!-- 配置监控统计拦截的filters -->
+	    <property name="filters" value="stat" /> 
+	</bean>
+
+	<bean id="dataSource_inv" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+		<property name="driverClassName" value="${inv.driver}" />
+
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${inv.url}" />
+		<property name="username" value="${inv.username}" />
+		<property name="password" value="${inv.password}" />
+
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${inv.pool.init}" />
+		<property name="minIdle" value="${inv.pool.minIdle}" />
+		<property name="maxActive" value="${inv.pool.maxActive}" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${inv.maxWait}" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${inv.timeBetweenEvictionRunsMillis}" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${inv.minEvictableIdleTimeMillis}" />
+
+		<property name="validationQuery" value="${inv.testSql}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
+
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="stat" />
+	</bean>
+
+	<bean id="dataSource_cop" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+		<property name="driverClassName" value="${cop.driver}" />
+
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${cop.url}" />
+		<property name="username" value="${cop.username}" />
+		<property name="password" value="${cop.password}" />
+
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${cop.pool.init}" />
+		<property name="minIdle" value="${cop.pool.minIdle}" />
+		<property name="maxActive" value="${cop.pool.maxActive}" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${cop.maxWait}" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${cop.timeBetweenEvictionRunsMillis}" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${cop.minEvictableIdleTimeMillis}" />
+
+		<property name="validationQuery" value="${cop.testSql}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
+
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="stat" />
+	</bean>
+
+	<bean id="dataSource_dcr" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+		<property name="driverClassName" value="${dcr.driver}" />
+
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${dcr.url}" />
+		<property name="username" value="${dcr.username}" />
+		<property name="password" value="${dcr.password}" />
+
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${dcr.pool.init}" />
+		<property name="minIdle" value="${dcr.pool.minIdle}" />
+		<property name="maxActive" value="${dcr.pool.maxActive}" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${dcr.maxWait}" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${dcr.timeBetweenEvictionRunsMillis}" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${dcr.minEvictableIdleTimeMillis}" />
+
+		<property name="validationQuery" value="${dcr.testSql}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
+
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="stat" />
+	</bean>
+
+    <bean id="dataSource_cop_et" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
+        <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+        <property name="driverClassName" value="${cop_et.driver}"/>
+
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="${cop_et.url}"/>
+        <property name="username" value="${cop_et.username}"/>
+        <property name="password" value="${cop_et.password}"/>
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="${cop_et.pool.init}"/>
+        <property name="minIdle" value="${cop_et.pool.minIdle}"/>
+        <property name="maxActive" value="${cop_et.pool.maxActive}"/>
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="${cop_et.maxWait}"/>
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${cop_et.timeBetweenEvictionRunsMillis}"/>
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${cop_et.minEvictableIdleTimeMillis}"/>
+
+        <property name="validationQuery" value="${cop_et.testSql}"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
+
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="stat"/>
+    </bean>
+
+	<bean id="dataSource_erp" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+		  destroy-method="close">
+		<!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+		<property name="driverClassName" value="${erp.driver}"/>
+
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${erp.url}"/>
+		<property name="username" value="${erp.username}"/>
+		<property name="password" value="${erp.password}"/>
+
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${erp.pool.init}"/>
+		<property name="minIdle" value="${erp.pool.minIdle}"/>
+		<property name="maxActive" value="${erp.pool.maxActive}"/>
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${erp.maxWait}"/>
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${erp.timeBetweenEvictionRunsMillis}"/>
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${erp.minEvictableIdleTimeMillis}"/>
+
+		<property name="validationQuery" value="${erp.testSql}"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="testOnBorrow" value="false"/>
+		<property name="testOnReturn" value="false"/>
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
+
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="stat"/>
+	</bean>
+
+	<bean id="dataSource_entry" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+		<property name="driverClassName" value="${entry.driver}" />
+
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${entry.url}" />
+		<property name="username" value="${entry.username}" />
+		<property name="password" value="${entry.password}" />
+
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${entry.pool.init}" />
+		<property name="minIdle" value="${entry.pool.minIdle}" />
+		<property name="maxActive" value="${entry.pool.maxActive}" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${entry.maxWait}" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${entry.timeBetweenEvictionRunsMillis}" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${entry.minEvictableIdleTimeMillis}" />
+
+		<property name="validationQuery" value="${entry.testSql}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用）
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" /> -->
+
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="stat" />
+	</bean>
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件（mybatis-spring项目提供整合类）
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" /> -->
+        <!-- 通配符指定Mapper.xml:自动扫描mapping.xml文件 
+  	<property name="mapperLocations" value="classpath:/mybatis/**/*Mapper.xml" />
+    </bean>-->
+    
+    <!-- 配置多数据源映射关系 -->
+    <bean id="dataSource" class="com.powerbridge.bssp.common.datasource.DynamicDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+        		<entry key="dataSource_bssp" value-ref="dataSource_bssp"></entry>
+                <entry key="dataSource_parameter" value-ref="dataSource_parameter"></entry>
+            	<entry key="dataSource_edi" value-ref="dataSource_edi"></entry>
+            	<entry key="dataSource_ems" value-ref="dataSource_ems"></entry>
+            	<entry key="dataSource_sas" value-ref="dataSource_sas"></entry>
+            	<entry key="dataSource_inv" value-ref="dataSource_inv"></entry>
+            	<entry key="dataSource_dcr" value-ref="dataSource_dcr"></entry>
+            	<entry key="dataSource_cop" value-ref="dataSource_cop"></entry>
+                <entry key="dataSource_cop_et" value-ref="dataSource_cop_et"></entry>
+                <entry key="dataSource_erp" value-ref="dataSource_erp"></entry>
+                <entry key="dataSource_entry" value-ref="dataSource_entry"></entry>
+            </map>
+        </property>
+    <!-- 默认目标数据源为你主库数据源 -->
+        <property name="defaultTargetDataSource" ref="dataSource_bssp"/>
+    </bean>
+      
+	<!-- MyBatis SqlSessionFactoryBean 配置 -->
+	<!-- 注意：这里使用的是MP的MybatisSqlSessionFactoryBean，而不是Mybatis的，因为MP需要进行相应代理 -->
+	<bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+	    <!-- 配置数据源 -->
+	    <property name="dataSource" ref="dataSource" />
+	    <!-- 配置Mybatis配置文件 -->
+	    <property name="configLocation" value="classpath:mybatis-config.xml" />
+	    <!-- 配置别名包路径 -->
+	    <property name="typeAliasesPackage" value="com.powerbridge.bssp.*.entity" />
+	    <!-- 配置Mapper扫描路径（IDEA系列编辑器需要特别注意，因为IDEA的设置问题，src中的xml文件是不会被编译的，如果放在src中可能会报错，解决办法详见 常用问题-Invalid bound statement (not found) 错误如何解决?） -->
+	    <property name="mapperLocations" value="classpath:/mybatis/**/*Mapper.xml" />
+	    <!-- 插件配置项  -->
+	    <property name="plugins">
+	        <array>
+	            <!-- 分页插件配置 -->
+	            <bean id="paginationInterceptor" class="com.baomidou.mybatisplus.plugins.PaginationInterceptor">
+	                <property name="dialectType" value="mysql" />
+	            </bean>
+	        </array>
+	    </property>
+	    <!-- Oracle需要添加该项 -->
+	    <!-- <property name="dbType" value="oracle" /> -->
+	    <!-- 全局表为下划线命名设置 true -->
+	    <!-- <property name="dbColumnUnderline" value="true" /> -->
+	</bean>
+
+
+    <!-- MyBatis 动态实现:DAO接口所在包名，Spring会自动查找其下的类  -->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 对Dao 接口动态实现，需要知道接口在哪  -->
+         <property name="basePackage" value="com.powerbridge.bssp" />
+    </bean>
+
+
+</beans>

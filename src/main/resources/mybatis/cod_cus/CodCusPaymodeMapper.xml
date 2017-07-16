@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusPaymodeMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusPaymode">
+    <result column="PAY_MODE_CODE" jdbcType="VARCHAR" property="payModeCode" />
+    <result column="PAY_MODE_NAME" jdbcType="VARCHAR" property="payModeName" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusPaymode">
+    SELECT
+      PAY_MODE_CODE AS id,
+      PAY_MODE_NAME AS text
+    FROM COD_CUS_PAYMODE
+  </select>
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusPaymode">
+    insert into cod_cus_paymode (PAY_MODE_CODE, PAY_MODE_NAME)
+    values (#{payModeCode,jdbcType=VARCHAR}, #{payModeName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusPaymode">
+    insert into cod_cus_paymode
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="payModeCode != null">
+        PAY_MODE_CODE,
+      </if>
+      <if test="payModeName != null">
+        PAY_MODE_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="payModeCode != null">
+        #{payModeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payModeName != null">
+        #{payModeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

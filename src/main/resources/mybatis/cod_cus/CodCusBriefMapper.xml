@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusBriefMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusBrief">
+    <id column="REG_CO_CGAC" jdbcType="VARCHAR" property="regCoCgac" />
+    <result column="ENT_NAME" jdbcType="VARCHAR" property="entName" />
+    <result column="CHK_ANNUAL" jdbcType="VARCHAR" property="chkAnnual" />
+  </resultMap>
+
+  <select id="selectBriefByList"  resultType="com.powerbridge.bssp.common.Bean.PullDown">
+    SELECT REG_CO_CGAC AS ID,ENT_NAME AS TEXT FROM COD_CUS_BRIEF ORDER BY REG_CO_CGAC
+  </select>
+</mapper>

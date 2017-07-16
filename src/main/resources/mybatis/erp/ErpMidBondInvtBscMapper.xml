@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.erp.mapper.ErpMidBondInvtBscMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.erp.entity.ErpMidBondInvtBsc">
+		<id column="UID" property="uid" />
+		<result column="BOND_INVT_NO" property="bondInvtNo" />
+		<result column="PUTREC_NO" property="putrecNo" />
+		<result column="INVT_PREENT_NO" property="invtPreentNo" />
+		<result column="ETPS_INNER_INVT_NO" property="etpsInnerInvtNo" />
+		<result column="BIZOP_ETPS_SCCD" property="bizopEtpsSccd" />
+		<result column="BIZOP_ETPSNO" property="bizopEtpsno" />
+		<result column="BIZOP_ETPS_NM" property="bizopEtpsNm" />
+		<result column="RVSNGD_ETPS_SCCD" property="rvsngdEtpsSccd" />
+		<result column="RCVGD_ETPSNO" property="rcvgdEtpsno" />
+		<result column="RCVGD_ETPS_NM" property="rcvgdEtpsNm" />
+		<result column="DCL_ETPS_SCCD" property="dclEtpsSccd" />
+		<result column="DCL_ETPSNO" property="dclEtpsno" />
+		<result column="DCL_ETPS_NM" property="dclEtpsNm" />
+		<result column="DEC_TIME" property="decTime" />
+		<result column="MTPCK_ENDPRD_MARKCD" property="mtpckEndprdMarkcd" />
+		<result column="SUPV_MODECD" property="supvModecd" />
+		<result column="TRSP_MODECD" property="trspModecd" />
+		<result column="IMPEXP_MARKCD" property="impexpMarkcd" />
+		<result column="IMPEXP_PORTCD" property="impexpPortcd" />
+		<result column="DCL_PLC_CUSCD" property="dclPlcCuscd" />
+		<result column="NATCD" property="natcd" />
+		<result column="APPLY_NO" property="applyNo" />
+		<result column="LIST_TYPE" property="listType" />
+		<result column="INPUT_ETPS_SCCD" property="inputEtpsSccd" />
+		<result column="INPUT_COP_NO" property="inputCopNo" />
+		<result column="INPUT_COP_NAME" property="inputCopName" />
+		<result column="DCLCUS_FLAG" property="dclcusFlag" />
+		<result column="DCLCUS_TYPECD" property="dclcusTypecd" />
+		<result column="BOND_INVT_TYPECD" property="bondInvtTypecd" />
+		<result column="DEC_TYPECD" property="decTypecd" />
+		<result column="RLT_INVT_NO" property="rltInvtNo" />
+		<result column="RLT_PUTREC_NO" property="rltPutrecNo" />
+		<result column="RLT_ENTRY_NO" property="rltEntryNo" />
+		<result column="RLT_ENTRY_BIZOP_ETPS_SCCD" property="rltEntryBizopEtpsSccd" />
+		<result column="RLT_ENTRY_BIZOP_ETPSNO" property="rltEntryBizopEtpsno" />
+		<result column="RLT_ENTRY_BIZOP_ETPS_NM" property="rltEntryBizopEtpsNm" />
+		<result column="RLT_ENTRY_RVSNGD_ETPS_SCCD" property="rltEntryRvsngdEtpsSccd" />
+		<result column="RLT_ENTRY_RCVGD_ETPSNO" property="rltEntryRcvgdEtpsno" />
+		<result column="RLT_ENTRY_RCVGD_ETPS_NM" property="rltEntryRcvgdEtpsNm" />
+		<result column="RLT_ENTRY_DCL_ETPS_SCCD" property="rltEntryDclEtpsSccd" />
+		<result column="RLT_ENTRY_DCL_ETPSNO" property="rltEntryDclEtpsno" />
+		<result column="RLT_ENTRY_DCL_ETPS_NM" property="rltEntryDclEtpsNm" />
+		<result column="SUCCESS_FLAG" property="successFlag" />
+		<result column="RMK" property="rmk" />
+		<result column="CORR_ENTRY_DCL_ETPS_SCCD" property="corrEntryDclEtpsSccd" />
+		<result column="CORR_ENTRY_DCL_ETPSNO" property="corrEntryDclEtpsno" />
+		<result column="CORR_ENTRY_DCL_ETPS_NM" property="corrEntryDclEtpsNm" />
+	</resultMap>
+
+</mapper>

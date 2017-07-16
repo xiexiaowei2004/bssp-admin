@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.entry.dao.EntryLicenseDocusMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.entry.entity.EntryLicenseDocus">
+		<result column="UID" property="uid" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+		<result column="DOCU_CODE" property="docuCode" />
+		<result column="CERT_CODE" property="certCode" />
+	</resultMap>
+
+</mapper>

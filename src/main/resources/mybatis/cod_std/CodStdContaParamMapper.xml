@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_std.dao.CodStdContaParamMapper">
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_std.entity.CodStdContaParam">
+        <id column="UID" jdbcType="VARCHAR" property="uid"/>
+        <result column="CODE" jdbcType="VARCHAR" property="code"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        
+        <result column="MODEL" jdbcType="VARCHAR" property="model"/>
+        <result column="SIZE" jdbcType="VARCHAR" property="size"/>
+        <result column="EMPTY" jdbcType="VARCHAR" property="empty"/>
+        <result column="CABINET_TYPE" jdbcType="VARCHAR" property="cabinetType"/>
+        <result column="VOLUME" jdbcType="VARCHAR" property="volume"/>
+        <result column="BOX_NUMBER" jdbcType="VARCHAR" property="boxNumber"/>
+        
+        <result column="IS_ENABLE" jdbcType="VARCHAR" property="isEnable"/>
+        <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy"/>
+        <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+        <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="UPDATE_TIME" jdbcType="DATE" property="updatetime"/>
+    </resultMap>
+	
+	
+    <sql id="Base_Column_List">
+        A.UID AS uid,
+        A.CODE AS code,
+        A.NAME AS name,
+        A.MODEL AS model,
+        A.SIZE AS size,
+        A.EMPTY AS empty,
+        A.CABINET_TYPE AS cabinetType,
+        A.VOLUME AS volume,
+        A.BOX_NUMBER AS boxNumber,
+        A.IS_ENABLE AS isEnable,
+        A.CREATE_BY AS createBy,
+        A.CREATE_TIME AS createTime,
+        A.UPDATE_BY AS updateBy,
+        A.UPDATE_TIME AS updateTime
+    </sql>
+
+    <select id="selectRedisDropDown" parameterType="java.lang.String"
+            resultType="com.powerbridge.bssp.cod_std.entity.CodStdContaParam">
+        SELECT
+        A.CODE AS id,
+        A.NAME AS text,
+        <include refid="Base_Column_List"/>
+        FROM COD_STD_CONTA_PARAM A
+
+    </select>
+
+</mapper> 

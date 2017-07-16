@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cop_et.dao.EtArcrpImgMapper">
+
+    <!--查询列表-->
+    <select id="selectEtArcrpImgList" parameterType="com.powerbridge.bssp.cop_et.entity.EtArcrpImg" resultType="com.powerbridge.bssp.cop_et.entity.EtArcrpImg">
+        SELECT
+        A.UID As uid,
+        A.SEQ_NO As seqNo,
+        A.CHG_TMS_CNT As chgTmsCnt,
+        A.GDS_SEQNO As gdsSeqno,
+        A.GDECD As gdecd,
+        A.GDS_NM As gdsNm,
+        A.RMK As rmk,
+        B.ATTR_NAME As modfMarkname
+        FROM ET_ARCRP_IMG A
+
+        LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE = A.MODF_MARKCD AND B.DICTIONARY_VALUE='MODF_MARK' <!-- 修改标记 -->
+        <where>
+            1=1
+            <if test="seqNo != null and seqNo !=''">
+                AND A.SEQ_NO = #{seqNo}
+            </if>
+            <if test="chgTmsCnt != null">
+                AND A.CHG_TMS_CNT = #{chgTmsCnt,jdbcType=INTEGER}
+            </if>
+            <if test="etArcrpNo != null and etArcrpNo !=''">
+                AND A.ET_ARCRP_NO = #{etArcrpNo}
+            </if>
+        </where>
+    </select>
+
+    <!-- 获取当前档案库编号的最大的料件序号-->
+    <select id="getMaxGdsSeqno" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT MAX(GDS_SEQNO) AS gdsSeqno
+        FROM ET_ARCRP_IMG
+        WHERE SEQ_NO = #{seqNo}
+        AND CHG_TMS_CNT = #{chgTmsCnt,jdbcType=INTEGER}
+    </select>
+</mapper>

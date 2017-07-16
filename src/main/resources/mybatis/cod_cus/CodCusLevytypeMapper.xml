@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusLevytypeMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusLevytype">
+    <result column="CUT_MODE" jdbcType="VARCHAR" property="cutMode" />
+    <result column="ABBR_CUT" jdbcType="VARCHAR" property="abbrCut" />
+    <result column="FULL_CUT" jdbcType="VARCHAR" property="fullCut" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusLevytype">
+    SELECT
+      CUT_MODE AS id,
+      FULL_CUT AS text
+    FROM COD_CUS_LEVYTYPE
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusLevytype">
+    insert into cod_cus_levytype (CUT_MODE, ABBR_CUT, FULL_CUT
+      )
+    values (#{cutMode,jdbcType=VARCHAR}, #{abbrCut,jdbcType=VARCHAR}, #{fullCut,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusLevytype">
+    insert into cod_cus_levytype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cutMode != null">
+        CUT_MODE,
+      </if>
+      <if test="abbrCut != null">
+        ABBR_CUT,
+      </if>
+      <if test="fullCut != null">
+        FULL_CUT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cutMode != null">
+        #{cutMode,jdbcType=VARCHAR},
+      </if>
+      <if test="abbrCut != null">
+        #{abbrCut,jdbcType=VARCHAR},
+      </if>
+      <if test="fullCut != null">
+        #{fullCut,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

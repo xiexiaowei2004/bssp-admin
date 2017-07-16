@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_std.dao.CodStdCodes">
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_std.entity.CodStdCodes">
+        <id column="UID" jdbcType="VARCHAR" property="uid"/>
+        <result column="ATTR_VALUE" jdbcType="VARCHAR" property="attrValue"/>
+        <result column="ATTR_NAME" jdbcType="VARCHAR" property="attrName"/>
+        <result column="DICTIONARY_VALUE" jdbcType="VARCHAR" property="dictionaryValue"/>
+        <result column="DICTIONARY_DESCRIPT" jdbcType="VARCHAR" property="dictionaryDescript"/>
+        <result column="ORDER_NO" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="IS_ENABLE" jdbcType="VARCHAR" property="isEnable"/>
+        <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy"/>
+        <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+        <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="UPDATE_TIME" jdbcType="DATE" property="updatetime"/>
+    </resultMap>
+    
+    <select id="selectRedisDropDown"  parameterType="java.lang.String" resultType="com.powerbridge.bssp.cod_std.entity.CodStdCodes">
+    SELECT ATTR_VALUE AS id,
+    		ATTR_NAME AS text 
+    FROM COD_STD_CODES
+  </select>
+    
+    <select id="selectCodStdCodesByList" resultType="com.powerbridge.bssp.common.Bean.PullDown">
+        SELECT
+          ATTR_VALUE AS id,ATTR_NAME AS text
+        FROM
+          COD_STD_CODES
+        <where>
+            1=1
+            <if test="_parameter != null and _parameter !=''">
+                AND DICTIONARY_VALUE=#{_parameter}
+            </if>
+            AND IS_ENABLE = 'Y'
+        </where>
+        ORDER BY
+          ORDER_NO
+        ASC
+    </select>
+
+</mapper>

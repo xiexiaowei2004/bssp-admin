@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusWrapMapper">
+<resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusWrap">
+    <result column="WRAP_NAME" jdbcType="VARCHAR" property="wrapName" />
+    <result column="WRAP_TYPE" jdbcType="VARCHAR" property="wrapType" />
+  </resultMap>
+  
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusWrap">
+    SELECT
+      WRAP_NAME AS text,
+      WRAP_TYPE AS id
+    FROM COD_CUS_WRAP
+  </select>
+
+</mapper>

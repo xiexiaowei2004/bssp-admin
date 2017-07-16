@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cop_et.dao.EtArcrpAcmpFormDtMapper">
+
+    <sql id="Base_Column_List">
+        A.UID As uid,
+		A.NETWK_ETPS_ARCRP_NO As netwkEtpsArcrpNo,
+		A.CHG_TMS_CNT As chgTmsCnt,
+		A.ACMP_FORM_SEQNO As acmpFormSeqno,
+		A.ACMP_FORM_TYPECD As acmpFormTypecd,
+		A.ACMP_FORM_NO As acmpFormNo,
+		A.FIXD_NO As fixdNo,
+		A.ACMP_FORM_FILE_NM As acmpFormFileNm,
+		A.TGBL_LOSS_RATE As tgblLossRate,
+		A.RMK As rmk,
+		A.SEQ_NO As seqNo,
+		A.CREATE_BY As createBy,
+		A.CREATE_NAME As createName,
+		A.CREATE_TIME As createTime,
+		A.UPDATE_BY As updateBy,
+		A.UPDATE_NAME As updateName,
+		A.UPDATE_TIME As updateTime
+    </sql>
+    <!--查询列表-->
+    <select id="selectEtArcrpAcmpFormDtList" parameterType="com.powerbridge.bssp.cop_et.entity.EtArcrpAcmpFormDt" resultType="com.powerbridge.bssp.cop_et.entity.EtArcrpAcmpFormDt">
+        SELECT
+        B.ATTR_NAME As acmpFormTypenm,
+        <include refid="Base_Column_List"/>
+        FROM ET_ARCRP_ACMP_FORM_DT A
+
+        LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE = A.ACMP_FORM_TYPECD AND B.DICTIONARY_VALUE='ACMP_FORM_TYPECD' <!-- 修改标记 -->
+        <where>
+            1=1
+            <if test="seqNo != null and seqNo !=''">
+                AND A.SEQ_NO = #{seqNo}
+            </if>
+            <if test="chgTmsCnt != null">
+                AND A.CHG_TMS_CNT = #{chgTmsCnt,jdbcType=INTEGER}
+            </if>
+            <if test="netwkEtpsArcrpNo != null and netwkEtpsArcrpNo !=''">
+                AND A.NETWK_ETPS_ARCRP_NO = #{netwkEtpsArcrpNo}
+            </if>
+        </where>
+    </select>
+</mapper>

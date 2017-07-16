@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusUsertoMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusUserto">
+    <result column="USE_TO_COD" jdbcType="VARCHAR" property="useToCod" />
+    <result column="USE_TO_NAM" jdbcType="VARCHAR" property="useToNam" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusUserto">
+    SELECT
+      USE_TO_COD AS id,
+      USE_TO_NAM AS text
+    FROM COD_CUS_USERTO
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusUserto">
+    insert into cod_cus_userto (USE_TO_COD, USE_TO_NAM)
+    values (#{useToCod,jdbcType=VARCHAR}, #{useToNam,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusUserto">
+    insert into cod_cus_userto
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="useToCod != null">
+        USE_TO_COD,
+      </if>
+      <if test="useToNam != null">
+        USE_TO_NAM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="useToCod != null">
+        #{useToCod,jdbcType=VARCHAR},
+      </if>
+      <if test="useToNam != null">
+        #{useToNam,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

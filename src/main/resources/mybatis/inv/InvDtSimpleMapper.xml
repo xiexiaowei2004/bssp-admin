@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.inv.dao.InvDtSimpleMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.inv.entity.InvDtSimple">
+		<id column="UID" property="uid" />
+		<result column="BOND_INVT_NO" property="bondInvtNo" />
+		<result column="CHG_TMS_CNT" property="chgTmsCnt" />
+		<result column="GDS_SEQNO" property="gdsSeqno" />
+		<result column="PUTREC_SEQNO" property="putrecSeqno" />
+		<result column="GDS_MTNO" property="gdsMtno" />
+		<result column="GDECD" property="gdecd" />
+		<result column="GDS_NM" property="gdsNm" />
+		<result column="GDS_SPCF_MODEL_DESC" property="gdsSpcfModelDesc" />
+		<result column="DCL_UNITCD" property="dclUnitcd" />
+		<result column="LAWF_UNITCD" property="lawfUnitcd" />
+		<result column="SECD_LAWF_UNITCD" property="secdLawfUnitcd" />
+		<result column="NATCD" property="natcd" />
+		<result column="DCL_UPRC_AMT" property="dclUprcAmt" />
+		<result column="DCL_TOTAL_AMT" property="dclTotalAmt" />
+		<result column="USD_STAT_TOTAL_AMT" property="usdStatTotalAmt" />
+		<result column="DCL_CURRCD" property="dclCurrcd" />
+		<result column="LAWF_QTY" property="lawfQty" />
+		<result column="SECD_LAWF_QTY" property="secdLawfQty" />
+		<result column="WT_SF_VAL" property="wtSfVal" />
+		<result column="FST_SF_VAL" property="fstSfVal" />
+		<result column="SECD_SF_VAL" property="secdSfVal" />
+		<result column="DCL_QTY" property="dclQty" />
+		<result column="GROSS_WT" property="grossWt" />
+		<result column="NET_WT" property="netWt" />
+		<result column="USE_CD" property="useCd" />
+		<result column="LVYRLF_MODECD" property="lvyrlfModecd" />
+		<result column="UCNS_VERNO" property="ucnsVerno" />
+		<result column="ENTRY_GDS_SEQNO" property="entryGdsSeqno" />
+		<result column="APPLY_TB_SEQNO" property="applyTbSeqno" />
+		<result column="CLY_MARKCD" property="clyMarkcd" />
+		<result column="VERSION" property="version" />
+		<result column="ACTL_PASS_QTY" property="actlPassQty" />
+		<result column="PASSPORT_USED_QTY" property="passportUsedQty" />
+		<result column="RMK" property="rmk" />
+		<result column="SEQ_NO" property="seqNo" />
+	</resultMap>
+	<sql id="Base_Column_List">
+	     A.UID AS UID,
+		 A.BOND_INVT_NO AS BONDINVTNO,
+		 A.CHG_TMS_CNT AS CHGTMSCNT,
+		 A.GDS_SEQNO AS GDSSEQNO,
+		 A.PUTREC_SEQNO AS PUTRECSEQNO,
+		 A.GDS_MTNO AS GDSMTNO,
+		 A.GDECD AS GDECD,
+		 A.GDS_NM AS GDSNM,
+		 A.GDS_SPCF_MODEL_DESC AS GDSSPCFMODELDESC,
+		 A.DCL_UNITCD AS DCLUNITCD,
+		 A.LAWF_UNITCD AS LAWFUNITCD,
+		 A.SECD_LAWF_UNITCD AS SECDLAWFUNITCD,
+		 A.NATCD AS NATCD,
+		 A.DCL_UPRC_AMT AS DCLUPRCAMT,
+		 A.DCL_TOTAL_AMT AS DCLTOTALAMT,
+		 A.USD_STAT_TOTAL_AMT AS USDSTATTOTALAMT,
+		 A.DCL_CURRCD AS DCLCURRCD,
+		 A.LAWF_QTY AS LAWFQTY,
+		 A.SECD_LAWF_QTY AS SECDLAWFQTY,
+		 A.WT_SF_VAL AS WTSFVAL,
+		 A.FST_SF_VAL AS FSTSFVAL,
+		 A.SECD_SF_VAL AS SECDSFVAL,
+		 A.DCL_QTY AS DCLQTY,
+		 A.GROSS_WT AS GROSSWT,
+		 A.NET_WT AS NETWT,
+		 A.USE_CD AS USECD,
+		 A.LVYRLF_MODECD AS LVYRLFMODECD,
+		 A.UCNS_VERNO AS UCNSVERNO,
+		 A.ENTRY_GDS_SEQNO AS ENTRYGDSSEQNO,
+		 A.APPLY_TB_SEQNO AS APPLYTBSEQNO,
+		 A.CLY_MARKCD AS CLYMARKCD,
+		 A.VERSION AS VERSION,
+		 A.ACTL_PASS_QTY AS ACTLPASSQTY,
+		 A.PASSPORT_USED_QTY AS PASSPORTUSEDQTY,
+		 A.RMK AS RMK,
+		 A.SEQ_NO AS SEQNO
+	</sql>
+	<select id="selectByInvDtSimple" resultType="com.powerbridge.bssp.inv.entity.InvDtSimple">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM INV_DT_SIMPLE A
+		LEFT JOIN BSSP_COD.COD_CUS_UNIT B ON A.DCL_UNITCD=B.UNIT_CODE <!-- 申报计量单位-->
+		LEFT JOIN BSSP_COD.COD_CUS_UNIT D ON A.LAWF_UNITCD=D.UNIT_CODE <!-- 法定计量单位-->
+		LEFT JOIN BSSP_COD.COD_CUS_UNIT H ON A.SECD_LAWF_UNITCD=H.UNIT_CODE <!-- 第二法定计量单位-->
+		LEFT JOIN BSSP_COD.COD_CUS_CURR E ON A.DCL_CURRCD=E.CURR_CODE <!-- 申报币制-->
+		LEFT JOIN BSSP_COD.COD_CUS_COUNTRY F ON A.NATCD=F.COUNTRY_CO <!-- 国别代码-->
+		LEFT JOIN BSSP_COD.COD_CUS_LEVYMODE G ON A.LVYRLF_MODECD=G.DUTY_MODE <!-- 增减免方式-->
+		<where>
+			1=1
+			<if test="seqNo != null">
+				AND SEQ_NO = #{seqNo}
+			</if>
+			ORDER BY A.GDS_SEQNO ASC
+		</where>
+	</select>
+</mapper>

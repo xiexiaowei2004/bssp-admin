@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusBusitypeMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusBusitype">
+    <result column="BUSI_CODE" jdbcType="VARCHAR" property="busiCode" />
+    <result column="BUSI_NAME" jdbcType="VARCHAR" property="busiName" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusBusitype">
+    SELECT
+      BUSI_CODE AS id,
+      BUSI_NAME AS text
+    FROM COD_CUS_BUSITYPE
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusBusitype">
+    insert into cod_cus_busitype (BUSI_CODE, BUSI_NAME)
+    values (#{busiCode,jdbcType=VARCHAR}, #{busiName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusBusitype">
+    insert into cod_cus_busitype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="busiCode != null">
+        BUSI_CODE,
+      </if>
+      <if test="busiName != null">
+        BUSI_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="busiCode != null">
+        #{busiCode,jdbcType=VARCHAR},
+      </if>
+      <if test="busiName != null">
+        #{busiName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

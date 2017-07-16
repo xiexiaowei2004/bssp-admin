@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.ems_bws.dao.EmsBwsAcmpFormDtMapper">
+	<!--基本字段 -->
+	<sql id="Base_Column_List">
+		A.UID AS UID,
+		A.BOP_NO AS BOPNO,
+		A.CHG_TMS_CNT AS CHGTMSCNT,
+		A.ACMP_FORM_SEQNO AS ACMPFORMSEQNO,
+		B.ATTR_NAME AS ACMPFORMTYPECD,
+		A.ACMP_FORM_NO AS ACMPFORMNO,
+		A.FIXD_NO AS FIXDNO,
+		A.ACMP_FORM_FILE_NM AS ACMPFORMFILENM,
+		A.ETPS_PREENT_NO AS ETPSPREENTNO,
+		A.RMK AS RMK,
+		A.SEQ_NO AS SEQNO
+</sql>
+	<!--根据单据编号查询单损耗 -->
+	<select id="selectEmsBwsAcmpFormDtList" resultType="com.powerbridge.bssp.ems_bws.entity.EmsBwsAcmpFormDt">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM EMS_BWS_ACMP_FORM_DT A
+		LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE = A.ACMP_FORM_TYPECD AND B.DICTIONARY_VALUE='ACMP_FORM_TYPECD' <!--随附单证类型-->
+		WHERE A.SEQ_NO = #{seqNo} AND A.CHG_TMS_CNT = #{chgTmsCnt}
+	</select>
+</mapper>

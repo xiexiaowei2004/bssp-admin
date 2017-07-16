@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.erp.dao.ErpPreUcnsDtMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.erp.entity.ErpPreUcnsDt">
+		<id column="UID" property="uid" />
+		<result column="ENDPRD_SEQNO" property="endprdSeqno" />
+		<result column="MTPCK_SEQNO" property="mtpckSeqno" />
+		<result column="UCNS_VERNO" property="ucnsVerno" />
+		<result column="UCNS_QTY" property="ucnsQty" />
+		<result column="NET_USEUP_QTY" property="netUseupQty" />
+		<result column="TGBL_LOSS_RATE" property="tgblLossRate" />
+		<result column="INTGB_LOSS_RATE" property="intgbLossRate" />
+		<result column="BOND_MTPCK_PRPR" property="bondMtpckPrpr" />
+		<result column="SUCCESS_FLAG" property="successFlag" />
+		<result column="RMK" property="rmk" />
+		<result column="CREATE_BY" property="createBy" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_BY" property="updateBy" />
+		<result column="UPDATE_TIME" property="updateTime" />
+		<result column="INPUT_ETPS_SCCD" property="inputEtpsSccd" />
+		<result column="INPUT_COP_NO" property="inputCopNo" />
+		<result column="INPUT_COP_NAME" property="inputCopName" />
+		<result column="MODF_MARKCD" property="modfMarkcd" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		UID AS UID, ENDPRD_SEQNO AS endprdSeqno, MTPCK_SEQNO AS mtpckSeqno, UCNS_VERNO AS ucnsVerno,
+		UCNS_QTY AS ucnsQty, NET_USEUP_QTY AS netUseupQty, TGBL_LOSS_RATE AS tgblLossRate, INTGB_LOSS_RATE AS intgbLossRate, BOND_MTPCK_PRPR AS bondMtpckPrpr,
+		SUCCESS_FLAG AS successFlag, RMK AS rmk, CREATE_BY AS createBy, CREATE_TIME AS createTime, UPDATE_BY AS updateBy, UPDATE_TIME AS updateTime,
+		INPUT_ETPS_SCCD as inputEtpsSccd, INPUT_COP_NO as inputCopNo, INPUT_COP_NAME as inputCopName, MODF_MARKCD AS modfMarkcd,
+		UCNS_DCL_STUCD as ucnsDclStucd
+	</sql>
+
+	<sql id="Join_Column_List">
+		A.UID AS UID, A.ENDPRD_SEQNO AS endprdSeqno, A.MTPCK_SEQNO AS mtpckSeqno, A.UCNS_VERNO AS ucnsVerno,
+		A.UCNS_QTY AS ucnsQty, A.NET_USEUP_QTY AS netUseupQty, A.TGBL_LOSS_RATE AS tgblLossRate,
+		A.INTGB_LOSS_RATE AS intgbLossRate, A.BOND_MTPCK_PRPR AS bondMtpckPrpr,
+		A.SUCCESS_FLAG AS successFlag, A.RMK AS rmk, A.CREATE_BY AS createBy, A.CREATE_TIME AS createTime, A.UPDATE_BY AS updateBy, A.UPDATE_TIME AS updateTime,
+		A.INPUT_ETPS_SCCD as inputEtpsSccd, A.INPUT_COP_NO as inputCopNo, A.INPUT_COP_NAME as inputCopName,
+		A.MODF_MARKCD AS modfMarkcd, A.UCNS_DCL_STUCD as ucnsDclStucd,
+		C.GDS_MTNO AS exgDdsMtno,C.GDS_NM AS exgGdsNm,C.GDECD AS exgGdecd, C.GDS_SPCF_MODEL_DESC AS exgGdsSpcfModelDesc,
+		B.GDS_MTNO AS imgDdsMtno,B.GDS_NM AS imgGdsNm,B.GDECD AS imgGdecd, B.GDS_SPCF_MODEL_DESC AS imgGdsSpcfModelDesc
+	</sql>
+
+	<select id="getListData" resultType="com.powerbridge.bssp.erp.entity.ErpPreUcnsDt">
+		SELECT
+		<include refid="Join_Column_List"/>
+		FROM ERP_PRE_UCNS_DT A
+		LEFT JOIN ERP_PRE_DT_IMG B ON B.GDS_SEQNO = A.MTPCK_SEQNO  /* 料件序号 */
+		LEFT JOIN ERP_PRE_DT_EXG C ON C.GDS_SEQNO = A.ENDPRD_SEQNO /* 成品序号 */
+
+		<where>
+			<if test="endprdSeqno != null">
+				A.ENDPRD_SEQNO = ${endprdSeqno} <!-- 成品序号 -->
+			</if>
+			<if test="exgDdsMtno != null and exgDdsMtno !=''">
+				AND C.GDS_MTNO LIKE '${exgDdsMtno}%' <!-- 成品料号(左匹配) -->
+			</if>
+			<if test="ucnsVerno != null and ucnsVerno !=''">
+				AND A.UCNS_VERNO =  '${ucnsVerno}' <!-- 单耗版本号 -->
+			</if>
+
+			<if test="createTimeStart != null and createTimeStart !=''">
+				AND A.CREATE_TIME <![CDATA[>=]]> #{createTimeStart} <!-- 录入日期起始 -->
+			</if>
+			<if test="createTimeEnd != null and createTimeEnd !=''">
+				AND A.CREATE_TIME <![CDATA[<=]]> #{createTimeEnd}  <!-- 录入日期终结 -->
+			</if>
+			<if test="filterCond == 2">
+				AND A.SUCCESS_FLAG ='1'  <!-- 已备案 -->
+			</if>
+			<if test="filterCond == 3">
+				AND A.SUCCESS_FLAG ='0' <!-- 未备案 -->
+			</if>
+			<if test="successFlag != null and successFlag !=''">
+				AND A.SUCCESS_FLAG = #{successFlag} <!-- 是否已备案 -->
+			</if>
+		</where>
+
+
+	</select>
+
+	<select id="getDataById" resultType="com.powerbridge.bssp.erp.entity.ErpPreUcnsDt">
+		SELECT
+		<include refid="Join_Column_List"/>
+		FROM ERP_PRE_UCNS_DT A
+		LEFT JOIN ERP_PRE_DT_IMG B ON B.GDS_SEQNO = A.MTPCK_SEQNO  /* 料件序号 */
+		LEFT JOIN ERP_PRE_DT_EXG C ON C.GDS_SEQNO = A.ENDPRD_SEQNO /* 成品序号 */
+
+		<where>
+			 A.uid = #{uid}
+		</where>
+	</select>
+
+	<!-- 根据组合条件取单耗信息 -->
+	<select id="getDataByCond" resultType="com.powerbridge.bssp.erp.entity.ErpPreUcnsDt">
+		select
+		<include refid="Base_Column_List"/>
+		from erp_pre_ucns_dt
+		<where>
+			<if test="successFlag != null and successFlag !=''">
+				SUCCESS_FLAG = #{successFlag}
+			</if>
+			<if test="keyList != null and keyList.length >0">
+				CONCAT(ENDPRD_SEQNO , '|' ,  MTPCK_SEQNO , '|' , IFNULL(UCNS_VERNO,'')) in
+				<foreach collection="keyList" index="index" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+
+	<!-- 根据组合条件删除单耗信息 -->
+	<delete id="deleteDataByCond">
+		delete
+		from erp_pre_ucns_dt
+		<where>
+			<if test="keyList != null and keyList.length >0">
+				CONCAT(ENDPRD_SEQNO , '|' ,  MTPCK_SEQNO , '|' , IFNULL(UCNS_VERNO,'')) in
+				<foreach collection="keyList" index="index" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</delete>
+
+</mapper>

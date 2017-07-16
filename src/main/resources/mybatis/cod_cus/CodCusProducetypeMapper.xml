@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusProducetypeMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusProducetype">
+    <result column="PRODUCT_TYPE_CODE" jdbcType="VARCHAR" property="productTypeCode" />
+    <result column="PRODUCT_TYPE_NAME" jdbcType="VARCHAR" property="productTypeName" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusProducetype">
+    SELECT
+      PRODUCT_TYPE_CODE AS id,
+      PRODUCT_TYPE_NAME AS text
+    FROM COD_CUS_PRODUCETYPE
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusProducetype">
+    insert into cod_cus_producetype (PRODUCT_TYPE_CODE, PRODUCT_TYPE_NAME)
+    values (#{productTypeCode,jdbcType=VARCHAR}, #{productTypeName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusProducetype">
+    insert into cod_cus_producetype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productTypeCode != null">
+        PRODUCT_TYPE_CODE,
+      </if>
+      <if test="productTypeName != null">
+        PRODUCT_TYPE_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productTypeCode != null">
+        #{productTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productTypeName != null">
+        #{productTypeName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

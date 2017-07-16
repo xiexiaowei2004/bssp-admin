@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.erp.dao.ErpMidUcnsDtMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.powerbridge.bssp.erp.entity.ErpMidUcnsDt">
+		<id column="UID" property="uid" />
+		<result column="ENDPRD_SEQNO" property="endprdSeqno" />
+		<result column="MTPCK_SEQNO" property="mtpckSeqno" />
+		<result column="UCNS_VERNO" property="ucnsVerno" />
+		<result column="UCNS_QTY" property="ucnsQty" />
+		<result column="NET_USEUP_QTY" property="netUseupQty" />
+		<result column="TGBL_LOSS_RATE" property="tgblLossRate" />
+		<result column="INTGB_LOSS_RATE" property="intgbLossRate" />
+		<result column="BOND_MTPCK_PRPR" property="bondMtpckPrpr" />
+		<result column="RMK" property="rmk" />
+		<result column="MODF_MARKCD" property="modfMarkcd" />
+	</resultMap>
+
+</mapper>

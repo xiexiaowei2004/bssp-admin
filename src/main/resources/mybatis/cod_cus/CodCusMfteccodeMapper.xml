@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusMfteccodeMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusMfteccode">
+    <result column="MFTEC_CODE" jdbcType="VARCHAR" property="mftecCode" />
+    <result column="MFTEC_NAME" jdbcType="VARCHAR" property="mftecName" />
+  </resultMap>
+  
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusMfteccode">
+    SELECT
+      MFTEC_CODE AS id,
+      MFTEC_NAME AS text
+    FROM COD_CUS_MFTECCODE
+  </select>
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusMfteccode">
+    insert into cod_cus_mfteccode (MFTEC_CODE, MFTEC_NAME)
+    values (#{mftecCode,jdbcType=VARCHAR}, #{mftecName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusMfteccode">
+    insert into cod_cus_mfteccode
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mftecCode != null">
+        MFTEC_CODE,
+      </if>
+      <if test="mftecName != null">
+        MFTEC_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mftecCode != null">
+        #{mftecCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mftecName != null">
+        #{mftecName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusClassifyMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusClassify">
+    <id column="PK_SEQ" jdbcType="DOUBLE" property="pkSeq" />
+    <result column="G_NAME" jdbcType="VARCHAR" property="gName" />
+    <result column="KEY_NAME" jdbcType="VARCHAR" property="keyName" />
+    <result column="CLASS_SPEC" jdbcType="VARCHAR" property="classSpec" />
+    <result column="CODE_T" jdbcType="VARCHAR" property="codeT" />
+    <result column="CODE_S" jdbcType="VARCHAR" property="codeS" />
+    <result column="CLASS_NO" jdbcType="VARCHAR" property="classNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PK_SEQ, G_NAME, KEY_NAME, CLASS_SPEC, CODE_T, CODE_S, CLASS_NO
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Double" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cod_cus_classify
+    where PK_SEQ = #{pkSeq,jdbcType=DOUBLE}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Double">
+    delete from cod_cus_classify
+    where PK_SEQ = #{pkSeq,jdbcType=DOUBLE}
+  </delete>
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusClassify">
+    insert into cod_cus_classify (PK_SEQ, G_NAME, KEY_NAME, 
+      CLASS_SPEC, CODE_T, CODE_S, 
+      CLASS_NO)
+    values (#{pkSeq,jdbcType=DOUBLE}, #{gName,jdbcType=VARCHAR}, #{keyName,jdbcType=VARCHAR}, 
+      #{classSpec,jdbcType=VARCHAR}, #{codeT,jdbcType=VARCHAR}, #{codeS,jdbcType=VARCHAR}, 
+      #{classNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusClassify">
+    insert into cod_cus_classify
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pkSeq != null">
+        PK_SEQ,
+      </if>
+      <if test="gName != null">
+        G_NAME,
+      </if>
+      <if test="keyName != null">
+        KEY_NAME,
+      </if>
+      <if test="classSpec != null">
+        CLASS_SPEC,
+      </if>
+      <if test="codeT != null">
+        CODE_T,
+      </if>
+      <if test="codeS != null">
+        CODE_S,
+      </if>
+      <if test="classNo != null">
+        CLASS_NO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pkSeq != null">
+        #{pkSeq,jdbcType=DOUBLE},
+      </if>
+      <if test="gName != null">
+        #{gName,jdbcType=VARCHAR},
+      </if>
+      <if test="keyName != null">
+        #{keyName,jdbcType=VARCHAR},
+      </if>
+      <if test="classSpec != null">
+        #{classSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="codeT != null">
+        #{codeT,jdbcType=VARCHAR},
+      </if>
+      <if test="codeS != null">
+        #{codeS,jdbcType=VARCHAR},
+      </if>
+      <if test="classNo != null">
+        #{classNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusClassify">
+    update cod_cus_classify
+    <set>
+      <if test="gName != null">
+        G_NAME = #{gName,jdbcType=VARCHAR},
+      </if>
+      <if test="keyName != null">
+        KEY_NAME = #{keyName,jdbcType=VARCHAR},
+      </if>
+      <if test="classSpec != null">
+        CLASS_SPEC = #{classSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="codeT != null">
+        CODE_T = #{codeT,jdbcType=VARCHAR},
+      </if>
+      <if test="codeS != null">
+        CODE_S = #{codeS,jdbcType=VARCHAR},
+      </if>
+      <if test="classNo != null">
+        CLASS_NO = #{classNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PK_SEQ = #{pkSeq,jdbcType=DOUBLE}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusClassify">
+    update cod_cus_classify
+    set G_NAME = #{gName,jdbcType=VARCHAR},
+      KEY_NAME = #{keyName,jdbcType=VARCHAR},
+      CLASS_SPEC = #{classSpec,jdbcType=VARCHAR},
+      CODE_T = #{codeT,jdbcType=VARCHAR},
+      CODE_S = #{codeS,jdbcType=VARCHAR},
+      CLASS_NO = #{classNo,jdbcType=VARCHAR}
+    where PK_SEQ = #{pkSeq,jdbcType=DOUBLE}
+  </update>
+</mapper>

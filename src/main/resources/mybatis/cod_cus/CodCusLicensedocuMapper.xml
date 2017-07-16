@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.CodCusLicensedocuMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.CodCusLicensedocu">
+    <result column="DOCU_CODE" jdbcType="VARCHAR" property="docuCode" />
+    <result column="DOCU_NAME" jdbcType="VARCHAR" property="docuName" />
+  </resultMap>
+  <select id="selectRedisDropDown"  resultType="com.powerbridge.bssp.cod_cus.entity.CodCusLicensedocu">
+    SELECT
+      DOCU_CODE AS id,
+      DOCU_NAME AS text
+    FROM COD_CUS_LICENSEDOCU
+  </select>
+  
+  <insert id="insert" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusLicensedocu">
+    insert into cod_cus_licensedocu (DOCU_CODE, DOCU_NAME)
+    values (#{docuCode,jdbcType=VARCHAR}, #{docuName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.powerbridge.bssp.cod_cus.entity.CodCusLicensedocu">
+    insert into cod_cus_licensedocu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="docuCode != null">
+        DOCU_CODE,
+      </if>
+      <if test="docuName != null">
+        DOCU_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="docuCode != null">
+        #{docuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="docuName != null">
+        #{docuName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

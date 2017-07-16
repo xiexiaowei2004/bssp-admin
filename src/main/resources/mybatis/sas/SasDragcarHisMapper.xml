@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.sas.dao.SasDragcarHisMapper">
+
+	<!-- 通用查询映射结果 -->
+	<sql id="Base_Column_List">
+		A.UID AS UID,
+		A.CHG_TMS_CNT AS CHGTMSCNT,
+		A.ETPS_PREENT_NO AS ETPSPREENTNO,
+		A.VEHICLE_FRAME_NO AS VEHICLEFRAMENO,
+		A.VEHICLE_FRAME_WT AS VEHICLEFRAMEWT,
+		A.VEHICLE_FRAME_TYPE AS VEHICLEFRAMETYPE,
+		A.CONTACT_ER AS CONTACTER,
+		A.CONTACT_TELE AS CONTACTTELE,
+		A.CONTACT_ADDRESS AS CONTACTADDRESS,
+		A.ETPSNO AS ETPSNO,
+		E.ATTR_NAME AS DClTYPECD,
+		A.DCL_ER AS DCLER,
+		A.DCL_TIME AS DCLTIME,
+		A.ETPS_NM AS ETPSNM,
+		A.ETPS_SCCD AS ETPSSCCD,A.RMK AS RMK,
+		A.MASTER_CUSCD AS MASTERCUSCD,
+		A.AREA_CODE AS AREACODE,
+		D.ATTR_NAME AS BIZTYPE,
+		C.ATTR_NAME AS chkstatusName,
+		A.DOC_TYPE AS DOCTYPE,
+		A.RET_CHANNEL AS RETCHANNEL,
+		A.DEC_TIME AS DECTIME,
+		A.SEQ_NO AS SEQNO,
+		A.CHK_TIME AS CHKTIME,
+		A.INPUTER_CODE AS INPUTERCODE,
+		A.INPUTER_NAME AS INPUTERNAME,
+		A.INPUT_COP_NO AS INPUTCOPNO,
+		A.INPUT_ETPS_SCCD AS INPUTETPSSCCD,
+		A.INPUT_COP_NAME AS INPUTCOPNAME,
+		A.CREATE_BY AS CREATEBY,
+		A.CREATE_NAME AS CREATENAME,
+		A.CREATE_TIME AS CREATETIME,
+		A.UPDATE_BY AS UPDATEBY,
+		A.UPDATE_NAME AS UPDATENAME,
+		A.UPDATE_TIME AS UPDATETIME
+	</sql>
+
+	<!--<sql id="Base_Column_List1">
+		A.UID AS UID,
+		A.CHG_TMS_CNT AS CHGTMSCNT,
+		A.VEHICLE_FRAME_NO AS VEHICLEFRAMENO,
+		A.VEHICLE_FRAME_WT AS VEHICLEFRAMEWT,
+		A.VEHICLE_FRAME_TYPE AS VEHICLEFRAMETYPE,
+		A.CONTACT_ER AS CONTACTER,
+		A.CONTACT_TELE AS CONTACTTELE,
+		A.CONTACT_ADDRESS AS CONTACTADDRESS,
+		A.ETPSNO AS ETPSNO,
+		A.ETPS_NM AS ETPSNM,
+		A.ETPS_SCCD AS ETPSSCCD,
+		A.RMK AS RMK,
+		A.MASTER_CUSCD AS MASTERCUSCD,
+		A.AREA_CODE AS AREACODE,
+		A.BIZ_TYPE AS BIZTYPE,
+		A.CHK_STATUS AS CHKSTATUS,
+		A.DOC_TYPE AS DOCTYPE,
+		A.RET_CHANNEL AS RETCHANNEL,
+		A.DEC_TIME AS DECTIME,
+		A.SEQ_NO AS SEQNO,
+		A.CHK_TIME AS CHKTIME,
+		A.INPUTER_CODE AS INPUTERCODE,
+		A.INPUTER_NAME AS INPUTERNAME,
+		A.INPUT_COP_NO AS INPUTCOPNO,
+		A.INPUT_ETPS_SCCD AS INPUTETPSSCCD,
+		A.INPUT_COP_NAME AS INPUTCOPNAME,
+		A.CREATE_BY AS CREATEBY,
+		A.CREATE_NAME AS CREATENAME,
+		A.CREATE_TIME AS CREATETIME,
+		A.UPDATE_BY AS UPDATEBY,
+		A.UPDATE_NAME AS UPDATENAME,
+		A.UPDATE_TIME AS UPDATETIME
+		FROM BSSP_SAS.SAS_DRAGCAR_CUS A
+		LEFT JOIN BSSP_COD.COD_STD_CAR_TYPE B ON A.VEHICLE_TYPECD=B.CODE &lt;!&ndash; 车辆类型 &ndash;&gt;
+		LEFT JOIN BSSP_COD.COD_STD_CODES D ON A.PLATE_TYPECD=D.ATTR_VALUE AND D.DICTIONARY_VALUE='PLATE_TYPE' &lt;!&ndash; 车牌类型 &ndash;&gt;
+		LEFT JOIN BSSP_COD.COD_STD_CODES E ON A.DCL_TYPECD=E.ATTR_VALUE AND E.DICTIONARY_VALUE='DCL_TYPE' &lt;!&ndash; 申报类型 &ndash;&gt;
+		LEFT JOIN BSSP_COD.COD_STD_CODES F ON A.CHK_STATUS=F.ATTR_VALUE AND F.DICTIONARY_VALUE='CHK_STATUS' &lt;!&ndash; 单据状态 &ndash;&gt;
+	</sql>-->
+
+	<!--查询列表 -->
+	<select id="selectSasDragcarHisList" resultType="com.powerbridge.bssp.sas.entity.SasDragcarHis">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM BSSP_SAS.SAS_DRAGCAR_His A
+		LEFT JOIN BSSP_COD.COD_STD_CODES C ON C.ATTR_VALUE =A.CHK_STATUS AND C.DICTIONARY_VALUE='CHK_STATUS' <!-- 单据状态 -->
+		LEFT JOIN BSSP_COD.COD_STD_CODES D ON D.ATTR_VALUE=A.BIZ_TYPE AND D.DICTIONARY_VALUE='SAS_TYPE'  <!-- 业务分类 -->
+		LEFT JOIN BSSP_COD.COD_STD_CODES E ON A.DCL_TYPECD=E.ATTR_VALUE AND E.DICTIONARY_VALUE='DCL_TYPE'<!-- 申报类型 -->
+		<where>
+			1=1
+			<if test="etpsPreentNo != null and etpsPreentNo !=''">
+				AND A.ETPS_PREENT_NO LIKE '%${etpsPreentNo}%' <!--预录入编号 -->
+			</if>
+			<if test="vehicleFrameNo != null and vehicleFrameNo !=''">
+				AND A.VEHICLE_FRAME_NO LIKE '%${vehicleFrameNo}%' <!--车架号 -->
+			</if>
+			<if test="dclTypecd != null and dclTypecd !=''">
+				AND A.DCl_TYPECD = #{dclTypecd} <!-- 申报类型 -->
+			</if>
+			<if test="chkStatus != null and chkStatus !=''">
+				AND A.CHK_STATUS = #{chkStatus} <!-- 单据状态 -->
+			</if>
+			<if test="etpsNm != null and etpsNm !=''"><!-- 企业名称 -->
+				AND A.ETPS_NM = #{etpsNm}
+			</if>
+			<if test="bizType != null and bizType !=''">
+				AND A.BIZ_TYPE = #{bizType} <!-- 业务类型 -->
+			</if>
+			<if test="areaCode != null and areaCode !=''">
+				AND A.AREA_CODE = #{areaCode} <!-- 场地代码 -->
+			</if>
+			<if test="decTimeStart != null and decTimeStart !=''">
+				AND A.DEC_TIME <![CDATA[>=]]>
+				#{decTimeStart} <!-- 录入日期起始 -->
+			</if>
+
+			<if test="decTimeEnd != null and decTimeEnd !=''">
+				AND A.DEC_TIME <![CDATA[<=]]>
+				'${decTimeEnd} 23:59:59' <!-- 录入日期终结 -->
+			</if>
+		</where>
+	</select>
+</mapper>

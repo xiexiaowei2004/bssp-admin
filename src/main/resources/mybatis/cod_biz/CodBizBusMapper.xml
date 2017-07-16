@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_biz.dao.CodBizBusMapper">
+    <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_biz.entity.CodBizBus">
+        <id column="UID" jdbcType="VARCHAR" property="uid"/>
+        <result column="CODE" jdbcType="VARCHAR" property="code"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="UNIT" jdbcType="VARCHAR" property="unit"/>
+        <result column="PARAM_VALUE" jdbcType="VARCHAR" property="paramValue"/>
+        <result column="ClEARANCE_CODE" jdbcType="VARCHAR" property="clearanceCode"/>
+        <result column="PARAM_DESCRIPT" jdbcType="VARCHAR" property="paramDescript"/>
+        <result column="CUSTOMS_CODE" jdbcType="VARCHAR" property="customsCode"/>
+        <result column="AREA_CODE" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="IS_ENABLE" jdbcType="VARCHAR" property="isEnable"/>
+        <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy"/>
+        <result column="CREATE_TIME" jdbcType="DATE" property="createTime"/>
+        <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="UPDATE_TIME" jdbcType="DATE" property="updatetime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        A.UID AS UID, A.CODE AS CODE, A.NAME AS NAME, A.UNIT AS UNIT, A.PARAM_VALUE AS PARAMVALUE,
+        B.`NAME` AS CLEARANCECODE, A.PARAM_DESCRIPT AS PARAMDESCRIPT, A.CUSTOMS_CODE AS CUSTOMSCODE,
+        A.AREA_CODE AS AREACODE, A.IS_ENABLE AS ISENABLE, A.CREATE_BY AS CREATEBY, A.CREATE_TIME AS CREATETIME,
+        A.UPDATE_BY AS UPDATEBY, A.UPDATE_TIME AS UPDATETIME
+    </sql>
+
+<select id="selectRedisDropDown"  parameterType="java.lang.String" resultType="com.powerbridge.bssp.cod_biz.entity.CodBizBus">
+    SELECT CODE AS id,
+    		NAME AS text 
+    FROM COD_BIZ_BUS_PARAM
+  </select>
+
+    <select id="selectByCodBizBus" resultType="com.powerbridge.bssp.cod_biz.entity.CodBizBus">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM COD_BIZ_BUS_PARAM A
+        LEFT JOIN COD_STD_CLEARANCE_TYPE B ON A.CLEARANCE_CODE=B.CODE
+        <where>
+            1=1
+            <if test="customsCode != null and customsCode !=''">
+                AND A.CUSTOMS_CODE = '${customsCode}' <!-- 关区代码 -->
+            </if>
+            <if test="areaCode != null and areaCode !=''">
+                AND A.AREA_CODE = '${areaCode}' <!-- 场地代码 -->
+            </if>
+        </where>
+    </select>
+    <!--<select id="selectByUid" resultType="com.powerbridge.bssp.parameBeantity.CodBizBus">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM COD_BIZ_BUS_PARAM A
+        LEFT JOIN COD_STD_CLEARANCE_TYPE B ON A.CLEARANCE_CODE=B.CODE
+        <where>
+            1=1
+            <if test="uid != null and uid !=''">
+                AND A.UID = '${uid}'
+            </if>
+
+        </where>
+    </select>-->
+</mapper>

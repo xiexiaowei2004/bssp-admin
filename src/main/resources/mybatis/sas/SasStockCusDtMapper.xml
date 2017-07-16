@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.sas.dao.SasStockCusDtMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.powerbridge.bssp.sas.entity.SasStockCusDt">
+        <id column="UID" property="uid" />
+        <result column="SAS_STOCK_NO" property="sasStockNo" />
+        <result column="CHG_TMS_CNT" property="chgTmsCnt" />
+        <result column="SAS_STOCK_SEQNO" property="sasStockSeqno" />
+        <result column="SAS_DCL_SEQNO" property="sasDclSeqno" />
+        <result column="ORIACT_GDS_SEQNO" property="oriactGdsSeqno" />
+        <result column="GDS_MTNO" property="gdsMtno" />
+        <result column="GDECD" property="gdecd" />
+        <result column="GDS_NM" property="gdsNm" />
+        <result column="GDS_SPCF_MODEL_DESC" property="gdsSpcfModelDesc" />
+        <result column="DCL_UNITCD" property="dclUnitcd" />
+        <result column="LAWF_UNITCD" property="lawfUnitcd" />
+        <result column="SECD_LAWF_UNITCD" property="secdLawfUnitcd" />
+        <result column="NATCD" property="natcd" />
+        <result column="DCL_UPRC_AMT" property="dclUprcAmt" />
+        <result column="DCL_TOTAL_AMT" property="dclTotalAmt" />
+        <result column="USD_STAT_TOTAL_AMT" property="usdStatTotalAmt" />
+        <result column="DCL_CURRCD" property="dclCurrcd" />
+        <result column="LAWF_QTY" property="lawfQty" />
+        <result column="SECD_LAWF_QTY" property="secdLawfQty" />
+        <result column="WT_SF_VAL" property="wtSfVal" />
+        <result column="FST_SF_VAL" property="fstSfVal" />
+        <result column="SECD_SF_VAL" property="secdSfVal" />
+        <result column="DCL_QTY" property="dclQty" />
+        <result column="GROSS_WT" property="grossWt" />
+        <result column="NET_WT" property="netWt" />
+        <result column="USE_CD" property="useCd" />
+        <result column="LVYRLF_MODECD" property="lvyrlfModecd" />
+        <result column="UCNS_VERNO" property="ucnsVerno" />
+        <result column="CLY_MARKCD" property="clyMarkcd" />
+        <result column="ACTL_PASS_QTY" property="actlPassQty" />
+        <result column="PASSPORT_USED_QTY" property="passportUsedQty" />
+        <result column="REPLACE_QTY" property="replaceQty" />
+        <result column="RLT_GDS_SEQNO" property="rltGdsSeqno" />
+        <result column="RMK" property="rmk" />
+        <result column="ETPS_PREENT_NO" property="etpsPreentNo" />
+        <result column="COP_ENT_NO" property="copEntNo" />
+        <result column="STOCK_TYPECD" property="stockTypecd" />
+        <result column="MTPCK_ENDPRD_TYPECD" property="mtpckEndprdTypecd" />
+        <result column="OPERATE_TYPE" property="operateType" />
+        <result column="SEQ_NO" property="seqNo" />
+        <result column="CHK_TIME" property="chkTime" />
+        <result column="COL4" property="col4" />
+        <result column="COL3" property="col3" />
+        <result column="COL1" property="col1" />
+        <result column="COL2" property="col2" />
+    </resultMap>
+    <sql id="Base_Column_List">
+		A.UID AS UID,A.SAS_STOCK_NO AS SASSTOCKNO,A.CHG_TMS_CNT AS CHGTMSCNT,A.SAS_STOCK_SEQNO AS SASSTOCKSEQNO,A.SAS_DCL_SEQNO AS SASDCLSEQNO,
+		A.ORIACT_GDS_SEQNO AS ORIACTGDSSEQNO,A.GDS_MTNO AS GDSMTNO,A.GDECD AS GDECD,A.GDS_NM AS GDSNM,A.GDS_SPCF_MODEL_DESC AS GDSSPCFMODELDESC,
+		B.UNIT_NAME AS DCLUNITCD,E.UNIT_NAME AS LAWFUNITCD,A.SECD_LAWF_UNITCD AS SECDLAWFUNITCD,D.COUNTRY_NA AS NATCD,A.DCL_UPRC_AMT AS DCLUPRCAMT,
+		A.DCL_TOTAL_AMT AS DCLTOTALAMT,A.USD_STAT_TOTAL_AMT AS USDSTATTOTALAMT,C.CURR_NAME AS DCLCURRCD,A.LAWF_QTY AS LAWFQTY,A.SECD_LAWF_QTY AS SECDLAWFQTY,
+		A.WT_SF_VAL AS WTSFVAL,A.FST_SF_VAL AS FSTSFVAL,A.SECD_SF_VAL AS SECDSFVAL,A.DCL_QTY AS DCLQTY,A.GROSS_WT AS GROSSWT,A.NET_WT AS NETWT,A.USE_CD AS USECD,
+		F.DUTY_SPEC AS LVYRLFMODECD,A.UCNS_VERNO AS UCNSVERNO,A.CLY_MARKCD AS CLYMARKCD,A.ACTL_PASS_QTY AS ACTLPASSQTY,A.PASSPORT_USED_QTY AS PASSPORTUSEDQTY,
+		A.REPLACE_QTY AS REPLACEQTY,A.RLT_GDS_SEQNO AS RLTGDSSEQNO,A.RMK AS RMK,A.ETPS_PREENT_NO AS ETPSPREENTNO,A.COP_ENT_NO AS COPENTNO,
+		A.STOCK_TYPECD AS STOCKTYPECD,A.MTPCK_ENDPRD_TYPECD AS MTPCKENDPRDTYPECD,A.OPERATE_TYPE AS OPERATETYPE,A.SEQ_NO AS SEQNO,A.CHK_TIME AS CHKTIME
+	</sql>
+    <select id="selectByList" parameterType="java.lang.String" resultType="com.powerbridge.bssp.sas.entity.SasStockCusDt">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM SAS_STOCK_CUS_DT A
+        LEFT JOIN BSSP_COD.COD_CUS_UNIT B ON B.UNIT_CODE = A.DCL_UNITCD <!-- 申报计量单位 -->
+        LEFT JOIN BSSP_COD.COD_CUS_CURR C ON C.CURR_CODE = A.DCL_CURRCD <!-- 申报币制 -->
+        LEFT JOIN BSSP_COD.COD_CUS_COUNTRY D ON D.COUNTRY_CO = A.NATCD <!-- 国别代码 -->
+        LEFT JOIN BSSP_COD.COD_CUS_UNIT E ON E.UNIT_CODE = A.LAWF_UNITCD <!-- 法定计量单位 -->
+        LEFT JOIN BSSP_COD.COD_CUS_LEVYMODE F ON F.DUTY_MODE = A.LVYRLF_MODECD <!-- 征减免方式 -->
+        WHERE A.SEQ_NO = #{seqNo}
+    </select>
+    <select id="selectSum" resultType="java.lang.Double">
+        SELECT IFNULL(SUM(DCL_QTY),0) AS DCL_QTY  FROM SAS_STOCK_CUS_DT A LEFT JOIN SAS_STOCK_CUS B ON A.SEQ_NO = B.SEQ_NO WHERE B.SAS_DCL_NO = #{sasDclNo} AND A.SAS_DCL_SEQNO = #{sasDclSeqno}
+    </select>
+</mapper>

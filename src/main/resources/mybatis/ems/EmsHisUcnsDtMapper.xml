@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.ems.dao.EmsHisUcnsDtMapper">
+    <sql id="Base_Column_List">
+		A.UID AS UID,A.UCNS_SEQNO AS UCNSSEQNO,A.EMS_NO AS EMSNO,A.CHG_TMS_CNT AS CHGTMSCNT,A.ENDPRD_SEQNO AS ENDPRDSEQNO,A.MTPCK_SEQNO AS MTPCKSEQNO
+		,A.UCNS_VERNO AS UCNSVERNO,A.UCNS_QTY AS UCNSQTY,A.NET_USEUP_QTY AS NETUSEUPQTY,A.TGBL_LOSS_RATE AS TGBLLOSSRATE,A.INTGB_LOSS_RATE AS INTGBLOSSRATE
+		,A.UCNS_DCL_STUCD AS UCNSDCLSTUCD,A.MODF_MARKCD AS MODFMARKCD,A.BOND_MTPCK_PRPR AS BONDMTPCKPRPR,A.ETPS_EXE_MARKCD AS ETPSEXEMARKCD
+		,A.ETPS_PREENT_NO AS ETPSPREENTNO,A.DCL_TIME AS DCLTIME,A.UCNS_VALID_DATE AS UCNSVALIDDATE,A.RMK AS RMK,A.SEQ_NO AS SEQNO,A.CREATE_BY AS CREATEBY
+		,A.CREATE_NAME AS CREATENAME,A.CREATE_TIME AS CREATETIME,A.UPDATE_BY AS UPDATEBY,A.UPDATE_NAME AS UPDATENAME,A.UPDATE_TIME AS UPDATETIME
+		,B.ATTR_NAME AS UCNSDCLSTUNM,C.ATTR_NAME AS MODFMARKNM,D.ATTR_NAME AS ETPSEXEMARKNM
+		,E.GDS_MTNO AS MTPCKGDSMTNO,E.GDECD AS MTPCKGDECD,E.GDS_NM AS MTPCKGDSNM,F.GDS_MTNO AS ENDPRDGDSMTNO,F.GDECD AS ENDPRDGDECD,F.GDS_NM AS ENDPRDGDSNM
+	</sql>
+    <!--查询单损耗列表信息-->
+    <select id="selectEmsHisUcnsDtList" resultType="com.powerbridge.bssp.ems.entity.EmsHisUcnsDt">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM EMS_HIS_UCNS_DT A
+        LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE = A.UCNS_DCL_STUCD AND
+        B.DICTIONARY_VALUE='UCNS_DCL_STUCD'  <!--单耗申报状态-->
+        LEFT JOIN bssp_cod.COD_STD_CODES C ON C.ATTR_VALUE=A.MODF_MARKCD AND C.DICTIONARY_VALUE='MODF_MARK'  <!--修改标记-->
+        LEFT JOIN bssp_cod.COD_STD_CODES D ON D.ATTR_VALUE=A.ETPS_EXE_MARKCD AND D.DICTIONARY_VALUE='ETPS_EXE_MARK'  <!--企业执行标记-->
+        LEFT JOIN (
+        SELECT DISTINCT GDS_SEQNO,GDECD,GDS_NM,GDS_MTNO,SEQ_NO from EMS_HIS_IMG
+        WHERE MODF_MARKCD='3' AND CHG_TMS_CNT = #{chgTmsCnt}  AND SEQ_NO = #{seqNo}
+        UNION
+        SELECT DISTINCT GDS_SEQNO,GDECD,GDS_NM,GDS_MTNO,SEQ_NO from EMS_CUS_IMG i WHERE SEQ_NO = #{seqNo}
+        AND NOT EXISTS(select 1 from EMS_HIS_IMG WHERE MODF_MARKCD = '3' AND CHG_TMS_CNT = #{chgTmsCnt} AND GDS_SEQNO=i.GDS_SEQNO AND SEQ_NO = #{seqNo})
+        ) E ON A.MTPCK_SEQNO = E.GDS_SEQNO
+        AND A.SEQ_NO = E.SEQ_NO
+        LEFT JOIN (
+        SELECT DISTINCT GDS_SEQNO,GDECD,GDS_NM,GDS_MTNO,SEQ_NO from EMS_HIS_EXG WHERE  MODF_MARKCD='3' AND CHG_TMS_CNT = #{chgTmsCnt} AND SEQ_NO = #{seqNo}
+        UNION
+        SELECT DISTINCT GDS_SEQNO,GDECD,GDS_NM,GDS_MTNO,SEQ_NO from EMS_CUS_EXG e WHERE SEQ_NO = #{seqNo}
+        AND NOT EXISTS(select 1 from EMS_HIS_IMG WHERE MODF_MARKCD = '3' AND CHG_TMS_CNT = #{chgTmsCnt} AND GDS_SEQNO=e.GDS_SEQNO AND SEQ_NO = #{seqNo})
+        ) F ON A.ENDPRD_SEQNO = F.GDS_SEQNO
+        <where>
+            A.SEQ_NO = #{seqNo} AND A.CHG_TMS_CNT = #{chgTmsCnt}
+            <if test="emsNo != null and emsNo !=''">
+                AND A.EMS_NO = #{emsNo} <!-- 账册编号-->
+            </if>
+            <if test="emsNo != null and emsNo !=''">
+                AND A.UCNS_SEQNO = #{ucnsSeqno} <!-- 序号-->
+            </if>
+            <if test="endprdSeqno != null and endprdSeqno !=''">
+                AND A.ENDPRD_SEQNO = #{endprdSeqno} <!-- 成品序号-->
+            </if>
+            <if test="mtpckSeqno != null and mtpckSeqno !=''">
+                AND A.MTPCK_SEQNO = #{mtpckSeqno} <!-- 料件序号-->
+            </if>
+            <if test="filterSelect != null and filterSelect !=''">
+                AND NOT EXISTS (SELECT 1 FROM EMS_PUTREC_UCNS_DT WHERE SEQ_NO=A.SEQ_NO  AND UCNS_SEQNO=A.UCNS_SEQNO  AND CHG_TMS_CNT = #{filterSelect})
+            </if>
+        </where>
+    </select>
+    <!--查询单耗版本号-->
+    <select id="selectUcnsVerno" resultType="java.util.HashMap">
+        SELECT UCNS_VERNO AS id,UCNS_VERNO AS text
+        FROM EMS_HIS_UCNS_DT
+        WHERE EMS_NO = #{emsNo} <!-- 账册编号-->
+        AND ENDPRD_SEQNO=#{endprdSeqno} <!-- 成品序号-->
+        AND MODF_MARKCD!='2' <!-- 修改标志不等于删除-->
+        GROUP BY UCNS_VERNO
+        ORDER BY UCNS_VERNO
+    </select>
+    <!-- 获取最大的序号-->
+    <select id="getMaxUcnsSeqno" resultType="java.math.BigDecimal">
+        SELECT IFNULL(MAX(UCNS_SEQNO),0) AS UCNSSEQNO
+        FROM BSSP_EMS.EMS_HIS_UCNS_DT
+        WHERE SEQ_NO = #{seqNo} <!-- 单据编号-->
+    </select>
+    <!--根据主键查找单耗数据-->
+    <select id="selectByUid" resultType="com.powerbridge.bssp.ems.entity.EmsHisUcnsDt">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM EMS_HIS_UCNS_DT A
+        LEFT JOIN BSSP_COD.COD_STD_CODES B ON B.ATTR_VALUE = A.UCNS_DCL_STUCD AND B.DICTIONARY_VALUE='UCNS_DCL_STUCD'  <!--单耗申报状态-->
+        LEFT JOIN bssp_cod.COD_STD_CODES C ON C.ATTR_VALUE=A.MODF_MARKCD AND C.DICTIONARY_VALUE='MODF_MARK'  <!--修改标记-->
+        LEFT JOIN bssp_cod.COD_STD_CODES D ON D.ATTR_VALUE=A.ETPS_EXE_MARKCD AND D.DICTIONARY_VALUE='ETPS_EXE_MARK'  <!--企业执行标记-->
+        LEFT JOIN (
+        SELECT DISTINCT GDS_SEQNO,GDECD,GDS_NM,GDS_MTNO,SEQ_NO from EMS_HIS_IMG  his WHERE  MODF_MARKCD='3'
+        AND EXISTS(SELECT 1 FROM EMS_HIS_UCNS_DT WHERE his.SEQ_NO=SEQ_NO AND his.CHG_TMS_CNT=CHG_TMS_CNT AND UID=#{uid})
+        UNION
+        SELECT DISTINCT GDS_SEQNO,GDECD,GDS_NM,GDS_MTNO,SEQ_NO from EMS_CUS_IMG cus
+        WHERE cus.SEQ_NO=(SELECT SEQ_NO FROM EMS_HIS_UCNS_DT WHERE UID=#{uid})
+        AND NOT EXISTS(SELECT 1 FROM EMS_HIS_IMG E,EMS_HIS_UCNS_DT U WHERE E.SEQ_NO=U.SEQ_NO AND U.CHG_TMS_CNT=E.CHG_TMS_CNT AND U.UID=#{UID} )
+        ) E ON A.MTPCK_SEQNO = E.GDS_SEQNO
+        AND A.SEQ_NO = E.SEQ_NO
+        LEFT JOIN (
+        SELECT DISTINCT GDS_SEQNO,GDECD,GDS_NM,GDS_MTNO,SEQ_NO from EMS_HIS_EXG his WHERE  MODF_MARKCD='3' AND EXISTS(SELECT 1 FROM EMS_HIS_UCNS_DT WHERE his.SEQ_NO=SEQ_NO AND his.CHG_TMS_CNT=CHG_TMS_CNT AND UID=#{uid})
+        UNION
+        SELECT DISTINCT GDS_SEQNO,GDECD,GDS_NM,GDS_MTNO,SEQ_NO from EMS_CUS_EXG cus
+        WHERE  cus.SEQ_NO=(SELECT SEQ_NO FROM EMS_HIS_UCNS_DT WHERE UID=#{uid})
+        AND NOT EXISTS(SELECT 1 FROM EMS_HIS_EXG E,EMS_HIS_UCNS_DT U WHERE E.SEQ_NO=U.SEQ_NO AND U.CHG_TMS_CNT=E.CHG_TMS_CNT AND U.UID=#{UID} )
+        ) F ON A.ENDPRD_SEQNO = F.GDS_SEQNO
+        AND A.SEQ_NO = F.SEQ_NO
+        WHERE A.UID = #{uid} <!-- 主键 -->
+    </select>
+</mapper>

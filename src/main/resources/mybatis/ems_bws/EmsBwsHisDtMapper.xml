@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.ems_bws.dao.EmsBwsHisDtMapper">
+
+		<!--基本字段 -->
+		<sql id="Base_Column_List">
+			A.UID,
+			A.BWS_NO AS BWSNO,
+			A.CHG_TMS_CNT AS CHGTMSCNT,
+			A.GDS_SEQNO AS GDSSEQNO,
+			A.IN_DATE AS INDATE,
+			A.GDS_MTNO AS GDSMTNO,
+			A.GDECD AS GDECD,
+			A.GDS_NM AS GDSNM,
+			A.GDS_SPCF_MODEL_DESC AS GDSSPCFMODELDESC,
+			A.GDS_SPCF_MODEL_DESC AS ENDPRDGDSSPCFMODELDESC,
+			D.COUNTRY_NA AS NATCD,
+			A.DCL_UNITCD AS DCLUNITCD,
+			E.UNIT_NAME AS DCLUNITNM,
+			A.LAWF_UNITCD AS LAWFUNITCD,
+			F.UNIT_NAME AS LAWFUNITNM,
+			A.SECD_LAWF_UNITCD AS SECDLAWFUNITCD,
+			H.UNIT_NAME AS SECDLAWFUNITNM,
+			A.DCL_UPRC_AMT AS DCLUPRCAMT,
+			A.DCL_CURRCD AS DCLCURRCD,
+			A.AVG_PRICE AS AVGPRICE,
+			A.TOTAL_AMT AS TOTALAMT,
+			A.IN_QTY AS INQTY,
+			A.IN_LAWF_QTY AS INLAWFQTY,
+			A.IN_SECD_LAWF_QTY AS INSECDLAWFQTY,
+			A.ACTL_INC_QTY AS ACTLINCQTY,
+			A.ACTL_REDC_QTY AS ACTLREDCQTY,
+			A.PREVD_INC_QTY AS PREVDINCQTY,
+			A.PREVD_REDC_QTY AS PREVDREDCQTY,
+			A.OUT_DATE AS OUTDATE,
+			A.LIMIT_DATE AS LIMITDATE,
+			A.IN_TYPE AS INTYPE,
+			A.INVT_NO AS INVTNO,
+			A.INVT_G_NO AS INVTGNO,
+			A.CUSM_EXE_MARKCD AS CUSMEXEMARKCD,
+			A.RMK AS RMK,
+			A.MODF_MARKCD AS MODFMARKCD,
+			A.ETPS_PREENT_NO AS ETPSPREENTNO,
+			A.SEQ_NO AS SEQNO
+		</sql>
+		<!--根据单据编号查询单损耗 -->
+		<select id="selectEmsBwsHisDtList" resultType="com.powerbridge.bssp.ems_bws.entity.EmsBwsHisDt">
+			SELECT
+			<include refid="Base_Column_List"/>
+			FROM EMS_BWS_HIS_DT A
+			LEFT JOIN BSSP_COD.COD_CUS_COUNTRY D ON D.COUNTRY_CO = A.NATCD <!-- 国别代码 -->
+			LEFT JOIN BSSP_COD.COD_CUS_UNIT E ON A.DCL_UNITCD=E.UNIT_CODE <!-- 申报计量单位-->
+			LEFT JOIN BSSP_COD.COD_CUS_UNIT F ON A.LAWF_UNITCD=F.UNIT_CODE <!-- 法定计量单位-->
+			LEFT JOIN BSSP_COD.COD_CUS_UNIT H ON A.SECD_LAWF_UNITCD=H.UNIT_CODE <!-- 法定计量第二单位-->
+			<where>
+				1=1
+				<if test="seqNo != null and seqNo !=''">
+					AND A.SEQ_NO = #{seqNo} <!-- 单据编号 -->
+				</if>
+				<if test="bwsNo != null and bwsNo !=''">
+					AND A.BWS_NO = #{bwsNo} <!-- 账册编号 -->
+				</if>
+				<if test="gdecd != null and gdecd !=''">
+					AND A.GDECD LIKE'%${gdecd}%' <!-- 商品编码-->
+				</if>
+				<if test="gdsNm != null and gdsNm !=''">
+					AND A.GDS_NM LIKE '%${gdsNm}%' <!-- 商品名称-->
+				</if>
+			</where>
+		</select>
+
+	</mapper>

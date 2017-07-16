@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powerbridge.bssp.cod_cus.dao.BillGeneraterMapper">
+  <resultMap id="BaseResultMap" type="com.powerbridge.bssp.cod_cus.entity.BillGenerater">
+    <id column="UID" jdbcType="VARCHAR" property="uid" />
+    <result column="AREA_CODE" jdbcType="VARCHAR" property="areaCode" />
+    <result column="DOC_TYPE" jdbcType="VARCHAR" property="docType" />
+    <result column="SERVER_TYPE" jdbcType="VARCHAR" property="serverType" />
+    <result column="MODEL_NAME" jdbcType="VARCHAR" property="modelName" />
+    <result column="YEAR_MONTH" jdbcType="VARCHAR" property="yearMonth" />
+    <result column="MASK" jdbcType="VARCHAR" property="mask" />
+    <result column="APPLY_ID" jdbcType="VARCHAR" property="applyId" />
+    <result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+    <result column="SERIAL_NUMBER" jdbcType="INTEGER" property="serialNumber" />
+    <result column="IP" jdbcType="VARCHAR" property="ip" />
+    <result column="STATE" jdbcType="INTEGER" property="state" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    UID, CUSTOMS_CODE, BILL_CODE, BILL_NUMBER,YEAR_MONTH, SERIAL_NUMBER, APPLY_ID, IP, STATE, REMARKS,CREATE_TIME
+  </sql>
+  <!-- 根据关区代码,单据代码,年月份返回最大序列号 -->
+	<select id="selectNumber" resultMap="BaseResultMap" >
+        SELECT MAX(SERIAL_NUMBER) AS SERIAL_NUMBER FROM BILL_GENERATER  BG
+        WHERE 
+        BG.AREA_CODE=#{areaCode,jdbcType=VARCHAR} 
+        AND BG.DOC_TYPE=#{docType,jdbcType=VARCHAR} 
+        AND BG.SERVER_TYPE=#{serverType,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectNumberDate" resultMap="BaseResultMap" >
+        SELECT MAX(SERIAL_NUMBER) AS SERIAL_NUMBER FROM BILL_GENERATER  BG
+        WHERE 
+        BG.AREA_CODE=#{areaCode,jdbcType=VARCHAR} 
+        AND BG.DOC_TYPE=#{docType,jdbcType=VARCHAR} 
+        AND BG.SERVER_TYPE=#{serverType,jdbcType=VARCHAR}
+        AND BG.YEAR_MONTH=#{yearMonth,jdbcType=VARCHAR}
+    </select>
+    
+    <!-- 根据关区代码,单据代码,年月份返回最大序列号 -->
+	<select id="selectEdiSeqList" resultType="com.powerbridge.bssp.cod_cus.entity.EdiSeqList" parameterType="com.powerbridge.bssp.cod_cus.entity.EdiSeqInfo">
+		SELECT B.PARAM_NO AS paramNo,B.ORDER_NO AS orderNo,A.MODEL_NAME AS modelName,
+		A.DATE_RULE AS dateRule,A.MASK AS mask,A.COUNTER_LENGTH AS counterLength  
+		FROM EDI_SEQ_INFO A LEFT JOIN EDI_SEQ_LIST B
+		 ON A.UID=B.EDI_SEQ_UID 
+         <where>
+<!-- 			<if test="areaCode != null and areaCode !=''"> -->
+<!-- 			    AND A.AREA_CODE=#{areaCode}    -->
+<!-- 			</if> -->
+			<if test="docType != null and docType !=''">
+			   AND A.DOC_TYPE=#{docType}
+			</if>
+			<if test="serverType != null and serverType !=''">
+			   AND A.SERVER_TYPE=#{serverType}   
+			</if>
+			<if test="dateRule != null and dateRule !=''">
+			   AND A.DATE_RULE=#{dateRule}   
+			</if>
+			<if test="modelName != null and modelName !=''">
+			   AND A.MODEL_NAME=#{modelName}   
+			</if>
+			<if test="mask != null and mask !=''">
+			   AND A.MASK=#{mask}
+			</if>
+			<if test="counterLength != null and counterLength !=''">
+			   AND A.COUNTER_LENGTH=#{counterLength}   
+			</if>
+			AND B.STATUS='Y' ORDER BY  ORDER_NO asc
+		</where>
+    </select>
+</mapper>
